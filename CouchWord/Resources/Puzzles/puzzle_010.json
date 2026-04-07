@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_010",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Science",
+  "date": null,
+  "grid": [
+    ["A","T","O","M","S"],
+    ["#","#","#","#","#"],
+    ["L","I","G","H","T"],
+    ["#","#","#","#","#"],
+    ["W","A","V","E","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Tiny building blocks of matter", "answer": "ATOMS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Electromagnetic radiation we see", "answer": "LIGHT", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Ocean swells or sound carriers", "answer": "WAVES", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["science"],
+  "author": "CouchWord"
+}

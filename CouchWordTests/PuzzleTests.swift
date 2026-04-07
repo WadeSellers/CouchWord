@@ -4,80 +4,175 @@ import Testing
 @Suite("Puzzle Model Tests")
 struct PuzzleTests {
 
-    @Test func samplePuzzleHasCorrectSize() {
-        let puzzle = PuzzleGenerator.sample()
-        #expect(puzzle.size == 5)
-        #expect(puzzle.cells.count == 5)
-        #expect(puzzle.cells[0].count == 5)
+    private func makeSamplePuzzle() -> Puzzle {
+        Puzzle(
+            id: "test_001",
+            version: 1,
+            size: PuzzleSize(rows: 5, cols: 5),
+            difficulty: .easy,
+            theme: "Test",
+            date: nil,
+            grid: [
+                ["S", "T", "A", "R", "S"],
+                ["#", "#", "#", "#", "#"],
+                ["O", "R", "B", "I", "T"],
+                ["#", "#", "#", "#", "#"],
+                ["C", "O", "M", "E", "T"],
+            ],
+            clues: ClueSet(
+                across: [
+                    PuzzleClue(number: 1, clue: "Night lights", answer: "STARS", row: 0, col: 0),
+                    PuzzleClue(number: 2, clue: "Path around planet", answer: "ORBIT", row: 2, col: 0),
+                    PuzzleClue(number: 3, clue: "Icy traveler", answer: "COMET", row: 4, col: 0),
+                ],
+                down: []
+            ),
+            tags: ["test"],
+            author: "Test"
+        )
     }
 
-    @Test func blackCellsAreCorrectlyPlaced() {
-        let puzzle = PuzzleGenerator.sample()
-        #expect(puzzle.cells[1][1].isBlack)
-        #expect(puzzle.cells[1][3].isBlack)
-        #expect(puzzle.cells[3][1].isBlack)
-        #expect(puzzle.cells[3][3].isBlack)
-        #expect(!puzzle.cells[0][0].isBlack)
+    @Test func puzzleHasCorrectDimensions() {
+        let puzzle = makeSamplePuzzle()
+        #expect(puzzle.rows == 5)
+        #expect(puzzle.cols == 5)
     }
 
-    @Test func clueNumbersAssigned() {
-        let puzzle = PuzzleGenerator.sample()
-        #expect(puzzle.cells[0][0].clueNumber == 1)
-        #expect(puzzle.cells[0][2].clueNumber == 2)
-        #expect(puzzle.cells[2][0].clueNumber == 5)
+    @Test func blackCellsDetected() {
+        let puzzle = makeSamplePuzzle()
+        #expect(puzzle.isBlack(row: 1, col: 0))
+        #expect(puzzle.isBlack(row: 1, col: 3))
+        #expect(puzzle.isBlack(row: 3, col: 0))
+        #expect(!puzzle.isBlack(row: 0, col: 0))
+        #expect(!puzzle.isBlack(row: 2, col: 2))
     }
 
-    @Test func acrossClueNumbersWired() {
-        let puzzle = PuzzleGenerator.sample()
-        // Row 0 should all reference across clue 1
-        for col in 0..<5 {
-            #expect(puzzle.cells[0][col].acrossClueNumber == 1)
-        }
-        // Row 2 should all reference across clue 5
-        for col in 0..<5 {
-            #expect(puzzle.cells[2][col].acrossClueNumber == 5)
-        }
+    @Test func solutionRetrieval() {
+        let puzzle = makeSamplePuzzle()
+        #expect(puzzle.solutionAt(row: 0, col: 0) == "S")
+        #expect(puzzle.solutionAt(row: 0, col: 4) == "S")
+        #expect(puzzle.solutionAt(row: 2, col: 0) == "O")
+        #expect(puzzle.solutionAt(row: 1, col: 0) == nil) // black cell
     }
 
-    @Test func downClueNumbersWired() {
-        let puzzle = PuzzleGenerator.sample()
-        // Column 0 should reference down clue 1
-        for row in 0..<5 {
-            #expect(puzzle.cells[row][0].downClueNumber == 1)
-        }
+    @Test func outOfBoundsReturnsNil() {
+        let puzzle = makeSamplePuzzle()
+        #expect(puzzle.solutionAt(row: -1, col: 0) == nil)
+        #expect(puzzle.solutionAt(row: 5, col: 0) == nil)
+        #expect(puzzle.isBlack(row: -1, col: 0) == true)
     }
 
-    @Test func unsovledPuzzleIsNotSolved() {
-        let puzzle = PuzzleGenerator.sample()
-        #expect(!puzzle.isSolved)
+    @Test func acrossClueRetrieval() {
+        let puzzle = makeSamplePuzzle()
+        let clue = puzzle.acrossClue(forRow: 0, col: 2)
+        #expect(clue != nil)
+        #expect(clue?.number == 1)
+        #expect(clue?.answer == "STARS")
     }
 
-    @Test func solvedPuzzleIsSolved() {
-        var puzzle = PuzzleGenerator.sample()
-        // Fill in all solutions
-        for row in 0..<puzzle.size {
-            for col in 0..<puzzle.size {
-                if !puzzle.cells[row][col].isBlack {
-                    puzzle.cells[row][col].letter = puzzle.cells[row][col].solution
-                }
-            }
-        }
-        #expect(puzzle.isSolved)
-    }
-
-    @Test func clueRetrieval() {
-        let puzzle = PuzzleGenerator.sample()
-        let clue1across = puzzle.clue(for: 1, direction: .across)
-        #expect(clue1across != nil)
-        #expect(clue1across?.text == "Apple's programming language")
-
-        let clue3down = puzzle.clue(for: 3, direction: .down)
-        #expect(clue3down != nil)
-        #expect(clue3down?.startCol == 4)
+    @Test func clueNumberAssignment() {
+        let puzzle = makeSamplePuzzle()
+        #expect(puzzle.clueNumber(row: 0, col: 0) == 1)
+        #expect(puzzle.clueNumber(row: 2, col: 0) == 2)
+        #expect(puzzle.clueNumber(row: 4, col: 0) == 3)
+        #expect(puzzle.clueNumber(row: 0, col: 3) == nil) // mid-word, no number
     }
 
     @Test func directionToggle() {
         #expect(Direction.across.opposite == .down)
         #expect(Direction.down.opposite == .across)
+    }
+
+    @Test func puzzleDecoding() throws {
+        let json = """
+        {
+            "id": "decode_test",
+            "version": 1,
+            "size": {"rows": 3, "cols": 3},
+            "difficulty": "easy",
+            "theme": "Decode",
+            "date": null,
+            "grid": [["C","A","T"],["#","#","#"],["D","O","G"]],
+            "clues": {
+                "across": [
+                    {"number": 1, "clue": "Feline", "answer": "CAT", "row": 0, "col": 0},
+                    {"number": 2, "clue": "Canine", "answer": "DOG", "row": 2, "col": 0}
+                ],
+                "down": []
+            },
+            "tags": ["animals"],
+            "author": "Test"
+        }
+        """
+        let data = json.data(using: .utf8)!
+        let puzzle = try JSONDecoder().decode(Puzzle.self, from: data)
+        #expect(puzzle.id == "decode_test")
+        #expect(puzzle.rows == 3)
+        #expect(puzzle.solutionAt(row: 0, col: 0) == "C")
+        #expect(puzzle.clues.across.count == 2)
+    }
+}
+
+@Suite("UserProgress Tests")
+struct UserProgressTests {
+
+    @Test func initialProgressIsEmpty() {
+        let progress = UserProgress(puzzleID: "test", rows: 5, cols: 5)
+        #expect(progress.state == .notStarted)
+        #expect(progress.hintsUsed == 0)
+        #expect(progress.elapsedSeconds == 0)
+        #expect(progress.undoStack.isEmpty)
+        #expect(progress.letterAt(row: 0, col: 0) == "")
+    }
+
+    @Test func setAndGetLetter() {
+        var progress = UserProgress(puzzleID: "test", rows: 5, cols: 5)
+        progress.setLetter("A", row: 0, col: 0)
+        #expect(progress.letterAt(row: 0, col: 0) == "A")
+    }
+
+    @Test func outOfBoundsSetIsNoOp() {
+        var progress = UserProgress(puzzleID: "test", rows: 5, cols: 5)
+        progress.setLetter("X", row: -1, col: 0)
+        progress.setLetter("X", row: 5, col: 0)
+        // Should not crash
+    }
+
+    @Test func progressEncoding() throws {
+        let progress = UserProgress(puzzleID: "test", rows: 3, cols: 3)
+        let data = try JSONEncoder().encode(progress)
+        let decoded = try JSONDecoder().decode(UserProgress.self, from: data)
+        #expect(decoded.puzzleID == "test")
+        #expect(decoded.userGrid.count == 3)
+    }
+}
+
+@Suite("GameStats Tests")
+struct GameStatsTests {
+
+    @Test func initialStatsAreZero() {
+        let stats = GameStats()
+        #expect(stats.totalSolved == 0)
+        #expect(stats.currentStreak == 0)
+        #expect(stats.longestStreak == 0)
+    }
+
+    @Test func recordCompletionUpdatesStats() {
+        var stats = GameStats()
+        stats.recordCompletion(puzzleID: "p1", time: 120, hints: 1)
+        #expect(stats.totalSolved == 1)
+        #expect(stats.currentStreak == 1)
+        #expect(stats.totalHintsUsed == 1)
+        #expect(stats.bestTimes["p1"] == 120)
+    }
+
+    @Test func bestTimeUpdates() {
+        var stats = GameStats()
+        stats.recordCompletion(puzzleID: "p1", time: 120, hints: 0)
+        stats.recordCompletion(puzzleID: "p1", time: 90, hints: 0)
+        #expect(stats.bestTimes["p1"] == 90)
+
+        stats.recordCompletion(puzzleID: "p1", time: 150, hints: 0)
+        #expect(stats.bestTimes["p1"] == 90) // should not increase
     }
 }

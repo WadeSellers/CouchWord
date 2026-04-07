@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_005",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Sports",
+  "date": null,
+  "grid": [
+    ["G","O","A","L","S"],
+    ["#","#","#","#","#"],
+    ["T","R","A","C","K"],
+    ["#","#","#","#","#"],
+    ["S","C","O","R","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "What a soccer player scores", "answer": "GOALS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Running oval or music on a CD", "answer": "TRACK", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Points on the scoreboard", "answer": "SCORE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["sports"],
+  "author": "CouchWord"
+}

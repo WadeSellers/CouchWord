@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_015",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Technology",
+  "date": null,
+  "grid": [
+    ["#","#","N","#","#"],
+    ["#","#","O","#","#"],
+    ["B","Y","T","E","S"],
+    ["#","#","E","#","#"],
+    ["#","#","S","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "Units of digital data", "answer": "BYTES", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Written reminders or musical symbols", "answer": "NOTES", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["technology"],
+  "author": "CouchWord"
+}

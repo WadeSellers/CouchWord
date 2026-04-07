@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_001",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Space",
+  "date": null,
+  "grid": [
+    ["S","T","A","R","S"],
+    ["#","#","#","#","#"],
+    ["O","R","B","I","T"],
+    ["#","#","#","#","#"],
+    ["C","O","M","E","T"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Twinkling night lights", "answer": "STARS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Path around a planet", "answer": "ORBIT", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Icy space traveler with a tail", "answer": "COMET", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["space"],
+  "author": "CouchWord"
+}

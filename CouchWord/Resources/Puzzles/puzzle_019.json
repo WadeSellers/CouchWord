@@ -1,0 +1,26 @@
+{
+  "id": "puzzle_019",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Art",
+  "date": null,
+  "grid": [
+    ["#","P","#","#","#"],
+    ["#","A","#","#","#"],
+    ["#","I","N","K","S"],
+    ["#","N","#","#","#"],
+    ["#","T","O","N","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "Writing fluids for pens", "answer": "INKS", "row": 2, "col": 1 },
+      { "number": 3, "clue": "Color shade or quality", "answer": "TONE", "row": 4, "col": 1 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Apply color to a canvas", "answer": "PAINT", "row": 0, "col": 1 }
+    ]
+  },
+  "tags": ["art"],
+  "author": "CouchWord"
+}

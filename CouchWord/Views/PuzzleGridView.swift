@@ -7,34 +7,24 @@ struct PuzzleGridView: View {
     var body: some View {
         if let puzzle = viewModel.puzzle {
             VStack(spacing: 2) {
-                ForEach(0..<puzzle.size, id: \.self) { row in
+                ForEach(0..<puzzle.rows, id: \.self) { row in
                     HStack(spacing: 2) {
-                        ForEach(0..<puzzle.size, id: \.self) { col in
+                        ForEach(0..<puzzle.cols, id: \.self) { col in
+                            let isBlack = puzzle.isBlack(row: row, col: col)
+
                             CellView(
-                                cell: puzzle.cells[row][col],
+                                letter: viewModel.progress?.letterAt(row: row, col: col) ?? "",
+                                clueNumber: puzzle.clueNumber(row: row, col: col),
+                                displayState: viewModel.cellState(row: row, col: col),
                                 isFocused: row == viewModel.focusedRow && col == viewModel.focusedCol,
                                 isHighlighted: isCellHighlighted(row: row, col: col)
                             )
-                            .focusable(!puzzle.cells[row][col].isBlack)
+                            .focusable(!isBlack)
                             .focused($focusedCellID, equals: cellID(row: row, col: col))
-                            .onTapGesture {
-                                if row == viewModel.focusedRow && col == viewModel.focusedCol {
-                                    viewModel.toggleDirection()
-                                } else {
-                                    viewModel.focusedRow = row
-                                    viewModel.focusedCol = col
-                                }
-                            }
-                            .digitalCrownRotation(
-                                Binding(get: { 0.0 }, set: { _ in }),
-                                from: 0, through: 0
-                            )
+                            .disabled(isBlack)
                         }
                     }
                 }
-            }
-            .sheet(isPresented: $viewModel.showingLetterPicker) {
-                LetterInputView(viewModel: viewModel)
             }
             .onChange(of: focusedCellID) { _, newValue in
                 if let newValue, let (row, col) = parseCellID(newValue) {
@@ -42,43 +32,30 @@ struct PuzzleGridView: View {
                     viewModel.focusedCol = col
                 }
             }
-            .onChange(of: viewModel.focusedRow) { _, _ in
-                focusedCellID = cellID(row: viewModel.focusedRow, col: viewModel.focusedCol)
-            }
-            .onChange(of: viewModel.focusedCol) { _, _ in
-                focusedCellID = cellID(row: viewModel.focusedRow, col: viewModel.focusedCol)
-            }
-            .onMoveCommand { direction in
-                switch direction {
-                case .up: viewModel.moveFocus(.up)
-                case .down: viewModel.moveFocus(.down)
-                case .left: viewModel.moveFocus(.left)
-                case .right: viewModel.moveFocus(.right)
-                @unknown default: break
-                }
-            }
-            .onPlayPauseCommand {
-                viewModel.toggleDirection()
+            .onChange(of: viewModel.focusedRow) { _, _ in syncFocus() }
+            .onChange(of: viewModel.focusedCol) { _, _ in syncFocus() }
+            .onAppear { syncFocus() }
+            // Press select to toggle direction or open letter input
+            .onExitCommand {
+                viewModel.saveCurrentProgress()
             }
         }
+    }
+
+    private func syncFocus() {
+        focusedCellID = cellID(row: viewModel.focusedRow, col: viewModel.focusedCol)
     }
 
     private func isCellHighlighted(row: Int, col: Int) -> Bool {
         guard let clue = viewModel.activeClue else { return false }
-        if clue.direction == .across {
-            return row == clue.startRow
-                && col >= clue.startCol
-                && col < clue.startCol + clue.length
+        if viewModel.currentDirection == .across {
+            return row == clue.row && col >= clue.col && col < clue.col + clue.length
         } else {
-            return col == clue.startCol
-                && row >= clue.startRow
-                && row < clue.startRow + clue.length
+            return col == clue.col && row >= clue.row && row < clue.row + clue.length
         }
     }
 
-    private func cellID(row: Int, col: Int) -> String {
-        "\(row)-\(col)"
-    }
+    private func cellID(row: Int, col: Int) -> String { "\(row)-\(col)" }
 
     private func parseCellID(_ id: String) -> (Int, Int)? {
         let parts = id.split(separator: "-")

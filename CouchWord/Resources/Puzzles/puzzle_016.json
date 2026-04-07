@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_016",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Mythology",
+  "date": null,
+  "grid": [
+    ["Z","E","U","S","#"],
+    ["#","#","#","#","#"],
+    ["#","A","R","E","S"],
+    ["#","#","#","#","#"],
+    ["#","T","H","O","R"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "King of the Greek gods", "answer": "ZEUS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Greek god of war", "answer": "ARES", "row": 2, "col": 1 },
+      { "number": 3, "clue": "Norse god of thunder", "answer": "THOR", "row": 4, "col": 1 }
+    ],
+    "down": []
+  },
+  "tags": ["mythology"],
+  "author": "CouchWord"
+}

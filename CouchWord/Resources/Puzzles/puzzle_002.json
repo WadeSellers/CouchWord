@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_002",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Food",
+  "date": null,
+  "grid": [
+    ["B","R","E","A","D"],
+    ["#","#","#","#","#"],
+    ["S","A","U","C","E"],
+    ["#","#","#","#","#"],
+    ["G","R","A","V","Y"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Sliced loaf staple", "answer": "BREAD", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Pasta topping liquid", "answer": "SAUCE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Poured over mashed potatoes", "answer": "GRAVY", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["food"],
+  "author": "CouchWord"
+}

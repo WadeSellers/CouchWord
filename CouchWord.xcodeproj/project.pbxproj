@@ -7,56 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A100000000000000000001 /* CouchWordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000001 /* CouchWordApp.swift */; };
-		A100000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000002 /* ContentView.swift */; };
-		A100000000000000000003 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000003 /* Puzzle.swift */; };
-		A100000000000000000004 /* PuzzleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000004 /* PuzzleGenerator.swift */; };
-		A100000000000000000005 /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000005 /* PuzzleViewModel.swift */; };
-		A100000000000000000006 /* PuzzleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000006 /* PuzzleGridView.swift */; };
-		A100000000000000000007 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000007 /* CellView.swift */; };
-		A100000000000000000008 /* ClueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000008 /* ClueListView.swift */; };
-		A100000000000000000009 /* LetterInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100000000000000000009 /* LetterInputView.swift */; };
-		A10000000000000000000A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000A /* Assets.xcassets */; };
-		A10000000000000000000B /* PuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000B /* PuzzleTests.swift */; };
-		A10000000000000000000C /* PuzzleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000C /* PuzzleViewModelTests.swift */; };
+		A10001 /* CouchWordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001; };
+		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002; };
+		A10003 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003; };
+		A10004 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004; };
+		A10005 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005; };
+		A10006 /* PuzzleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006; };
+		A10007 /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007; };
+		A10008 /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008; };
+		A10009 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009; };
+		A1000A /* VoiceInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000A; };
+		A1000B /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000B; };
+		A1000C /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000C; };
+		A1000D /* ClueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000D; };
+		A1000E /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000E; };
+		A1000F /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000F; };
+		A10010 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010; };
+		A10011 /* LetterInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
+		A10012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
+		A10013 /* PuzzleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013; };
+		A10014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10014; };
+		A10015 /* Puzzles in Resources */ = {isa = PBXBuildFile; fileRef = B10015; };
+		A10020 /* PuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020; };
+		A10021 /* PuzzleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C200000000000000000001 /* PBXContainerItemProxy */ = {
+		C20001 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D100000000000000000001 /* Project object */;
+			containerPortal = D10001 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E100000000000000000001;
+			remoteGlobalIDString = E10001;
 			remoteInfo = CouchWord;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B100000000000000000001 /* CouchWordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchWordApp.swift; sourceTree = "<group>"; };
-		B100000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B100000000000000000003 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
-		B100000000000000000004 /* PuzzleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGenerator.swift; sourceTree = "<group>"; };
-		B100000000000000000005 /* PuzzleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
-		B100000000000000000006 /* PuzzleGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGridView.swift; sourceTree = "<group>"; };
-		B100000000000000000007 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
-		B100000000000000000008 /* ClueListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClueListView.swift; sourceTree = "<group>"; };
-		B100000000000000000009 /* LetterInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterInputView.swift; sourceTree = "<group>"; };
-		B10000000000000000000A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B10000000000000000000B /* PuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleTests.swift; sourceTree = "<group>"; };
-		B10000000000000000000C /* PuzzleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModelTests.swift; sourceTree = "<group>"; };
-		B10000000000000000000D /* CouchWord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CouchWord.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B10000000000000000000E /* CouchWordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CouchWordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10001 /* CouchWordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchWordApp.swift; sourceTree = "<group>"; };
+		B10002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B10003 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
+		B10004 /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
+		B10005 /* GameStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStats.swift; sourceTree = "<group>"; };
+		B10006 /* PuzzleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleStore.swift; sourceTree = "<group>"; };
+		B10007 /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
+		B10008 /* ShakeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetector.swift; sourceTree = "<group>"; };
+		B10009 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		B1000A /* VoiceInputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceInputManager.swift; sourceTree = "<group>"; };
+		B1000B /* PuzzleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
+		B1000C /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		B1000D /* ClueListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClueListView.swift; sourceTree = "<group>"; };
+		B1000E /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
+		B1000F /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		B10010 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		B10011 /* LetterInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterInputView.swift; sourceTree = "<group>"; };
+		B10012 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		B10013 /* PuzzleGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGridView.swift; sourceTree = "<group>"; };
+		B10014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10015 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Puzzles; sourceTree = "<group>"; };
+		B10020 /* PuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleTests.swift; sourceTree = "<group>"; };
+		B10021 /* PuzzleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModelTests.swift; sourceTree = "<group>"; };
+		B10030 /* CouchWord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CouchWord.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10031 /* CouchWordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CouchWordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F100000000000000000001 /* Frameworks */ = {
+		F10001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F100000000000000000002 /* Frameworks */ = {
+		F10002 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -66,70 +88,97 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		G100000000000000000001 = {
+		G10001 = {
 			isa = PBXGroup;
 			children = (
-				G100000000000000000003 /* CouchWord */,
-				G100000000000000000007 /* CouchWordTests */,
-				G100000000000000000002 /* Products */,
+				G10003 /* CouchWord */,
+				G10009 /* CouchWordTests */,
+				G10002 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		G100000000000000000002 /* Products */ = {
+		G10002 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B10000000000000000000D /* CouchWord.app */,
-				B10000000000000000000E /* CouchWordTests.xctest */,
+				B10030 /* CouchWord.app */,
+				B10031 /* CouchWordTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		G100000000000000000003 /* CouchWord */ = {
+		G10003 /* CouchWord */ = {
 			isa = PBXGroup;
 			children = (
-				B100000000000000000001 /* CouchWordApp.swift */,
-				B100000000000000000002 /* ContentView.swift */,
-				G100000000000000000004 /* Models */,
-				G100000000000000000005 /* ViewModels */,
-				G100000000000000000006 /* Views */,
-				B10000000000000000000A /* Assets.xcassets */,
+				B10001 /* CouchWordApp.swift */,
+				B10002 /* ContentView.swift */,
+				G10004 /* Models */,
+				G10005 /* ViewModels */,
+				G10006 /* Views */,
+				G10007 /* Services */,
+				G10008 /* Resources */,
+				B10014 /* Assets.xcassets */,
 			);
 			path = CouchWord;
 			sourceTree = "<group>";
 		};
-		G100000000000000000004 /* Models */ = {
+		G10004 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B100000000000000000003 /* Puzzle.swift */,
-				B100000000000000000004 /* PuzzleGenerator.swift */,
+				B10003 /* Puzzle.swift */,
+				B10004 /* UserProgress.swift */,
+				B10005 /* GameStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		G100000000000000000005 /* ViewModels */ = {
+		G10005 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B100000000000000000005 /* PuzzleViewModel.swift */,
+				B1000B /* PuzzleViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		G100000000000000000006 /* Views */ = {
+		G10006 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B100000000000000000006 /* PuzzleGridView.swift */,
-				B100000000000000000007 /* CellView.swift */,
-				B100000000000000000008 /* ClueListView.swift */,
-				B100000000000000000009 /* LetterInputView.swift */,
+				B1000C /* CellView.swift */,
+				B1000D /* ClueListView.swift */,
+				B1000E /* CompletionView.swift */,
+				B1000F /* GameView.swift */,
+				B10010 /* HomeScreen.swift */,
+				B10011 /* LetterInputView.swift */,
+				B10012 /* OnboardingView.swift */,
+				B10013 /* PuzzleGridView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		G100000000000000000007 /* CouchWordTests */ = {
+		G10007 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B10000000000000000000B /* PuzzleTests.swift */,
-				B10000000000000000000C /* PuzzleViewModelTests.swift */,
+				B10006 /* PuzzleStore.swift */,
+				B10007 /* ProgressStore.swift */,
+				B10008 /* ShakeDetector.swift */,
+				B10009 /* SoundManager.swift */,
+				B1000A /* VoiceInputManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		G10008 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B10015 /* Puzzles */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		G10009 /* CouchWordTests */ = {
+			isa = PBXGroup;
+			children = (
+				B10020 /* PuzzleTests.swift */,
+				B10021 /* PuzzleViewModelTests.swift */,
 			);
 			path = CouchWordTests;
 			sourceTree = "<group>";
@@ -137,13 +186,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E100000000000000000001 /* CouchWord */ = {
+		E10001 /* CouchWord */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F300000000000000000002 /* Build configuration list for PBXNativeTarget "CouchWord" */;
+			buildConfigurationList = F30002 /* Build configuration list for PBXNativeTarget "CouchWord" */;
 			buildPhases = (
-				F200000000000000000001 /* Sources */,
-				F100000000000000000001 /* Frameworks */,
-				F200000000000000000003 /* Resources */,
+				F20001 /* Sources */,
+				F10001 /* Frameworks */,
+				F20003 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -151,46 +200,46 @@
 			);
 			name = CouchWord;
 			productName = CouchWord;
-			productReference = B10000000000000000000D /* CouchWord.app */;
+			productReference = B10030 /* CouchWord.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E100000000000000000002 /* CouchWordTests */ = {
+		E10002 /* CouchWordTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F300000000000000000003 /* Build configuration list for PBXNativeTarget "CouchWordTests" */;
+			buildConfigurationList = F30003 /* Build configuration list for PBXNativeTarget "CouchWordTests" */;
 			buildPhases = (
-				F200000000000000000002 /* Sources */,
-				F100000000000000000002 /* Frameworks */,
+				F20002 /* Sources */,
+				F10002 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C300000000000000000001 /* PBXTargetDependency */,
+				C30001 /* PBXTargetDependency */,
 			);
 			name = CouchWordTests;
 			productName = CouchWordTests;
-			productReference = B10000000000000000000E /* CouchWordTests.xctest */;
+			productReference = B10031 /* CouchWordTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D100000000000000000001 /* Project object */ = {
+		D10001 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					E100000000000000000001 = {
+					E10001 = {
 						CreatedOnToolsVersion = 16.0;
 					};
-					E100000000000000000002 = {
+					E10002 = {
 						CreatedOnToolsVersion = 16.0;
-						TestTargetID = E100000000000000000001;
+						TestTargetID = E10001;
 					};
 				};
 			};
-			buildConfigurationList = F300000000000000000001 /* Build configuration list for PBXProject "CouchWord" */;
+			buildConfigurationList = F30001 /* Build configuration list for PBXProject "CouchWord" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -198,66 +247,77 @@
 				en,
 				Base,
 			);
-			mainGroup = G100000000000000000001;
-			productRefGroup = G100000000000000000002 /* Products */;
+			mainGroup = G10001;
+			productRefGroup = G10002 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E100000000000000000001 /* CouchWord */,
-				E100000000000000000002 /* CouchWordTests */,
+				E10001 /* CouchWord */,
+				E10002 /* CouchWordTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F200000000000000000003 /* Resources */ = {
+		F20003 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A10000000000000000000A /* Assets.xcassets in Resources */,
+				A10014 /* Assets.xcassets in Resources */,
+				A10015 /* Puzzles in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F200000000000000000001 /* Sources */ = {
+		F20001 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A100000000000000000001 /* CouchWordApp.swift in Sources */,
-				A100000000000000000002 /* ContentView.swift in Sources */,
-				A100000000000000000003 /* Puzzle.swift in Sources */,
-				A100000000000000000004 /* PuzzleGenerator.swift in Sources */,
-				A100000000000000000005 /* PuzzleViewModel.swift in Sources */,
-				A100000000000000000006 /* PuzzleGridView.swift in Sources */,
-				A100000000000000000007 /* CellView.swift in Sources */,
-				A100000000000000000008 /* ClueListView.swift in Sources */,
-				A100000000000000000009 /* LetterInputView.swift in Sources */,
+				A10001 /* CouchWordApp.swift in Sources */,
+				A10002 /* ContentView.swift in Sources */,
+				A10003 /* Puzzle.swift in Sources */,
+				A10004 /* UserProgress.swift in Sources */,
+				A10005 /* GameStats.swift in Sources */,
+				A10006 /* PuzzleStore.swift in Sources */,
+				A10007 /* ProgressStore.swift in Sources */,
+				A10008 /* ShakeDetector.swift in Sources */,
+				A10009 /* SoundManager.swift in Sources */,
+				A1000A /* VoiceInputManager.swift in Sources */,
+				A1000B /* PuzzleViewModel.swift in Sources */,
+				A1000C /* CellView.swift in Sources */,
+				A1000D /* ClueListView.swift in Sources */,
+				A1000E /* CompletionView.swift in Sources */,
+				A1000F /* GameView.swift in Sources */,
+				A10010 /* HomeScreen.swift in Sources */,
+				A10011 /* LetterInputView.swift in Sources */,
+				A10012 /* OnboardingView.swift in Sources */,
+				A10013 /* PuzzleGridView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F200000000000000000002 /* Sources */ = {
+		F20002 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A10000000000000000000B /* PuzzleTests.swift in Sources */,
-				A10000000000000000000C /* PuzzleViewModelTests.swift in Sources */,
+				A10020 /* PuzzleTests.swift in Sources */,
+				A10021 /* PuzzleViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C300000000000000000001 /* PBXTargetDependency */ = {
+		C30001 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E100000000000000000001 /* CouchWord */;
-			targetProxy = C200000000000000000001 /* PBXContainerItemProxy */;
+			target = E10001 /* CouchWord */;
+			targetProxy = C20001 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		F400000000000000000001 /* Debug */ = {
+		F40001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -319,7 +379,7 @@
 			};
 			name = Debug;
 		};
-		F400000000000000000002 /* Release */ = {
+		F40002 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -374,7 +434,7 @@
 			};
 			name = Release;
 		};
-		F400000000000000000003 /* Debug */ = {
+		F40003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -397,7 +457,7 @@
 			};
 			name = Debug;
 		};
-		F400000000000000000004 /* Release */ = {
+		F40004 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -420,7 +480,7 @@
 			};
 			name = Release;
 		};
-		F400000000000000000005 /* Debug */ = {
+		F40005 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -437,7 +497,7 @@
 			};
 			name = Debug;
 		};
-		F400000000000000000006 /* Release */ = {
+		F40006 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -457,34 +517,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F300000000000000000001 /* Build configuration list for PBXProject "CouchWord" */ = {
+		F30001 /* Build configuration list for PBXProject "CouchWord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F400000000000000000001 /* Debug */,
-				F400000000000000000002 /* Release */,
+				F40001 /* Debug */,
+				F40002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F300000000000000000002 /* Build configuration list for PBXNativeTarget "CouchWord" */ = {
+		F30002 /* Build configuration list for PBXNativeTarget "CouchWord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F400000000000000000003 /* Debug */,
-				F400000000000000000004 /* Release */,
+				F40003 /* Debug */,
+				F40004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F300000000000000000003 /* Build configuration list for PBXNativeTarget "CouchWordTests" */ = {
+		F30003 /* Build configuration list for PBXNativeTarget "CouchWordTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F400000000000000000005 /* Debug */,
-				F400000000000000000006 /* Release */,
+				F40005 /* Debug */,
+				F40006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D100000000000000000001 /* Project object */;
+	rootObject = D10001 /* Project object */;
 }

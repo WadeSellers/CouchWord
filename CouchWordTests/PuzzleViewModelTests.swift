@@ -4,20 +4,51 @@ import Testing
 @Suite("PuzzleViewModel Tests")
 struct PuzzleViewModelTests {
 
+    private func makePuzzle() -> Puzzle {
+        Puzzle(
+            id: "vm_test",
+            version: 1,
+            size: PuzzleSize(rows: 5, cols: 5),
+            difficulty: .easy,
+            theme: "Test",
+            date: nil,
+            grid: [
+                ["S", "T", "A", "R", "S"],
+                ["#", "#", "R", "#", "#"],
+                ["C", "A", "R", "D", "S"],
+                ["#", "#", "E", "#", "#"],
+                ["P", "L", "A", "N", "S"],
+            ],
+            clues: ClueSet(
+                across: [
+                    PuzzleClue(number: 1, clue: "Night lights", answer: "STARS", row: 0, col: 0),
+                    PuzzleClue(number: 3, clue: "Playing deck", answer: "CARDS", row: 2, col: 0),
+                    PuzzleClue(number: 5, clue: "Intentions", answer: "PLANS", row: 4, col: 0),
+                ],
+                down: [
+                    PuzzleClue(number: 2, clue: "Region", answer: "AREA", row: 0, col: 2),
+                ]
+            ),
+            tags: ["test"],
+            author: "Test"
+        )
+    }
+
     @MainActor
-    @Test func loadPuzzleSetsState() {
+    @Test func loadPuzzleSetsInitialState() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
+        vm.loadPuzzle(makePuzzle())
         #expect(vm.puzzle != nil)
         #expect(vm.focusedRow == 0)
         #expect(vm.focusedCol == 0)
         #expect(!vm.isSolved)
+        #expect(vm.currentDirection == .across)
     }
 
     @MainActor
     @Test func moveFocusRight() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
+        vm.loadPuzzle(makePuzzle())
         vm.moveFocus(.right)
         #expect(vm.focusedCol == 1)
     }
@@ -25,21 +56,18 @@ struct PuzzleViewModelTests {
     @MainActor
     @Test func moveFocusSkipsBlackCells() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
-        // Move to row 1, col 0
-        vm.focusedRow = 1
-        vm.focusedCol = 0
-        // Move right — should skip col 1 (black) and land on col 2
-        vm.moveFocus(.right)
-        #expect(vm.focusedCol == 2)
+        vm.loadPuzzle(makePuzzle())
+        vm.focusedRow = 0
+        vm.focusedCol = 1
+        vm.moveFocus(.down)
+        // Row 1 col 1 is black, should skip to row 2
+        #expect(vm.focusedRow == 2)
     }
 
     @MainActor
     @Test func moveFocusStopsAtBounds() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
-        vm.focusedRow = 0
-        vm.focusedCol = 0
+        vm.loadPuzzle(makePuzzle())
         vm.moveFocus(.left)
         #expect(vm.focusedCol == 0)
         vm.moveFocus(.up)
@@ -49,75 +77,168 @@ struct PuzzleViewModelTests {
     @MainActor
     @Test func toggleDirectionWhenBothCluesExist() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
-        // Cell (0,0) has both across and down clues
+        vm.loadPuzzle(makePuzzle())
+        // Cell (0,2) has across clue 1 and down clue 2
         vm.focusedRow = 0
-        vm.focusedCol = 0
+        vm.focusedCol = 2
         vm.currentDirection = .across
         vm.toggleDirection()
         #expect(vm.currentDirection == .down)
-        vm.toggleDirection()
-        #expect(vm.currentDirection == .across)
     }
 
     @MainActor
-    @Test func enterLetterUpdatesCell() {
+    @Test func enterLetterUpdatesProgress() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
-        vm.focusedRow = 0
-        vm.focusedCol = 0
+        vm.loadPuzzle(makePuzzle())
         vm.enterLetter("S")
-        #expect(vm.puzzle?.cells[0][0].letter == "S")
+        #expect(vm.progress?.letterAt(row: 0, col: 0) == "S")
     }
 
     @MainActor
     @Test func enterLetterAdvancesFocus() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
+        vm.loadPuzzle(makePuzzle())
         vm.currentDirection = .across
-        vm.focusedRow = 0
-        vm.focusedCol = 0
         vm.enterLetter("S")
-        #expect(vm.focusedCol == 1)
+        #expect(vm.focusedCol == 1) // moved to next cell
     }
 
     @MainActor
-    @Test func clearCurrentCell() {
+    @Test func undoRestoresCell() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
+        vm.loadPuzzle(makePuzzle())
         vm.enterLetter("X")
+        #expect(vm.progress?.letterAt(row: 0, col: 0) == "X")
+        // Undo moves focus back, so set it explicitly
         vm.focusedRow = 0
         vm.focusedCol = 0
-        vm.clearCurrentCell()
-        #expect(vm.puzzle?.cells[0][0].letter == nil)
+        vm.undo()
+        #expect(vm.progress?.letterAt(row: 0, col: 0) == "")
+    }
+
+    @MainActor
+    @Test func enterWordFillsMultipleCells() {
+        let vm = PuzzleViewModel()
+        vm.loadPuzzle(makePuzzle())
+        vm.currentDirection = .across
+        vm.focusedRow = 0
+        vm.focusedCol = 0
+        vm.enterWord("STARS")
+        #expect(vm.progress?.letterAt(row: 0, col: 0) == "S")
+        #expect(vm.progress?.letterAt(row: 0, col: 1) == "T")
+        #expect(vm.progress?.letterAt(row: 0, col: 2) == "A")
+        #expect(vm.progress?.letterAt(row: 0, col: 3) == "R")
+        #expect(vm.progress?.letterAt(row: 0, col: 4) == "S")
+    }
+
+    @MainActor
+    @Test func wordUndoRestoresAllCells() {
+        let vm = PuzzleViewModel()
+        vm.loadPuzzle(makePuzzle())
+        vm.currentDirection = .across
+        vm.enterWord("STARS")
+        vm.undo()
+        #expect(vm.progress?.letterAt(row: 0, col: 0) == "")
+        #expect(vm.progress?.letterAt(row: 0, col: 4) == "")
+    }
+
+    @MainActor
+    @Test func hintRevealsCorrectLetter() {
+        let vm = PuzzleViewModel()
+        vm.loadPuzzle(makePuzzle())
+        vm.focusedRow = 0
+        vm.focusedCol = 0
+        vm.useHint()
+        #expect(vm.progress?.letterAt(row: 0, col: 0) == "S")
+        #expect(vm.progress?.hintsUsed == 1)
+        #expect(vm.hintsRemaining == 2)
+    }
+
+    @MainActor
+    @Test func maxThreeHints() {
+        let vm = PuzzleViewModel()
+        vm.loadPuzzle(makePuzzle())
+        vm.useHint()
+        vm.focusedCol = 1
+        vm.useHint()
+        vm.focusedCol = 2
+        vm.useHint()
+        vm.focusedCol = 3
+        vm.useHint() // should be no-op
+        #expect(vm.progress?.hintsUsed == 3)
+        #expect(vm.hintsRemaining == 0)
     }
 
     @MainActor
     @Test func selectClueUpdatesFocus() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
-        let clue = vm.puzzle!.acrossClues.first { $0.number == 5 }!
-        vm.selectClue(clue)
-        #expect(vm.focusedRow == clue.startRow)
-        #expect(vm.focusedCol == clue.startCol)
+        vm.loadPuzzle(makePuzzle())
+        let clue = vm.puzzle!.clues.across[1] // clue 3, row 2
+        vm.selectClue(clue, direction: .across)
+        #expect(vm.focusedRow == 2)
+        #expect(vm.focusedCol == 0)
         #expect(vm.currentDirection == .across)
     }
 
     @MainActor
-    @Test func solvingPuzzleSetsFlag() {
+    @Test func cellStatesReflectProgress() {
         let vm = PuzzleViewModel()
-        vm.loadPuzzle(PuzzleGenerator.sample())
-        guard let puzzle = vm.puzzle else { return }
-        // Fill in all letters correctly
-        for row in 0..<puzzle.size {
-            for col in 0..<puzzle.size {
-                if !puzzle.cells[row][col].isBlack {
-                    vm.focusedRow = row
-                    vm.focusedCol = col
-                    vm.enterLetter(puzzle.cells[row][col].solution)
-                }
-            }
+        vm.loadPuzzle(makePuzzle())
+        #expect(vm.cellState(row: 0, col: 0) == .empty)
+        #expect(vm.cellState(row: 1, col: 0) == .black)
+
+        vm.enterLetter("S")
+        vm.focusedRow = 0
+        vm.focusedCol = 0
+        #expect(vm.cellState(row: 0, col: 0) == .filled)
+    }
+}
+
+@Suite("VoiceInputManager Tests")
+struct VoiceInputManagerTests {
+
+    @Test func singleLetterProcessing() {
+        let result = VoiceInputManager.process("B")
+        if case .letter(let c) = result {
+            #expect(c == "B")
+        } else {
+            #expect(Bool(false), "Expected single letter")
         }
-        #expect(vm.isSolved)
+    }
+
+    @Test func wordProcessing() {
+        let result = VoiceInputManager.process("BANANA")
+        if case .word(let w) = result {
+            #expect(w == "BANANA")
+        } else {
+            #expect(Bool(false), "Expected word")
+        }
+    }
+
+    @Test func phoneticLetterProcessing() {
+        let result = VoiceInputManager.process("BEE")
+        if case .letter(let c) = result {
+            #expect(c == "B")
+        } else {
+            #expect(Bool(false), "Expected phonetic B")
+        }
+    }
+
+    @Test func emptyInputReturnsEmpty() {
+        let result = VoiceInputManager.process("")
+        if case .empty = result {
+            // pass
+        } else {
+            #expect(Bool(false), "Expected empty")
+        }
+    }
+
+    @Test func thLetterPattern() {
+        let result = VoiceInputManager.process("the letter R")
+        if case .letter(let c) = result {
+            #expect(c == "R")
+        } else {
+            #expect(Bool(false), "Expected letter R from 'the letter R'")
+        }
     }
 }

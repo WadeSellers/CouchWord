@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_011",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Weather",
+  "date": null,
+  "grid": [
+    ["#","#","S","#","#"],
+    ["#","#","T","#","#"],
+    ["C","L","O","U","D"],
+    ["#","#","R","#","#"],
+    ["#","#","M","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "White puffy sky formation", "answer": "CLOUD", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Severe weather event", "answer": "STORM", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["weather"],
+  "author": "CouchWord"
+}

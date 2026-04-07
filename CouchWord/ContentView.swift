@@ -1,23 +1,22 @@
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject private var viewModel = PuzzleViewModel()
+/// Root view that handles onboarding vs main app flow.
+struct RootView: View {
+    @EnvironmentObject var progressStore: ProgressStore
+    @State private var showOnboarding: Bool = false
 
     var body: some View {
-        NavigationStack {
-            HStack(spacing: 60) {
-                PuzzleGridView(viewModel: viewModel)
-                ClueListView(viewModel: viewModel)
+        HomeScreen()
+            .fullScreenCover(isPresented: $showOnboarding) {
+                OnboardingView {
+                    progressStore.hasShownOnboarding = true
+                    showOnboarding = false
+                }
             }
-            .padding(60)
-            .navigationTitle("CouchWord")
             .onAppear {
-                viewModel.loadPuzzle(PuzzleGenerator.sample())
+                if !progressStore.hasShownOnboarding {
+                    showOnboarding = true
+                }
             }
-        }
     }
-}
-
-#Preview {
-    ContentView()
 }

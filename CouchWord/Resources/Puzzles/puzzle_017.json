@@ -1,0 +1,27 @@
+{
+  "id": "puzzle_017",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Geography",
+  "date": null,
+  "grid": [
+    ["M","O","U","N","T"],
+    ["O","#","#","#","R"],
+    ["U","#","#","#","A"],
+    ["N","#","#","#","I"],
+    ["T","R","A","I","L"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "A peak or to climb up", "answer": "MOUNT", "row": 0, "col": 0 },
+      { "number": 3, "clue": "Hiking path through nature", "answer": "TRAIL", "row": 4, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "A tall landform or peak", "answer": "MOUNT", "row": 0, "col": 0 },
+      { "number": 2, "clue": "A walking path in the woods", "answer": "TRAIL", "row": 0, "col": 4 }
+    ]
+  },
+  "tags": ["geography"],
+  "author": "CouchWord"
+}

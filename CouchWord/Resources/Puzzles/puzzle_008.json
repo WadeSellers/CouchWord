@@ -1,0 +1,27 @@
+{
+  "id": "puzzle_008",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Movies",
+  "date": null,
+  "grid": [
+    ["A","C","T","O","R"],
+    ["C","#","#","#","E"],
+    ["T","#","#","#","E"],
+    ["O","#","#","#","L"],
+    ["R","E","E","L","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Movie performer", "answer": "ACTOR", "row": 0, "col": 0 },
+      { "number": 3, "clue": "Film spools", "answer": "REELS", "row": 4, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "One who plays a role", "answer": "ACTOR", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Film spools", "answer": "REELS", "row": 0, "col": 4 }
+    ]
+  },
+  "tags": ["movies"],
+  "author": "CouchWord"
+}

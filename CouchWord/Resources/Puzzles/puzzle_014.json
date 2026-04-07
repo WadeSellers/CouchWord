@@ -1,0 +1,27 @@
+{
+  "id": "puzzle_014",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Books",
+  "date": null,
+  "grid": [
+    ["N","O","V","E","L"],
+    ["O","#","#","#","I"],
+    ["T","#","#","#","N"],
+    ["E","#","#","#","E"],
+    ["S","U","G","A","R"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "A long fictional book", "answer": "NOVEL", "row": 0, "col": 0 },
+      { "number": 3, "clue": "Sweet granulated substance", "answer": "SUGAR", "row": 4, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Written reminders", "answer": "NOTES", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Cruise ship or jacket type", "answer": "LINER", "row": 0, "col": 4 }
+    ]
+  },
+  "tags": ["books"],
+  "author": "CouchWord"
+}

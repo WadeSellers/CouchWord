@@ -1,60 +1,92 @@
 import Foundation
 
-struct Puzzle {
-    let size: Int
-    var cells: [[Cell]]
-    var acrossClues: [Clue]
-    var downClues: [Clue]
+// MARK: - Puzzle (matches spec JSON schema)
 
-    var isSolved: Bool {
-        cells.allSatisfy { row in
-            row.allSatisfy { cell in
-                cell.isBlack || cell.letter == cell.solution
-            }
+struct Puzzle: Codable, Identifiable {
+    let id: String
+    let version: Int
+    let size: PuzzleSize
+    let difficulty: Difficulty
+    let theme: String?
+    let date: String?
+    let grid: [[String]]
+    let clues: ClueSet
+    let tags: [String]
+    let author: String
+
+    var rows: Int { size.rows }
+    var cols: Int { size.cols }
+
+    func solutionAt(row: Int, col: Int) -> Character? {
+        guard row >= 0, row < rows, col >= 0, col < cols else { return nil }
+        let value = grid[row][col]
+        if value == "#" { return nil }
+        return value.first
+    }
+
+    func isBlack(row: Int, col: Int) -> Bool {
+        guard row >= 0, row < rows, col >= 0, col < cols else { return true }
+        return grid[row][col] == "#"
+    }
+
+    func clueNumber(row: Int, col: Int) -> Int? {
+        // A cell gets a number if it starts an across or down word
+        let allClues = clues.across + clues.down
+        return allClues.first(where: { $0.row == row && $0.col == col })?.number
+    }
+
+    func acrossClue(forRow row: Int, col: Int) -> PuzzleClue? {
+        clues.across.first { clue in
+            row == clue.row && col >= clue.col && col < clue.col + clue.answer.count
         }
     }
 
-    func clue(for number: Int, direction: Direction) -> Clue? {
-        let clues = direction == .across ? acrossClues : downClues
-        return clues.first { $0.number == number }
+    func downClue(forRow row: Int, col: Int) -> PuzzleClue? {
+        clues.down.first { clue in
+            col == clue.col && row >= clue.row && row < clue.row + clue.answer.count
+        }
+    }
+
+    func clue(for number: Int, direction: Direction) -> PuzzleClue? {
+        let list = direction == .across ? clues.across : clues.down
+        return list.first { $0.number == number }
     }
 }
 
-struct Cell {
-    var letter: Character?
-    let solution: Character
-    let isBlack: Bool
-    var clueNumber: Int?
-    var acrossClueNumber: Int?
-    var downClueNumber: Int?
-
-    static func black() -> Cell {
-        Cell(letter: nil, solution: " ", isBlack: true)
-    }
-
-    static func letter(_ solution: Character, clueNumber: Int? = nil) -> Cell {
-        Cell(letter: nil, solution: solution, isBlack: false, clueNumber: clueNumber)
-    }
+struct PuzzleSize: Codable, Equatable {
+    let rows: Int
+    let cols: Int
 }
 
-struct Clue: Identifiable, Hashable {
+struct ClueSet: Codable {
+    let across: [PuzzleClue]
+    let down: [PuzzleClue]
+}
+
+struct PuzzleClue: Codable, Identifiable, Hashable {
     let number: Int
-    let direction: Direction
-    let text: String
-    let startRow: Int
-    let startCol: Int
-    let length: Int
+    let clue: String
+    let answer: String
+    let row: Int
+    let col: Int
 
-    var id: String { "\(direction)-\(number)" }
-
-    var label: String { "\(number). \(text)" }
+    var id: String { "\(number)" }
+    var label: String { "\(number). \(clue)" }
+    var length: Int { answer.count }
 }
 
-enum Direction: String, CaseIterable {
+enum Direction: String, Codable, CaseIterable {
     case across = "Across"
     case down = "Down"
 
     var opposite: Direction {
         self == .across ? .down : .across
     }
+}
+
+enum Difficulty: String, Codable, CaseIterable {
+    case easy
+    case medium
+    case hard
+    case expert
 }

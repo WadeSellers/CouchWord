@@ -1,0 +1,33 @@
+{
+  "id": "puzzle_009",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Travel",
+  "date": null,
+  "grid": [
+    ["H","E","A","R","T"],
+    ["E","M","B","E","R"],
+    ["A","B","U","S","E"],
+    ["R","E","S","I","N"],
+    ["T","R","E","N","D"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Core of emotions", "answer": "HEART", "row": 0, "col": 0 },
+      { "number": 6, "clue": "Glowing coal from a fire", "answer": "EMBER", "row": 1, "col": 0 },
+      { "number": 7, "clue": "Misuse or mistreat", "answer": "ABUSE", "row": 2, "col": 0 },
+      { "number": 8, "clue": "Sticky tree substance", "answer": "RESIN", "row": 3, "col": 0 },
+      { "number": 9, "clue": "Popular fad or direction", "answer": "TREND", "row": 4, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Organ that pumps blood", "answer": "HEART", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Still-hot piece of ash", "answer": "EMBER", "row": 0, "col": 1 },
+      { "number": 3, "clue": "Wrongful treatment", "answer": "ABUSE", "row": 0, "col": 2 },
+      { "number": 4, "clue": "Tree sap product", "answer": "RESIN", "row": 0, "col": 3 },
+      { "number": 5, "clue": "Fashion movement", "answer": "TREND", "row": 0, "col": 4 }
+    ]
+  },
+  "tags": ["travel"],
+  "author": "CouchWord"
+}

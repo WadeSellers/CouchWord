@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_020",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Languages",
+  "date": null,
+  "grid": [
+    ["W","O","R","D","S"],
+    ["#","#","#","#","#"],
+    ["L","A","T","I","N"],
+    ["#","#","#","#","#"],
+    ["#","T","O","N","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Vocabulary building blocks", "answer": "WORDS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Ancient Roman language", "answer": "LATIN", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Sound pitch in Mandarin", "answer": "TONE", "row": 4, "col": 1 }
+    ],
+    "down": []
+  },
+  "tags": ["languages"],
+  "author": "CouchWord"
+}

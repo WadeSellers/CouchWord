@@ -1,0 +1,26 @@
+{
+  "id": "puzzle_012",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Colors",
+  "date": null,
+  "grid": [
+    ["#","B","#","G","#"],
+    ["#","L","#","R","#"],
+    ["P","A","L","E","R"],
+    ["#","C","#","E","#"],
+    ["#","K","#","N","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 3, "clue": "More washed out or lighter", "answer": "PALER", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Darkest color", "answer": "BLACK", "row": 0, "col": 1 },
+      { "number": 2, "clue": "Color of grass and leaves", "answer": "GREEN", "row": 0, "col": 3 }
+    ]
+  },
+  "tags": ["colors"],
+  "author": "CouchWord"
+}

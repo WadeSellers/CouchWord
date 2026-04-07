@@ -1,0 +1,27 @@
+{
+  "id": "puzzle_004",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Music",
+  "date": null,
+  "grid": [
+    ["B","E","A","T","S"],
+    ["E","#","#","#","O"],
+    ["A","#","#","#","N"],
+    ["T","#","#","#","G"],
+    ["S","O","N","G","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Musical rhythms", "answer": "BEATS", "row": 0, "col": 0 },
+      { "number": 3, "clue": "Tunes you sing along to", "answer": "SONGS", "row": 4, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Rhythmic pulses", "answer": "BEATS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Musical pieces", "answer": "SONGS", "row": 0, "col": 4 }
+    ]
+  },
+  "tags": ["music"],
+  "author": "CouchWord"
+}

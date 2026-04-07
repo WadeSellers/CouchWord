@@ -1,35 +1,104 @@
 import SwiftUI
+import Combine
 
 @MainActor
 class PuzzleViewModel: ObservableObject {
+    // MARK: - Published State
+
     @Published var puzzle: Puzzle?
+    @Published var progress: UserProgress?
     @Published var focusedRow: Int = 0
     @Published var focusedCol: Int = 0
     @Published var currentDirection: Direction = .across
-    @Published var showingLetterPicker = false
-    @Published var isSolved = false
+    @Published var isZoomedOut: Bool = false
+    @Published var isSolved: Bool = false
+    @Published var showingVoiceInput: Bool = false
+    @Published var checkMode: CheckMode = .none
 
-    var currentCell: Cell? {
-        guard let puzzle, validPosition(row: focusedRow, col: focusedCol) else { return nil }
-        return puzzle.cells[focusedRow][focusedCol]
+    private var timerCancellable: AnyCancellable?
+    private var startTime: Date?
+    private let progressStore: ProgressStore
+
+    enum CheckMode {
+        case none
+        case checking  // show correct/incorrect colors
     }
 
-    var activeClue: Clue? {
-        guard let puzzle, let cell = currentCell else { return nil }
-        let number = currentDirection == .across ? cell.acrossClueNumber : cell.downClueNumber
-        guard let number else { return nil }
-        return puzzle.clue(for: number, direction: currentDirection)
+    init(progressStore: ProgressStore = ProgressStore()) {
+        self.progressStore = progressStore
     }
 
-    var cluesForCurrentDirection: [Clue] {
-        guard let puzzle else { return [] }
-        return currentDirection == .across ? puzzle.acrossClues : puzzle.downClues
+    // MARK: - Computed Properties
+
+    var currentCell: String {
+        progress?.letterAt(row: focusedRow, col: focusedCol) ?? ""
     }
+
+    var activeClue: PuzzleClue? {
+        guard let puzzle else { return nil }
+        if currentDirection == .across {
+            return puzzle.acrossClue(forRow: focusedRow, col: focusedCol)
+        } else {
+            return puzzle.downClue(forRow: focusedRow, col: focusedCol)
+        }
+    }
+
+    var acrossClues: [PuzzleClue] {
+        puzzle?.clues.across ?? []
+    }
+
+    var downClues: [PuzzleClue] {
+        puzzle?.clues.down ?? []
+    }
+
+    var cluesForCurrentDirection: [PuzzleClue] {
+        currentDirection == .across ? acrossClues : downClues
+    }
+
+    var hintsRemaining: Int {
+        3 - (progress?.hintsUsed ?? 0)
+    }
+
+    var elapsedTime: TimeInterval {
+        progress?.elapsedSeconds ?? 0
+    }
+
+    var elapsedTimeFormatted: String {
+        let total = Int(elapsedTime)
+        let minutes = total / 60
+        let seconds = total % 60
+        return String(format: "%d:%02d", minutes, seconds)
+    }
+
+    // MARK: - Puzzle Lifecycle
 
     func loadPuzzle(_ puzzle: Puzzle) {
         self.puzzle = puzzle
         self.isSolved = false
+        self.checkMode = .none
+        self.isZoomedOut = false
+        self.currentDirection = .across
+
+        // Try to resume existing progress
+        if let saved = progressStore.loadProgress(for: puzzle.id),
+           saved.state == .inProgress {
+            self.progress = saved
+        } else {
+            self.progress = UserProgress(puzzleID: puzzle.id, rows: puzzle.rows, cols: puzzle.cols)
+        }
+
         moveToFirstEditableCell()
+        startTimer()
+    }
+
+    func saveCurrentProgress() {
+        guard var progress else { return }
+        progress.elapsedSeconds = elapsedTime
+        if !isSolved {
+            progress.state = .inProgress
+        }
+        self.progress = progress
+        progressStore.saveProgress(progress)
     }
 
     // MARK: - Navigation
@@ -46,8 +115,8 @@ class PuzzleViewModel: ObservableObject {
         case .right: newCol += 1
         }
 
-        // Skip black cells in the movement direction
-        while validPosition(row: newRow, col: newCol) && puzzle.cells[newRow][newCol].isBlack {
+        // Skip black cells
+        while isValidPosition(row: newRow, col: newCol) && puzzle.isBlack(row: newRow, col: newCol) {
             switch direction {
             case .up: newRow -= 1
             case .down: newRow += 1
@@ -56,59 +125,257 @@ class PuzzleViewModel: ObservableObject {
             }
         }
 
-        if validPosition(row: newRow, col: newCol) {
+        if isValidPosition(row: newRow, col: newCol) {
             focusedRow = newRow
             focusedCol = newCol
         }
     }
 
     func toggleDirection() {
-        guard let cell = currentCell else { return }
-        // Only toggle if the cell belongs to clues in both directions
-        if cell.acrossClueNumber != nil && cell.downClueNumber != nil {
+        guard let puzzle else { return }
+        let hasAcross = puzzle.acrossClue(forRow: focusedRow, col: focusedCol) != nil
+        let hasDown = puzzle.downClue(forRow: focusedRow, col: focusedCol) != nil
+        if hasAcross && hasDown {
             currentDirection = currentDirection.opposite
         }
     }
 
-    func selectClue(_ clue: Clue) {
-        currentDirection = clue.direction
-        focusedRow = clue.startRow
-        focusedCol = clue.startCol
+    func selectClue(_ clue: PuzzleClue, direction: Direction) {
+        currentDirection = direction
+        focusedRow = clue.row
+        focusedCol = clue.col
+    }
+
+    func toggleZoom() {
+        isZoomedOut.toggle()
     }
 
     // MARK: - Input
 
     func enterLetter(_ letter: Character) {
-        guard var puzzle, validPosition(row: focusedRow, col: focusedCol) else { return }
-        guard !puzzle.cells[focusedRow][focusedCol].isBlack else { return }
+        guard var progress, let puzzle else { return }
+        guard !puzzle.isBlack(row: focusedRow, col: focusedCol) else { return }
 
-        puzzle.cells[focusedRow][focusedCol].letter = letter
-        self.puzzle = puzzle
-        showingLetterPicker = false
+        // Record undo action
+        let snapshot = CellSnapshot(
+            row: focusedRow,
+            col: focusedCol,
+            previousValue: progress.letterAt(row: focusedRow, col: focusedCol)
+        )
+        let action = UndoAction(type: .letter, cellSnapshots: [snapshot])
+        progress.undoStack.append(action)
 
-        if puzzle.isSolved {
-            isSolved = true
+        // Place the letter
+        progress.setLetter(String(letter).uppercased(), row: focusedRow, col: focusedCol)
+        self.progress = progress
+
+        // Check for completion
+        if checkPuzzleSolved() {
+            completePuzzle()
         } else {
             advanceToNextCell()
+        }
+
+        saveCurrentProgress()
+    }
+
+    func enterWord(_ word: String) {
+        guard var progress, let puzzle, let clue = activeClue else { return }
+        let letters = Array(word.uppercased())
+
+        var snapshots: [CellSnapshot] = []
+        let dRow = currentDirection == .down ? 1 : 0
+        let dCol = currentDirection == .across ? 1 : 0
+
+        for (i, letter) in letters.enumerated() {
+            let row = focusedRow + i * dRow
+            let col = focusedCol + i * dCol
+
+            guard isValidPosition(row: row, col: col),
+                  !puzzle.isBlack(row: row, col: col) else { break }
+
+            // Check we're still within the same clue
+            let clueEndRow = clue.row + (currentDirection == .down ? clue.length - 1 : 0)
+            let clueEndCol = clue.col + (currentDirection == .across ? clue.length - 1 : 0)
+            guard row <= clueEndRow, col <= clueEndCol else { break }
+
+            let prev = progress.letterAt(row: row, col: col)
+            snapshots.append(CellSnapshot(row: row, col: col, previousValue: prev))
+            progress.setLetter(String(letter), row: row, col: col)
+        }
+
+        if !snapshots.isEmpty {
+            let action = UndoAction(type: .word, cellSnapshots: snapshots)
+            progress.undoStack.append(action)
+            self.progress = progress
+
+            if checkPuzzleSolved() {
+                completePuzzle()
+            }
+
+            saveCurrentProgress()
         }
     }
 
     func clearCurrentCell() {
-        guard var puzzle, validPosition(row: focusedRow, col: focusedCol) else { return }
-        puzzle.cells[focusedRow][focusedCol].letter = nil
-        self.puzzle = puzzle
+        guard var progress, let puzzle else { return }
+        guard !puzzle.isBlack(row: focusedRow, col: focusedCol) else { return }
+
+        let snapshot = CellSnapshot(
+            row: focusedRow,
+            col: focusedCol,
+            previousValue: progress.letterAt(row: focusedRow, col: focusedCol)
+        )
+        let action = UndoAction(type: .letter, cellSnapshots: [snapshot])
+        progress.undoStack.append(action)
+        progress.setLetter("", row: focusedRow, col: focusedCol)
+        self.progress = progress
+        saveCurrentProgress()
+    }
+
+    // MARK: - Undo
+
+    func undo() {
+        guard var progress, !progress.undoStack.isEmpty else { return }
+        let action = progress.undoStack.removeLast()
+
+        for snapshot in action.cellSnapshots {
+            progress.setLetter(snapshot.previousValue, row: snapshot.row, col: snapshot.col)
+        }
+
+        // Move focus to the first cell in the undo action
+        if let first = action.cellSnapshots.first {
+            focusedRow = first.row
+            focusedCol = first.col
+        }
+
+        self.progress = progress
+        saveCurrentProgress()
+    }
+
+    // MARK: - Hints
+
+    func useHint() {
+        guard var progress, let puzzle else { return }
+        guard progress.hintsUsed < 3 else { return }
+        guard !puzzle.isBlack(row: focusedRow, col: focusedCol) else { return }
+
+        let solution = puzzle.solutionAt(row: focusedRow, col: focusedCol)
+        guard let solution else { return }
+
+        let snapshot = CellSnapshot(
+            row: focusedRow,
+            col: focusedCol,
+            previousValue: progress.letterAt(row: focusedRow, col: focusedCol)
+        )
+        let action = UndoAction(type: .hint, cellSnapshots: [snapshot])
+        progress.undoStack.append(action)
+        progress.setLetter(String(solution), row: focusedRow, col: focusedCol)
+        progress.hintsUsed += 1
+        self.progress = progress
+
+        if checkPuzzleSolved() {
+            completePuzzle()
+        } else {
+            advanceToNextCell()
+        }
+
+        saveCurrentProgress()
+    }
+
+    // MARK: - Checking
+
+    func cellState(row: Int, col: Int) -> CellDisplayState {
+        guard let puzzle, let progress else { return .empty }
+
+        if puzzle.isBlack(row: row, col: col) { return .black }
+
+        let userLetter = progress.letterAt(row: row, col: col)
+        if userLetter.isEmpty { return .empty }
+
+        if checkMode == .checking || isSolved {
+            let solution = puzzle.solutionAt(row: row, col: col)
+            if userLetter.first == solution {
+                return .correct
+            } else {
+                return .incorrect
+            }
+        }
+
+        return .filled
+    }
+
+    func checkPuzzle() {
+        checkMode = .checking
+        // Auto-dismiss after 2 seconds
+        Task {
+            try? await Task.sleep(for: .seconds(2))
+            if !isSolved {
+                checkMode = .none
+            }
+        }
     }
 
     // MARK: - Private
+
+    private func checkPuzzleSolved() -> Bool {
+        guard let puzzle, let progress else { return false }
+        for row in 0..<puzzle.rows {
+            for col in 0..<puzzle.cols {
+                if puzzle.isBlack(row: row, col: col) { continue }
+                let userLetter = progress.letterAt(row: row, col: col)
+                guard let solution = puzzle.solutionAt(row: row, col: col) else { continue }
+                if userLetter.isEmpty || userLetter.first != solution {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    private func completePuzzle() {
+        guard var progress else { return }
+        stopTimer()
+        isSolved = true
+        checkMode = .checking
+        progress.state = .completed
+        progress.completedAt = .now
+
+        // Calculate accuracy
+        var totalCells = 0
+        var correctCells = 0
+        if let puzzle {
+            for row in 0..<puzzle.rows {
+                for col in 0..<puzzle.cols {
+                    if !puzzle.isBlack(row: row, col: col) {
+                        totalCells += 1
+                        let userLetter = progress.letterAt(row: row, col: col)
+                        if let solution = puzzle.solutionAt(row: row, col: col),
+                           userLetter.first == solution {
+                            correctCells += 1
+                        }
+                    }
+                }
+            }
+        }
+        progress.accuracy = totalCells > 0 ? Double(correctCells) / Double(totalCells) : 1.0
+        self.progress = progress
+        progressStore.saveProgress(progress)
+        progressStore.recordCompletion(
+            puzzleID: progress.puzzleID,
+            time: progress.elapsedSeconds,
+            hints: progress.hintsUsed
+        )
+    }
 
     private func advanceToNextCell() {
         guard let puzzle else { return }
         let dRow = currentDirection == .down ? 1 : 0
         let dCol = currentDirection == .across ? 1 : 0
-        var newRow = focusedRow + dRow
-        var newCol = focusedCol + dCol
+        let newRow = focusedRow + dRow
+        let newCol = focusedCol + dCol
 
-        if validPosition(row: newRow, col: newCol) && !puzzle.cells[newRow][newCol].isBlack {
+        if isValidPosition(row: newRow, col: newCol) && !puzzle.isBlack(row: newRow, col: newCol) {
             focusedRow = newRow
             focusedCol = newCol
         }
@@ -116,9 +383,9 @@ class PuzzleViewModel: ObservableObject {
 
     private func moveToFirstEditableCell() {
         guard let puzzle else { return }
-        for row in 0..<puzzle.size {
-            for col in 0..<puzzle.size {
-                if !puzzle.cells[row][col].isBlack {
+        for row in 0..<puzzle.rows {
+            for col in 0..<puzzle.cols {
+                if !puzzle.isBlack(row: row, col: col) {
                     focusedRow = row
                     focusedCol = col
                     return
@@ -127,10 +394,41 @@ class PuzzleViewModel: ObservableObject {
         }
     }
 
-    private func validPosition(row: Int, col: Int) -> Bool {
+    private func isValidPosition(row: Int, col: Int) -> Bool {
         guard let puzzle else { return false }
-        return row >= 0 && row < puzzle.size && col >= 0 && col < puzzle.size
+        return row >= 0 && row < puzzle.rows && col >= 0 && col < puzzle.cols
     }
+
+    // MARK: - Timer
+
+    private func startTimer() {
+        startTime = Date()
+        timerCancellable = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self, var progress = self.progress, !self.isSolved else { return }
+                if let start = self.startTime {
+                    progress.elapsedSeconds += Date().timeIntervalSince(start)
+                    self.startTime = Date()
+                    self.progress = progress
+                }
+            }
+    }
+
+    private func stopTimer() {
+        timerCancellable?.cancel()
+        timerCancellable = nil
+    }
+}
+
+// MARK: - Cell Display State
+
+enum CellDisplayState {
+    case empty
+    case filled
+    case correct
+    case incorrect
+    case black
 }
 
 enum FocusDirection {

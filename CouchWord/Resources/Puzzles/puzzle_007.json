@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_007",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Garden",
+  "date": null,
+  "grid": [
+    ["S","E","E","D","S"],
+    ["#","#","#","#","#"],
+    ["B","L","O","O","M"],
+    ["#","#","#","#","#"],
+    ["V","I","N","E","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Planted to grow flowers", "answer": "SEEDS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "A flower opening up", "answer": "BLOOM", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Climbing garden plants", "answer": "VINES", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["garden"],
+  "author": "CouchWord"
+}

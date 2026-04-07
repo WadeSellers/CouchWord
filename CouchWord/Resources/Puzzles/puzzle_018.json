@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_018",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "History",
+  "date": null,
+  "grid": [
+    ["Q","U","E","E","N"],
+    ["#","#","#","#","#"],
+    ["#","K","I","N","G"],
+    ["#","#","#","#","#"],
+    ["R","U","L","E","R"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Female monarch", "answer": "QUEEN", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Male monarch", "answer": "KING", "row": 2, "col": 1 },
+      { "number": 3, "clue": "One who governs a nation", "answer": "RULER", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["history"],
+  "author": "CouchWord"
+}

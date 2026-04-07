@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_006",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Ocean",
+  "date": null,
+  "grid": [
+    ["W","H","A","L","E"],
+    ["#","#","#","#","#"],
+    ["C","O","R","A","L"],
+    ["#","#","#","#","#"],
+    ["S","H","E","L","L"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Largest ocean mammal", "answer": "WHALE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Underwater reef material", "answer": "CORAL", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Found on the seashore", "answer": "SHELL", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["ocean"],
+  "author": "CouchWord"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_013",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Cities",
+  "date": null,
+  "grid": [
+    ["#","R","O","M","E"],
+    ["#","#","#","#","#"],
+    ["P","A","R","I","S"],
+    ["#","#","#","#","#"],
+    ["L","I","M","A","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Italian capital city", "answer": "ROME", "row": 0, "col": 1 },
+      { "number": 2, "clue": "French capital with the Eiffel Tower", "answer": "PARIS", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Capital of Peru", "answer": "LIMA", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["cities"],
+  "author": "CouchWord"
+}

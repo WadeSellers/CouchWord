@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_003",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Animals",
+  "date": null,
+  "grid": [
+    ["H","O","R","S","E"],
+    ["#","#","#","#","#"],
+    ["G","O","O","S","E"],
+    ["#","#","#","#","#"],
+    ["M","O","U","S","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Animal you ride", "answer": "HORSE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Honking bird", "answer": "GOOSE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Small squeaking rodent", "answer": "MOUSE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["animals"],
+  "author": "CouchWord"
+}

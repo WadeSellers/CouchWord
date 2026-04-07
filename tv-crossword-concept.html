@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CouchWord — Apple TV Crossword App — Full Product Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0f0f12;
+    --surface: #1a1a22;
+    --surface2: #242430;
+    --accent: #7eb8da;
+    --accent2: #f4c96b;
+    --text: #e8e6e1;
+    --dim: #6b6980;
+    --correct: #6bcf8e;
+    --error: #e8665a;
+    --v1: #7eb8da;
+    --v2: #8bc9a3;
+    --v3: #f4c96b;
+    --v4: #e89b6b;
+    --v5: #d87eb8;
+    --v6: #e86b6b;
+    --v7: #6be8c4;
+    --v8: #b8a0e8;
+    --v9: #e8d46b;
+    --v10: #6b9ee8;
+    --v11: #e8886b;
+    --v12: #8be86b;
+    --v13: #e86bb8;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', sans-serif; line-height: 1.6; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: 2.8em; color: var(--accent); margin-bottom: 4px; }
+  .subtitle { color: var(--dim); font-size: 1.05em; margin-bottom: 48px; font-weight: 300; }
+  h2 { font-family: 'DM Serif Display', serif; font-size: 1.6em; color: var(--accent2); margin: 48px 0 20px; }
+  h3 { font-size: 1.1em; font-weight: 600; color: var(--accent); margin: 28px 0 10px; }
+  h4 { font-size: 0.95em; font-weight: 600; color: var(--dim); margin: 18px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  p, li { font-weight: 300; font-size: 0.95em; color: #c4c2bc; }
+  li { margin-bottom: 6px; }
+  ul { padding-left: 20px; }
+  .screen-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 28px 0; }
+  @media (max-width: 700px) { .screen-row { grid-template-columns: 1fr; } }
+  .screen { background: var(--surface); border-radius: 16px; overflow: hidden; border: 1px solid #2a2a38; }
+  .screen-label { background: var(--surface2); padding: 10px 16px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75em; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 8px; }
+  .screen-label .num { background: var(--accent); color: var(--bg); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85em; }
+  .screen-body { padding: 20px; }
+  .tv-frame { background: #111118; border-radius: 10px; aspect-ratio: 16/9; position: relative; overflow: hidden; border: 2px solid #2a2a38; }
+  .home-mock { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 20px; }
+  .home-mock .logo { font-family: 'DM Serif Display', serif; font-size: 1.4em; color: var(--accent); margin-bottom: 12px; }
+  .home-mock .menu-item { background: var(--surface2); border-radius: 8px; padding: 8px 24px; margin: 3px 0; font-size: 0.7em; width: 60%; text-align: center; color: var(--dim); }
+  .home-mock .menu-item.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+  .grid-mock { display: flex; height: 100%; gap: 8px; padding: 10px; }
+  .mini-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 2px; flex: 1; align-self: center; }
+  .mini-grid .cell { aspect-ratio: 1; background: var(--surface2); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 0.55em; font-weight: 500; color: var(--text); }
+  .mini-grid .cell.black { background: #0a0a0e; }
+  .mini-grid .cell.active { background: var(--accent); color: var(--bg); font-weight: 700; }
+  .mini-grid .cell.word { background: #2a3a48; }
+  .mini-grid .cell.correct { background: #1e3a28; color: var(--correct); }
+  .clue-panel { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 4px 8px; }
+  .clue-panel .clue { font-size: 0.55em; color: var(--dim); padding: 3px 6px; border-radius: 4px; }
+  .clue-panel .clue.active { color: var(--text); background: var(--surface2); border-left: 2px solid var(--accent); }
+  .voice-mock { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 8px; }
+  .voice-wave { display: flex; gap: 3px; align-items: center; }
+  .voice-wave .bar { width: 4px; background: var(--accent); border-radius: 2px; animation: wave 0.8s ease-in-out infinite; }
+  .voice-wave .bar:nth-child(1) { height: 12px; animation-delay: 0s; }
+  .voice-wave .bar:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+  .voice-wave .bar:nth-child(3) { height: 28px; animation-delay: 0.2s; }
+  .voice-wave .bar:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+  .voice-wave .bar:nth-child(5) { height: 12px; animation-delay: 0.4s; }
+  @keyframes wave { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(0.4); } }
+  .voice-text { font-size: 0.65em; color: var(--accent2); font-weight: 500; }
+  .voice-sub { font-size: 0.5em; color: var(--dim); }
+  .mvp-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .mvp-table th { text-align: left; font-size: 0.75em; text-transform: uppercase; letter-spacing: 1px; color: var(--dim); padding: 8px 12px; border-bottom: 1px solid #2a2a38; }
+  .mvp-table td { padding: 10px 12px; border-bottom: 1px solid #1e1e28; font-size: 0.9em; font-weight: 300; }
+  .mvp-table tr:hover td { background: var(--surface2); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7em; font-weight: 500; }
+  .tag.must { background: #2a1e1e; color: var(--error); }
+  .tag.should { background: #2a2a1e; color: var(--accent2); }
+  .tag.nice { background: #1e2a2a; color: var(--accent); }
+  .note { background: var(--surface); border-left: 3px solid var(--accent2); padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 0.9em; color: #c4c2bc; }
+  .section-divider { border: none; border-top: 1px solid #2a2a38; margin: 48px 0; }
+  .version-card { background: var(--surface); border: 1px solid #2a2a38; border-radius: 16px; padding: 24px; margin: 20px 0; position: relative; overflow: hidden; }
+  .version-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .version-card.era1::before { background: linear-gradient(90deg, var(--v1), var(--v2)); }
+  .version-card.era2::before { background: linear-gradient(90deg, var(--v2), var(--v3)); }
+  .version-card.era3::before { background: linear-gradient(90deg, var(--v3), var(--v4)); }
+  .version-card.era4::before { background: linear-gradient(90deg, var(--v4), var(--v5)); }
+  .version-card.era5::before { background: linear-gradient(90deg, var(--v5), var(--v1)); }
+  .version-card.era6::before { background: linear-gradient(90deg, var(--v6), var(--v7)); }
+  .version-card.era7::before { background: linear-gradient(90deg, var(--v7), var(--v8)); }
+  .version-card.era8::before { background: linear-gradient(90deg, var(--v8), var(--v9)); }
+  .version-card.era9::before { background: linear-gradient(90deg, var(--v9), var(--v10)); }
+  .version-card.era10::before { background: linear-gradient(90deg, var(--v10), var(--v11)); }
+  .version-card.era11::before { background: linear-gradient(90deg, var(--v11), var(--v12)); }
+  .version-card.era12::before { background: linear-gradient(90deg, var(--v12), var(--v13)); }
+  .version-card.era13::before { background: linear-gradient(90deg, var(--v13), var(--v1)); }
+  .version-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+  .version-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.8em; font-weight: 600; padding: 3px 10px; border-radius: 6px; }
+  .era1 .version-num { background: #1a2a3a; color: var(--v1); }
+  .era2 .version-num { background: #1a2a22; color: var(--v2); }
+  .era3 .version-num { background: #2a2a1a; color: var(--v3); }
+  .era4 .version-num { background: #2a1e1a; color: var(--v4); }
+  .era5 .version-num { background: #2a1a28; color: var(--v5); }
+  .era6 .version-num { background: #2a1a1a; color: var(--v6); }
+  .era7 .version-num { background: #1a2a28; color: var(--v7); }
+  .era8 .version-num { background: #221a2a; color: var(--v8); }
+  .era9 .version-num { background: #2a2a1a; color: var(--v9); }
+  .era10 .version-num { background: #1a222a; color: var(--v10); }
+  .era11 .version-num { background: #2a1e1a; color: var(--v11); }
+  .era12 .version-num { background: #1e2a1a; color: var(--v12); }
+  .era13 .version-num { background: #2a1a22; color: var(--v13); }
+  .version-title { font-family: 'DM Serif Display', serif; font-size: 1.2em; color: var(--text); }
+  .version-tagline { font-size: 0.85em; color: var(--dim); font-style: italic; margin-bottom: 14px; }
+  .feature-list { list-style: none; padding: 0; }
+  .feature-list li { padding: 8px 0; border-bottom: 1px solid #1e1e28; display: flex; gap: 10px; align-items: flex-start; }
+  .feature-list li:last-child { border-bottom: none; }
+  .feature-icon { font-size: 1.1em; flex-shrink: 0; width: 24px; text-align: center; }
+  .feature-detail { flex: 1; }
+  .feature-name { font-weight: 500; color: var(--text); font-size: 0.9em; }
+  .feature-desc { font-weight: 300; color: var(--dim); font-size: 0.8em; margin-top: 2px; }
+  .code-block { background: #111118; border: 1px solid #2a2a38; border-radius: 10px; padding: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 0.8em; color: var(--accent); overflow-x: auto; margin: 12px 0; line-height: 1.7; white-space: pre-wrap; }
+  .code-comment { color: var(--dim); }
+  .code-key { color: var(--accent2); }
+  .code-val { color: var(--correct); }
+  .money-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+  .money-card { background: var(--surface2); border-radius: 12px; padding: 18px; }
+  .money-card h4 { margin-top: 0; color: var(--accent2); }
+  .money-amount { font-family: 'IBM Plex Mono', monospace; font-size: 1.4em; color: var(--correct); margin: 4px 0; }
+  .arch-box { display: inline-block; background: var(--surface2); border: 1px solid #2a2a38; border-radius: 8px; padding: 8px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75em; margin: 4px; color: var(--text); }
+  .arch-arrow { color: var(--dim); margin: 0 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<h1>CouchWord</h1>
+<p class="subtitle">Apple TV crossword puzzle app with voice input — full product roadmap, v1.0 through v52.0<br>First overnight Claude Code build challenge project</p>
+
+<h2>Table of Contents</h2>
+<ul>
+  <li>UI Flow & Core Screens</li>
+  <li>Navigation Model</li>
+  <li>MVP Feature List (v1.0)</li>
+  <li>Puzzle Data & Sources</li>
+  <li>Tech Stack & Architecture</li>
+  <li>Data Models (JSON schemas)</li>
+  <li>Full Version Roadmap (v1.0 — v52.0)</li>
+  <li>Monetization Strategy</li>
+  <li>Accessibility</li>
+  <li>Analytics & Metrics</li>
+  <li>App Store Strategy</li>
+  <li>Claude Code Build Instructions</li>
+</ul>
+
+<hr class="section-divider">
+
+<h2>UI Flow — What the User Sees</h2>
+
+<div class="screen-row">
+  <div class="screen">
+    <div class="screen-label"><span class="num">1</span> Home Screen</div>
+    <div class="screen-body">
+      <div class="tv-frame">
+        <div class="home-mock">
+          <div class="logo">CouchWord</div>
+          <div class="menu-item active">Today's Puzzle</div>
+          <div class="menu-item">Quick Play (5x5)</div>
+          <div class="menu-item">Continue Puzzle</div>
+          <div class="menu-item">Settings</div>
+        </div>
+      </div>
+      <p style="margin-top:12px; font-size:0.8em; color:var(--dim);">Swipe up/down on Siri Remote to navigate. Press to select. Big buttons, no clutter.</p>
+    </div>
+  </div>
+  <div class="screen">
+    <div class="screen-label"><span class="num">2</span> Puzzle Grid — Zoomed View</div>
+    <div class="screen-body">
+      <div class="tv-frame">
+        <div class="grid-mock">
+          <div class="mini-grid">
+            <div class="cell correct">S</div><div class="cell correct">T</div><div class="cell active">A</div><div class="cell word"></div><div class="cell word"></div>
+            <div class="cell black"></div><div class="cell black"></div><div class="cell">R</div><div class="cell black"></div><div class="cell black"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell black"></div><div class="cell"></div>
+            <div class="cell black"></div><div class="cell"></div><div class="cell black"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell black"></div>
+          </div>
+          <div class="clue-panel">
+            <div class="clue">1A: Ocean vessel</div>
+            <div class="clue active">3A: Celestial body</div>
+            <div class="clue">5A: Morning drink</div>
+            <div class="clue" style="margin-top:8px; border-top:1px solid #2a2a38; padding-top:6px;">1D: Roof material</div>
+            <div class="clue">2D: A feline</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:12px; font-size:0.8em; color:var(--dim);">Grid shows a 5x5 zoomed section. Active cell in blue. Completed letters in green. Clue panel on right.</p>
+    </div>
+  </div>
+</div>
+
+<div class="screen-row">
+  <div class="screen">
+    <div class="screen-label"><span class="num">3</span> Voice Input Mode</div>
+    <div class="screen-body">
+      <div class="tv-frame">
+        <div class="voice-mock">
+          <div class="voice-wave">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <div class="voice-text">"S — T — A — R"</div>
+          <div class="voice-sub">Hold Siri button: spell or say the full word</div>
+        </div>
+      </div>
+      <p style="margin-top:12px; font-size:0.8em; color:var(--dim);">Spell letter-by-letter or say the whole word. System fills from current position. Tap to confirm.</p>
+    </div>
+  </div>
+  <div class="screen">
+    <div class="screen-label"><span class="num">4</span> Puzzle Complete</div>
+    <div class="screen-body">
+      <div class="tv-frame">
+        <div class="home-mock">
+          <div class="logo" style="font-size:1em; color:var(--correct);">Puzzle Complete!</div>
+          <div style="font-size:0.6em; color:var(--dim); margin-bottom:8px;">12:34 | 0 hints | 7-day streak</div>
+          <div class="menu-item active">Next Puzzle</div>
+          <div class="menu-item">Share Results</div>
+          <div class="menu-item">Back to Home</div>
+        </div>
+      </div>
+      <p style="margin-top:12px; font-size:0.8em; color:var(--dim);">Time, hints used, streak count. Simple and satisfying.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<h2>Navigation Model</h2>
+<ul>
+  <li><strong>Swipe left/right/up/down</strong> — move between cells</li>
+  <li><strong>Click center</strong> — toggle Across / Down</li>
+  <li><strong>Hold Siri button</strong> — voice input</li>
+  <li><strong>Play/Pause</strong> — clue list overlay</li>
+  <li><strong>Menu</strong> — pause / back</li>
+  <li><strong>Shake remote</strong> — undo. Single letter: removes that letter. Full word: removes the whole word but preserves pre-existing letters from crossing words. Uses CMMotionManager.</li>
+  <li><strong>Double-tap center</strong> — zoom out to full grid overview, tap again to return</li>
+</ul>
+
+<div class="note">
+  <strong>Under the hood:</strong> Each voice-word entry is logged as a single "action" on an undo stack with a snapshot of which cells were pre-filled. Shake pops the last action and restores only the cells you changed. Letter-by-letter pushes one action per letter.
+</div>
+
+<hr class="section-divider">
+
+<h2>MVP Feature List (v1.0)</h2>
+<table class="mvp-table">
+  <thead><tr><th>Feature</th><th>Priority</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>5x5 mini crossword puzzles</td><td><span class="tag must">Must</span></td><td>Start small. Easier to generate, play, and display on TV.</td></tr>
+    <tr><td>Siri Remote navigation</td><td><span class="tag must">Must</span></td><td>Swipe to move, click to toggle direction. Must feel instant.</td></tr>
+    <tr><td>Voice letter input</td><td><span class="tag must">Must</span></td><td>Hold Siri, say "B", fills B. Core differentiator.</td></tr>
+    <tr><td>Voice word input</td><td><span class="tag should">Should</span></td><td>Say "BANANA", fills from cursor. Harder to get right.</td></tr>
+    <tr><td>20 bundled puzzles</td><td><span class="tag must">Must</span></td><td>Pre-generated with Claude, hand-reviewed, stored as JSON.</td></tr>
+    <tr><td>Clue display panel</td><td><span class="tag must">Must</span></td><td>Right-side panel, active clue highlighted.</td></tr>
+    <tr><td>Correct/incorrect feedback</td><td><span class="tag must">Must</span></td><td>Check-as-you-go or check-at-end. Green for correct.</td></tr>
+    <tr><td>Shake-to-undo</td><td><span class="tag must">Must</span></td><td>Shake = undo. Word undo preserves pre-existing letters.</td></tr>
+    <tr><td>Completion screen</td><td><span class="tag must">Must</span></td><td>Time, accuracy, streak count.</td></tr>
+    <tr><td>Save/resume progress</td><td><span class="tag should">Should</span></td><td>UserDefaults persistence.</td></tr>
+    <tr><td>Hint system</td><td><span class="tag should">Should</span></td><td>3 hints per puzzle. Reveals one letter.</td></tr>
+    <tr><td>Dark theme</td><td><span class="tag must">Must</span></td><td>TV apps should be dark.</td></tr>
+    <tr><td>Zoom toggle</td><td><span class="tag should">Should</span></td><td>Double-tap to see full grid, tap again to return.</td></tr>
+    <tr><td>Sound effects</td><td><span class="tag should">Should</span></td><td>Letter placed, word completed, puzzle done, undo. All mutable.</td></tr>
+    <tr><td>Onboarding tutorial</td><td><span class="tag must">Must</span></td><td>3-screen walkthrough on first launch. Skippable.</td></tr>
+  </tbody>
+</table>
+
+<hr class="section-divider">
+
+<h2>Puzzle Data & Sources</h2>
+<ul>
+  <li><strong>v1:</strong> Claude API generates 5x5 crosswords as JSON. Review by hand. Bundle 20 puzzles.</li>
+  <li><strong>v2-3:</strong> Bulk generate 100+ with validation script (real words, solvable, no dupes).</li>
+  <li><strong>v4+:</strong> Server-side daily puzzle via Cloudflare Worker.</li>
+  <li><strong>v8+:</strong> Community submissions via companion iOS app.</li>
+  <li><strong>v12+:</strong> On-demand AI generation. User picks theme, size, difficulty.</li>
+</ul>
+
+<h3>Puzzle JSON Schema</h3>
+<div class="code-block"><span class="code-comment">// Each puzzle is a single JSON file</span>
+{
+  <span class="code-key">"id"</span>: <span class="code-val">"puzzle_001"</span>,
+  <span class="code-key">"version"</span>: <span class="code-val">1</span>,
+  <span class="code-key">"size"</span>: { <span class="code-key">"rows"</span>: <span class="code-val">5</span>, <span class="code-key">"cols"</span>: <span class="code-val">5</span> },
+  <span class="code-key">"difficulty"</span>: <span class="code-val">"easy"</span>,
+  <span class="code-key">"theme"</span>: <span class="code-val">"Space"</span>,
+  <span class="code-key">"date"</span>: <span class="code-val">null</span>,
+  <span class="code-key">"grid"</span>: [
+    [<span class="code-val">"S"</span>,<span class="code-val">"T"</span>,<span class="code-val">"A"</span>,<span class="code-val">"R"</span>,<span class="code-val">"S"</span>],
+    [<span class="code-val">"#"</span>,<span class="code-val">"#"</span>,<span class="code-val">"R"</span>,<span class="code-val">"#"</span>,<span class="code-val">"#"</span>]
+  ],
+  <span class="code-key">"clues"</span>: {
+    <span class="code-key">"across"</span>: [
+      { <span class="code-key">"number"</span>: <span class="code-val">1</span>, <span class="code-key">"clue"</span>: <span class="code-val">"Celestial bodies"</span>, <span class="code-key">"answer"</span>: <span class="code-val">"STARS"</span>, <span class="code-key">"row"</span>: <span class="code-val">0</span>, <span class="code-key">"col"</span>: <span class="code-val">0</span> }
+    ],
+    <span class="code-key">"down"</span>: []
+  },
+  <span class="code-key">"tags"</span>: [<span class="code-val">"science"</span>, <span class="code-val">"astronomy"</span>],
+  <span class="code-key">"author"</span>: <span class="code-val">"CouchWord"</span>
+}</div>
+
+<h3>User Progress Schema</h3>
+<div class="code-block">{
+  <span class="code-key">"puzzle_id"</span>: <span class="code-val">"puzzle_001"</span>,
+  <span class="code-key">"state"</span>: <span class="code-val">"in_progress"</span>,
+  <span class="code-key">"user_grid"</span>: [[<span class="code-val">"S"</span>,<span class="code-val">"T"</span>,<span class="code-val">""</span>,<span class="code-val">""</span>,<span class="code-val">""</span>]],
+  <span class="code-key">"hints_used"</span>: <span class="code-val">1</span>,
+  <span class="code-key">"elapsed_seconds"</span>: <span class="code-val">342</span>,
+  <span class="code-key">"undo_stack"</span>: [],
+  <span class="code-key">"completed_at"</span>: <span class="code-val">null</span>,
+  <span class="code-key">"accuracy"</span>: <span class="code-val">null</span>
+}</div>
+
+<hr class="section-divider">
+
+<h2>Tech Stack & Architecture</h2>
+
+<h3>v1 (Local Only)</h3>
+<p>
+  <span class="arch-box">SwiftUI (tvOS)</span>
+  <span class="arch-arrow">+</span>
+  <span class="arch-box">JSON puzzles</span>
+  <span class="arch-arrow">+</span>
+  <span class="arch-box">UserDefaults</span>
+  <span class="arch-arrow">+</span>
+  <span class="arch-box">Siri Dictation</span>
+  <span class="arch-arrow">+</span>
+  <span class="arch-box">CMMotionManager</span>
+</p>
+
+<h3>v4+ (With Server)</h3>
+<p>
+  <span class="arch-box">SwiftUI (tvOS)</span>
+  <span class="arch-arrow">&rarr;</span>
+  <span class="arch-box">REST API</span>
+  <span class="arch-arrow">&rarr;</span>
+  <span class="arch-box">Cloudflare Worker</span>
+  <span class="arch-arrow">&rarr;</span>
+  <span class="arch-box">D1 Database</span>
+</p>
+
+<h3>v10+ (Multi-platform)</h3>
+<p>
+  <span class="arch-box">tvOS</span>
+  <span class="arch-arrow">+</span>
+  <span class="arch-box">iOS companion</span>
+  <span class="arch-arrow">+</span>
+  <span class="arch-box">CloudKit sync</span>
+  <span class="arch-arrow">+</span>
+  <span class="arch-box">GameKit</span>
+  <span class="arch-arrow">+</span>
+  <span class="arch-box">StoreKit 2</span>
+</p>
+
+<h3>Key Dependencies</h3>
+<ul>
+  <li>Swift 5.9+ / SwiftUI, tvOS 17+</li>
+  <li>Apple built-in dictation (no Speech framework needed)</li>
+  <li>CoreMotion for shake detection</li>
+  <li>AVFoundation for sound effects</li>
+  <li>Apple Developer account ($99/year)</li>
+</ul>
+
+<hr class="section-divider">
+
+<h2>Full Version Roadmap (v1.0 — v52.0)</h2>
+<p>52 versions across 13 eras. Each one adds a meaningful layer.</p>
+
+<h3>Era 1: Foundation (v1 - v4)</h3>
+
+<div class="version-card era1">
+  <div class="version-header"><span class="version-num">v1.0</span><span class="version-title">The MVP</span></div>
+  <p class="version-tagline">Does one thing. Does it well. Ships.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🧩</div><div class="feature-detail"><div class="feature-name">5x5 mini crossword grid</div><div class="feature-desc">Zoomed view fills TV. Minimap in corner.</div></div></li>
+    <li><div class="feature-icon">🎤</div><div class="feature-detail"><div class="feature-name">Voice letter + word input</div><div class="feature-desc">Hold Siri, say a letter or full word.</div></div></li>
+    <li><div class="feature-icon">📦</div><div class="feature-detail"><div class="feature-name">20 bundled puzzles</div><div class="feature-desc">Claude-generated, hand-reviewed, JSON.</div></div></li>
+    <li><div class="feature-icon">🫨</div><div class="feature-detail"><div class="feature-name">Shake-to-undo</div><div class="feature-desc">Word undo preserves pre-existing letters.</div></div></li>
+    <li><div class="feature-icon">💾</div><div class="feature-detail"><div class="feature-name">Save/resume</div><div class="feature-desc">UserDefaults persistence.</div></div></li>
+    <li><div class="feature-icon">💡</div><div class="feature-detail"><div class="feature-name">3 hints per puzzle</div><div class="feature-desc">Reveals one correct letter.</div></div></li>
+    <li><div class="feature-icon">🔊</div><div class="feature-detail"><div class="feature-name">Sound effects</div><div class="feature-desc">Letter, word, complete, undo. Mutable.</div></div></li>
+    <li><div class="feature-icon">🎓</div><div class="feature-detail"><div class="feature-name">Onboarding tutorial</div><div class="feature-desc">3 screens showing gestures. Skippable.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era1">
+  <div class="version-header"><span class="version-num">v2.0</span><span class="version-title">More Puzzles, More Sizes</span></div>
+  <p class="version-tagline">Give people a reason to come back.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📐</div><div class="feature-detail"><div class="feature-name">Multiple grid sizes</div><div class="feature-desc">5x5, 9x9, 13x13, 15x15. Zoomed nav scales to all.</div></div></li>
+    <li><div class="feature-icon">📚</div><div class="feature-detail"><div class="feature-name">100+ puzzle library</div><div class="feature-desc">Bulk-generated, validated, bundled.</div></div></li>
+    <li><div class="feature-icon">⭐</div><div class="feature-detail"><div class="feature-name">Difficulty ratings</div><div class="feature-desc">Easy, Medium, Hard, Expert.</div></div></li>
+    <li><div class="feature-icon">🔀</div><div class="feature-detail"><div class="feature-name">Puzzle browser</div><div class="feature-desc">Filter by size, difficulty, theme. Shows completion status.</div></div></li>
+    <li><div class="feature-icon">📊</div><div class="feature-detail"><div class="feature-name">Stats dashboard</div><div class="feature-desc">Total solved, average time, best times, accuracy, streak.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era1">
+  <div class="version-header"><span class="version-num">v3.0</span><span class="version-title">The Daily Puzzle</span></div>
+  <p class="version-tagline">The hook that makes people open the app every day.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📅</div><div class="feature-detail"><div class="feature-name">Daily puzzle</div><div class="feature-desc">Same puzzle for everyone. New at midnight EST. Compare times.</div></div></li>
+    <li><div class="feature-icon">🔥</div><div class="feature-detail"><div class="feature-name">Streak tracking</div><div class="feature-desc">Consecutive days. Flame icon grows with length. 1 free streak freeze.</div></div></li>
+    <li><div class="feature-icon">🏆</div><div class="feature-detail"><div class="feature-name">Daily leaderboard</div><div class="feature-desc">Global top 100. Your rank always shown.</div></div></li>
+    <li><div class="feature-icon">📤</div><div class="feature-detail"><div class="feature-name">Share results</div><div class="feature-desc">Wordle-style grid. Copy to clipboard or AirDrop.</div></div></li>
+    <li><div class="feature-icon">🖥️</div><div class="feature-detail"><div class="feature-name">Server infrastructure</div><div class="feature-desc">Cloudflare Worker + D1. Daily puzzle + leaderboard.</div></div></li>
+    <li><div class="feature-icon">🔔</div><div class="feature-detail"><div class="feature-name">Push notifications</div><div class="feature-desc">"Your daily puzzle is ready!" Streak-at-risk warnings.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era1">
+  <div class="version-header"><span class="version-num">v4.0</span><span class="version-title">Themes & Customization</span></div>
+  <p class="version-tagline">Make it yours.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🎨</div><div class="feature-detail"><div class="feature-name">Visual themes</div><div class="feature-desc">Midnight, Newspaper, Ocean, Forest, Neon. Grid colors, background, chrome.</div></div></li>
+    <li><div class="feature-icon">🏷️</div><div class="feature-detail"><div class="feature-name">Themed puzzle packs</div><div class="feature-desc">Science, Pop Culture, History, Food, Sports.</div></div></li>
+    <li><div class="feature-icon">🔤</div><div class="feature-detail"><div class="feature-name">Font options</div><div class="feature-desc">Serif, sans-serif, mono, handwritten. Tested at TV distance.</div></div></li>
+    <li><div class="feature-icon">🎵</div><div class="feature-detail"><div class="feature-name">Ambient background audio</div><div class="feature-desc">Lo-fi, coffee shop, rain, library, fireplace.</div></div></li>
+    <li><div class="feature-icon">⏱️</div><div class="feature-detail"><div class="feature-name">Timer options</div><div class="feature-desc">Show, hide, or countdown beat-the-clock mode.</div></div></li>
+  </ul>
+</div>
+
+<h3>Era 2: Social & Multiplayer (v5 - v8)</h3>
+
+<div class="version-card era2">
+  <div class="version-header"><span class="version-num">v5.0</span><span class="version-title">Couch Co-op</span></div>
+  <p class="version-tagline">Two brains, one puzzle, one couch.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">👥</div><div class="feature-detail"><div class="feature-name">Local 2-player</div><div class="feature-desc">Player 1 gets Across, Player 2 gets Down. Same grid. Collaborative.</div></div></li>
+    <li><div class="feature-icon">📱</div><div class="feature-detail"><div class="feature-name">iPhone as controller</div><div class="feature-desc">Player 2 uses companion app. Types on phone keyboard. No second remote needed.</div></div></li>
+    <li><div class="feature-icon">🏁</div><div class="feature-detail"><div class="feature-name">Race mode</div><div class="feature-desc">Split screen. Same puzzle. First to finish wins.</div></div></li>
+    <li><div class="feature-icon">🎯</div><div class="feature-detail"><div class="feature-name">Color-coded entries</div><div class="feature-desc">Blue vs orange. "You solved 62% of the puzzle."</div></div></li>
+    <li><div class="feature-icon">🏠</div><div class="feature-detail"><div class="feature-name">Household profiles</div><div class="feature-desc">Up to 4 profiles per Apple TV. Own stats, streaks, preferences.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era2">
+  <div class="version-header"><span class="version-num">v6.0</span><span class="version-title">Online Multiplayer</span></div>
+  <p class="version-tagline">Race strangers. Beat friends.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🌐</div><div class="feature-detail"><div class="feature-name">Online 1v1 races</div><div class="feature-desc">Matchmaking by skill. Same puzzle. See opponent's ghost cursor.</div></div></li>
+    <li><div class="feature-icon">👻</div><div class="feature-detail"><div class="feature-name">Ghost cursor</div><div class="feature-desc">Opponent's position as a dim cursor. Psychological pressure without spoiling answers.</div></div></li>
+    <li><div class="feature-icon">📈</div><div class="feature-detail"><div class="feature-name">ELO rating</div><div class="feature-desc">Ranks: Bronze, Silver, Gold, Platinum, Diamond.</div></div></li>
+    <li><div class="feature-icon">👋</div><div class="feature-detail"><div class="feature-name">Friend system</div><div class="feature-desc">Apple Game Center. Challenge friends. See their daily times.</div></div></li>
+    <li><div class="feature-icon">🏟️</div><div class="feature-detail"><div class="feature-name">Weekly tournaments</div><div class="feature-desc">Saturday: 5 puzzles, cumulative time. Top finishers get badges and exclusive themes.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era2">
+  <div class="version-header"><span class="version-num">v7.0</span><span class="version-title">Party Mode</span></div>
+  <p class="version-tagline">The Jackbox of crosswords.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🎉</div><div class="feature-detail"><div class="feature-name">Party mode (up to 8 players)</div><div class="feature-desc">Everyone joins via iPhone. TV shows shared grid. Take turns claiming clues.</div></div></li>
+    <li><div class="feature-icon">🎲</div><div class="feature-detail"><div class="feature-name">Spin-the-wheel</div><div class="feature-desc">Wheel picks random clue. 30 seconds to answer. Correct = points.</div></div></li>
+    <li><div class="feature-icon">⚡</div><div class="feature-detail"><div class="feature-name">Buzzer mode</div><div class="feature-desc">Clue on screen, first to buzz in answers. Like Jeopardy but crosswords.</div></div></li>
+    <li><div class="feature-icon">🃏</div><div class="feature-detail"><div class="feature-name">Power-up cards</div><div class="feature-desc">Reveal Letter, Steal Clue, Double Points, Block Opponent, Extra Time.</div></div></li>
+    <li><div class="feature-icon">🏅</div><div class="feature-detail"><div class="feature-name">Party results</div><div class="feature-desc">MVP, Most Steals, Fastest Answer. Animated podium. Shareable recap.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era2">
+  <div class="version-header"><span class="version-num">v8.0</span><span class="version-title">Community & User Content</span></div>
+  <p class="version-tagline">Let the users build for you.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🛠️</div><div class="feature-detail"><div class="feature-name">Puzzle creator (companion app)</div><div class="feature-desc">iOS grid editor. Place squares, type words, write clues. Auto-validates.</div></div></li>
+    <li><div class="feature-icon">📬</div><div class="feature-detail"><div class="feature-name">Submission pipeline</div><div class="feature-desc">Auto-validation: real words, symmetry, minimum words, no offensive terms.</div></div></li>
+    <li><div class="feature-icon">⭐</div><div class="feature-detail"><div class="feature-name">Rating system</div><div class="feature-desc">1-5 stars after completing. Highly-rated promoted, low-rated sink.</div></div></li>
+    <li><div class="feature-icon">👤</div><div class="feature-detail"><div class="feature-name">Creator profiles</div><div class="feature-desc">Puzzles created, average rating, total plays. Follow creators.</div></div></li>
+    <li><div class="feature-icon">🎁</div><div class="feature-detail"><div class="feature-name">Send a puzzle</div><div class="feature-desc">Create and send directly to a friend as a challenge.</div></div></li>
+  </ul>
+</div>
+
+<h3>Era 3: Smart Features (v9 - v12)</h3>
+
+<div class="version-card era3">
+  <div class="version-header"><span class="version-num">v9.0</span><span class="version-title">Adaptive Difficulty</span></div>
+  <p class="version-tagline">The app learns how smart you are.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🧠</div><div class="feature-detail"><div class="feature-name">Skill profiling</div><div class="feature-desc">Tracks performance by category: vocabulary, pop culture, science, geography. Builds a "knowledge radar."</div></div></li>
+    <li><div class="feature-icon">📈</div><div class="feature-detail"><div class="feature-name">Dynamic difficulty</div><div class="feature-desc">Auto-adjusts to your level. Crushing Easy? Nudges to Medium. Struggling? Backs off.</div></div></li>
+    <li><div class="feature-icon">🎯</div><div class="feature-detail"><div class="feature-name">Targeted vocabulary building</div><div class="feature-desc">Intentionally includes words from weak categories. "You've improved in Science by 23%."</div></div></li>
+    <li><div class="feature-icon">💬</div><div class="feature-detail"><div class="feature-name">Smart hints</div><div class="feature-desc">Instead of revealing a letter, gives a second easier clue. Three hint levels before reveal.</div></div></li>
+    <li><div class="feature-icon">📊</div><div class="feature-detail"><div class="feature-name">Knowledge radar</div><div class="feature-desc">Radar chart showing strengths across 10 categories. Shareable. Updates weekly.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era3">
+  <div class="version-header"><span class="version-num">v10.0</span><span class="version-title">Cross-Platform</span></div>
+  <p class="version-tagline">Start on TV. Finish on your phone.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📱</div><div class="feature-detail"><div class="feature-name">iOS app (full player)</div><div class="feature-desc">Not just a controller. Full puzzle experience on iPhone/iPad.</div></div></li>
+    <li><div class="feature-icon">☁️</div><div class="feature-detail"><div class="feature-name">CloudKit sync</div><div class="feature-desc">Progress, stats, streaks sync across all Apple devices.</div></div></li>
+    <li><div class="feature-icon">⌚</div><div class="feature-detail"><div class="feature-name">Apple Watch complication</div><div class="feature-desc">Streak, daily status, time to reset. Tap to open iPhone app.</div></div></li>
+    <li><div class="feature-icon">🖥️</div><div class="feature-detail"><div class="feature-name">macOS app</div><div class="feature-desc">Keyboard input. Same sync. Lunchtime crosswords at your desk.</div></div></li>
+    <li><div class="feature-icon">🔗</div><div class="feature-detail"><div class="feature-name">Handoff</div><div class="feature-desc">Phone to TV seamlessly. Continue right where you left off.</div></div></li>
+    <li><div class="feature-icon">🎙️</div><div class="feature-detail"><div class="feature-name">Siri shortcuts</div><div class="feature-desc">"Hey Siri, start my daily crossword." Opens on nearest device.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era3">
+  <div class="version-header"><span class="version-num">v11.0</span><span class="version-title">Voice Mode 2.0</span></div>
+  <p class="version-tagline">Talk to the puzzle. It talks back.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🗣️</div><div class="feature-detail"><div class="feature-name">Voice clue reading</div><div class="feature-desc">App reads current clue aloud when you navigate. Great for accessibility.</div></div></li>
+    <li><div class="feature-icon">💬</div><div class="feature-detail"><div class="feature-name">Conversational hints</div><div class="feature-desc">"I'm stuck on 7 across." App responds with spoken hint.</div></div></li>
+    <li><div class="feature-icon">🧭</div><div class="feature-detail"><div class="feature-name">Voice navigation</div><div class="feature-desc">"Go to 12 down." "Next empty cell." Full hands-free grid nav.</div></div></li>
+    <li><div class="feature-icon">✅</div><div class="feature-detail"><div class="feature-name">Voice check</div><div class="feature-desc">"Check this word." Spoken: "That's correct!" or "Two letters are wrong."</div></div></li>
+    <li><div class="feature-icon">🌙</div><div class="feature-detail"><div class="feature-name">Screen-off mode</div><div class="feature-desc">Solve with TV off. Clues read aloud, answers spoken, confirmation spoken. Audio-only crossword.</div></div></li>
+    <li><div class="feature-icon">🔊</div><div class="feature-detail"><div class="feature-name">Custom voice selection</div><div class="feature-desc">Apple's built-in voices. British narrator, calm female, etc.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era3">
+  <div class="version-header"><span class="version-num">v12.0</span><span class="version-title">AI-Powered Puzzles</span></div>
+  <p class="version-tagline">Infinite puzzles, generated on demand.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🤖</div><div class="feature-detail"><div class="feature-name">On-demand generation</div><div class="feature-desc">Pick theme, size, difficulty. Claude generates a unique puzzle in seconds.</div></div></li>
+    <li><div class="feature-icon">🎯</div><div class="feature-detail"><div class="feature-name">Personal interest puzzles</div><div class="feature-desc">"Generate about things I like." Uses knowledge radar + solving history.</div></div></li>
+    <li><div class="feature-icon">📰</div><div class="feature-detail"><div class="feature-name">Current events puzzles</div><div class="feature-desc">This week's news as a puzzle. Educational and timely.</div></div></li>
+    <li><div class="feature-icon">🎂</div><div class="feature-detail"><div class="feature-name">Occasion puzzles</div><div class="feature-desc">Birthday/anniversary puzzles with custom clues. Share as a gift.</div></div></li>
+    <li><div class="feature-icon">🏫</div><div class="feature-detail"><div class="feature-name">Educational mode</div><div class="feature-desc">Teachers generate topic-specific puzzles. "5th grade vocab." Learning as a game.</div></div></li>
+    <li><div class="feature-icon">🔄</div><div class="feature-detail"><div class="feature-name">Infinite daily</div><div class="feature-desc">Finished the daily? Generate another. No ceiling.</div></div></li>
+  </ul>
+</div>
+
+<h3>Era 4: Beyond Crosswords (v13 - v16)</h3>
+
+<div class="version-card era4">
+  <div class="version-header"><span class="version-num">v13.0</span><span class="version-title">Game Modes</span></div>
+  <p class="version-tagline">Same grid engine, totally different games.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">⏰</div><div class="feature-detail"><div class="feature-name">Speed round</div><div class="feature-desc">5x5, 60 seconds. How many consecutive puzzles? Leaderboard for longest run.</div></div></li>
+    <li><div class="feature-icon">🔇</div><div class="feature-detail"><div class="feature-name">Clueless mode</div><div class="feature-desc">No clues. Grid pattern and word lengths only. Insanely hard.</div></div></li>
+    <li><div class="feature-icon">⏪</div><div class="feature-detail"><div class="feature-name">Reverse mode</div><div class="feature-desc">You get the filled grid. Write the clues. AI judges quality.</div></div></li>
+    <li><div class="feature-icon">🔗</div><div class="feature-detail"><div class="feature-name">Chain mode</div><div class="feature-desc">One word seeds the next puzzle. Chain as many as you can. Gets harder.</div></div></li>
+    <li><div class="feature-icon">🌑</div><div class="feature-detail"><div class="feature-name">Mystery grid</div><div class="feature-desc">Black squares hidden. Grid reveals as you solve. Crossword fog-of-war.</div></div></li>
+    <li><div class="feature-icon">🎰</div><div class="feature-detail"><div class="feature-name">Lucky dip</div><div class="feature-desc">Random everything. "Feeling lucky?"</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era4">
+  <div class="version-header"><span class="version-num">v14.0</span><span class="version-title">Word Game Suite</span></div>
+  <p class="version-tagline">The home of TV word games.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🔤</div><div class="feature-detail"><div class="feature-name">Word search</div><div class="feature-desc">Classic word search on TV. Circle with swipes. Voice: "I found ELEPHANT."</div></div></li>
+    <li><div class="feature-icon">🔠</div><div class="feature-detail"><div class="feature-name">Anagram challenge</div><div class="feature-desc">Jumbled letters. Find all words. Longer = more points.</div></div></li>
+    <li><div class="feature-icon">🪜</div><div class="feature-detail"><div class="feature-name">Word ladder</div><div class="feature-desc">COLD > CORD > CARD > WARD > WARM. One letter at a time.</div></div></li>
+    <li><div class="feature-icon">📝</div><div class="feature-detail"><div class="feature-name">Cryptogram</div><div class="feature-desc">Decode substituted quotes. Voice: "A is T." Perfect for voice input.</div></div></li>
+    <li><div class="feature-icon">🧱</div><div class="feature-detail"><div class="feature-name">Acrostic puzzles</div><div class="feature-desc">First letters spell a hidden message.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era4">
+  <div class="version-header"><span class="version-num">v15.0</span><span class="version-title">Achievements & Progression</span></div>
+  <p class="version-tagline">Give completionists something to chase.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🏅</div><div class="feature-detail"><div class="feature-name">100+ achievements</div><div class="feature-desc">"First Puzzle", "Speed Demon (under 60s)", "No Hints November", "Voice Only", "Century Club (100 puzzles)".</div></div></li>
+    <li><div class="feature-icon">🎖️</div><div class="feature-detail"><div class="feature-name">Rank progression</div><div class="feature-desc">Novice > Apprentice > Solver > Expert > Master > Grandmaster > Legend. XP from puzzles.</div></div></li>
+    <li><div class="feature-icon">📖</div><div class="feature-detail"><div class="feature-name">Word journal</div><div class="feature-desc">Every new word logged with definition. "You've learned 1,247 words."</div></div></li>
+    <li><div class="feature-icon">🗺️</div><div class="feature-detail"><div class="feature-name">Collection map</div><div class="feature-desc">Puzzle packs as "regions". Complete all to unlock. Visual progress.</div></div></li>
+    <li><div class="feature-icon">🎁</div><div class="feature-detail"><div class="feature-name">Daily rewards</div><div class="feature-desc">Login rewards: hints, themes, streak freezes. 7-day bonus.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era4">
+  <div class="version-header"><span class="version-num">v16.0</span><span class="version-title">Seasons & Live Events</span></div>
+  <p class="version-tagline">Keep it fresh forever.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🌊</div><div class="feature-detail"><div class="feature-name">Seasonal events</div><div class="feature-desc">4 per year. Themed puzzles, exclusive visuals, limited achievements, seasonal leaderboard.</div></div></li>
+    <li><div class="feature-icon">🎃</div><div class="feature-detail"><div class="feature-name">Holiday specials</div><div class="feature-desc">Halloween horror, Christmas snowfall, Valentine's couple challenges.</div></div></li>
+    <li><div class="feature-icon">🎫</div><div class="feature-detail"><div class="feature-name">Season pass ($2.99)</div><div class="feature-desc">Exclusive themes, bonus puzzles, profile borders, early access.</div></div></li>
+    <li><div class="feature-icon">📡</div><div class="feature-detail"><div class="feature-name">Live community events</div><div class="feature-desc">Thousands solving simultaneously. Real-time leaderboard ticker.</div></div></li>
+    <li><div class="feature-icon">🏆</div><div class="feature-detail"><div class="feature-name">Championship series</div><div class="feature-desc">Quarterly: weekly qualifiers, bracket elimination, top 8 featured. Champion gets crown.</div></div></li>
+  </ul>
+</div>
+
+<h3>Era 5: Platform (v17 - v20)</h3>
+
+<div class="version-card era5">
+  <div class="version-header"><span class="version-num">v17.0</span><span class="version-title">Languages & Global</span></div>
+  <p class="version-tagline">Crosswords have no language barrier.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🌍</div><div class="feature-detail"><div class="feature-name">Multi-language puzzles</div><div class="feature-desc">Spanish, French, German, Japanese (hiragana), Portuguese, Italian. Native puzzles, not translations.</div></div></li>
+    <li><div class="feature-icon">🔀</div><div class="feature-detail"><div class="feature-name">Language-learning mode</div><div class="feature-desc">Clues in English, answers in Spanish. Built-in flashcard review of struggled words.</div></div></li>
+    <li><div class="feature-icon">🇯🇵</div><div class="feature-detail"><div class="feature-name">Japanese crosswords</div><div class="feature-desc">Hiragana/katakana grids. Traditional patterns. Kanji hints for advanced.</div></div></li>
+    <li><div class="feature-icon">📖</div><div class="feature-detail"><div class="feature-name">Bilingual word journal</div><div class="feature-desc">"You've learned 89 Spanish words and 34 Japanese words."</div></div></li>
+    <li><div class="feature-icon">🌐</div><div class="feature-detail"><div class="feature-name">Global leaderboards by language</div><div class="feature-desc">Per-language boards. Combined board for polyglots.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era5">
+  <div class="version-header"><span class="version-num">v18.0</span><span class="version-title">Screensaver & Ambient Mode</span></div>
+  <p class="version-tagline">Always on, even when you're not playing.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🖼️</div><div class="feature-detail"><div class="feature-name">Crossword screensaver</div><div class="feature-desc">Animated crossword being solved in slow motion. Words fill one by one. Gorgeous ambient art.</div></div></li>
+    <li><div class="feature-icon">📺</div><div class="feature-detail"><div class="feature-name">Ambient puzzle channel</div><div class="feature-desc">Watch AI solve crosswords with commentary explaining logic. Generated live.</div></div></li>
+    <li><div class="feature-icon">🕐</div><div class="feature-detail"><div class="feature-name">Crossword clock</div><div class="feature-desc">Numbers replaced with clues. Time displayed in the grid. Functional art.</div></div></li>
+    <li><div class="feature-icon">💡</div><div class="feature-detail"><div class="feature-name">Word of the day</div><div class="feature-desc">Beautiful word with definition, etymology, usage. New every hour.</div></div></li>
+    <li><div class="feature-icon">🌅</div><div class="feature-detail"><div class="feature-name">Time-of-day themes</div><div class="feature-desc">Sunrise morning, bright midday, sunset evening, starry night.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era5">
+  <div class="version-header"><span class="version-num">v19.0</span><span class="version-title">Creator Economy</span></div>
+  <p class="version-tagline">Let puzzle creators earn money.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">💰</div><div class="feature-detail"><div class="feature-name">Paid puzzle packs</div><div class="feature-desc">Creators sell packs ($0.99-$4.99). 70/30 split (minus Apple's cut).</div></div></li>
+    <li><div class="feature-icon">📊</div><div class="feature-detail"><div class="feature-name">Creator analytics</div><div class="feature-desc">Plays, completion rates, ratings, revenue, trending puzzles.</div></div></li>
+    <li><div class="feature-icon">🎨</div><div class="feature-detail"><div class="feature-name">Theme marketplace</div><div class="feature-desc">Creators sell visual themes, sound packs, font packs.</div></div></li>
+    <li><div class="feature-icon">🏫</div><div class="feature-detail"><div class="feature-name">Educator accounts</div><div class="feature-desc">Free premium for teachers. Class puzzles, student progress tracking.</div></div></li>
+    <li><div class="feature-icon">🤝</div><div class="feature-detail"><div class="feature-name">Brand partnerships</div><div class="feature-desc">"The National Geographic Puzzle Pack." Revenue share.</div></div></li>
+    <li><div class="feature-icon">📰</div><div class="feature-detail"><div class="feature-name">Newspaper partnerships</div><div class="feature-desc">Licensed crosswords from real papers. "Today's from The Washington Post."</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era5">
+  <div class="version-header"><span class="version-num">v20.0</span><span class="version-title">The Living Puzzle</span></div>
+  <p class="version-tagline">The crossword that never ends.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🌐</div><div class="feature-detail"><div class="feature-name">Collaborative mega-puzzle</div><div class="feature-desc">100x100 grid. Entire community solves together. See cursors in real-time. When complete, a new one starts.</div></div></li>
+    <li><div class="feature-icon">🗓️</div><div class="feature-detail"><div class="feature-name">Crossword calendar</div><div class="feature-desc">365 puzzles planned per year. Each day themed to its date.</div></div></li>
+    <li><div class="feature-icon">🎙️</div><div class="feature-detail"><div class="feature-name">Crossword podcast</div><div class="feature-desc">Daily 5-min recap: tricky clues, word origins, today's preview. Built-in player.</div></div></li>
+    <li><div class="feature-icon">🏛️</div><div class="feature-detail"><div class="feature-name">Puzzle archive</div><div class="feature-desc">Every daily puzzle ever, searchable and replayable.</div></div></li>
+    <li><div class="feature-icon">🧬</div><div class="feature-detail"><div class="feature-name">Puzzle DNA</div><div class="feature-desc">Unique double-helix visualization of your solving personality. Shareable, beautiful.</div></div></li>
+    <li><div class="feature-icon">🤖</div><div class="feature-detail"><div class="feature-name">AI crossword companion</div><div class="feature-desc">Persistent AI that learns your style. Comments, celebrates, suggests. Never annoying, always optional.</div></div></li>
+    <li><div class="feature-icon">📺</div><div class="feature-detail"><div class="feature-name">CouchWord TV</div><div class="feature-desc">Live competitive crossword solving. Commentary. Brackets. The ESPN of word games.</div></div></li>
+    <li><div class="feature-icon">♾️</div><div class="feature-detail"><div class="feature-name">Never-ending mode</div><div class="feature-desc">Infinite scrolling grid. No edges. Generates ahead of you. Explore an infinite word landscape. Zen mode.</div></div></li>
+  </ul>
+</div>
+
+<!-- ERA 6: HARDWARE & DEVICES -->
+<h3>Era 6: Hardware & New Devices (v21 - v24)</h3>
+<p>CouchWord meets every screen Apple makes.</p>
+
+<div class="version-card era6">
+  <div class="version-header"><span class="version-num">v21.0</span><span class="version-title">Apple Vision Pro</span></div>
+  <p class="version-tagline">Crosswords floating in your living room.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🥽</div><div class="feature-detail"><div class="feature-name">Spatial crossword grid</div><div class="feature-desc">The puzzle grid floats in front of you at whatever size you want. Pinch a cell to select it. Look at a clue to highlight it.</div></div></li>
+    <li><div class="feature-icon">👁️</div><div class="feature-detail"><div class="feature-name">Eye tracking input</div><div class="feature-desc">Look at a cell, pinch to select, speak the letter. Your eyes are the cursor. Fastest input method yet.</div></div></li>
+    <li><div class="feature-icon">🪟</div><div class="feature-detail"><div class="feature-name">Multi-window puzzles</div><div class="feature-desc">Clue list in one window, grid in another. Arrange them however you want in your space. Pin clues next to your coffee table.</div></div></li>
+    <li><div class="feature-icon">🌌</div><div class="feature-detail"><div class="feature-name">Immersive environments</div><div class="feature-desc">Solve crosswords on a beach, in a cozy cabin, on a space station, in a Japanese garden. The puzzle floats in the scene.</div></div></li>
+    <li><div class="feature-icon">👥</div><div class="feature-detail"><div class="feature-name">SharePlay solving</div><div class="feature-desc">Solve with someone wearing another Vision Pro. See their avatar hands pointing at clues. Spatial co-op.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era6">
+  <div class="version-header"><span class="version-num">v22.0</span><span class="version-title">Audio-First Experiences</span></div>
+  <p class="version-tagline">Crosswords without a screen.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🎧</div><div class="feature-detail"><div class="feature-name">AirPods crossword</div><div class="feature-desc">Solve entirely through AirPods. Clues read aloud, you speak answers, Siri confirms. On a walk, doing dishes, eyes-free.</div></div></li>
+    <li><div class="feature-icon">🚗</div><div class="feature-detail"><div class="feature-name">CarPlay integration</div><div class="feature-desc">Passenger-only mode (locked when driving). Clue on dashboard screen, voice answers. Road trip entertainment.</div></div></li>
+    <li><div class="feature-icon">🔈</div><div class="feature-detail"><div class="feature-name">HomePod puzzle</div><div class="feature-desc">"Hey Siri, play CouchWord." Entirely voice-based through HomePod. Family shouts answers from the kitchen.</div></div></li>
+    <li><div class="feature-icon">🎵</div><div class="feature-detail"><div class="feature-name">Audio clues</div><div class="feature-desc">Some clues are sounds instead of text: a bird call, a famous movie quote, a song intro. Name what you hear.</div></div></li>
+    <li><div class="feature-icon">🗺️</div><div class="feature-detail"><div class="feature-name">Spatial audio hints</div><div class="feature-desc">On Vision Pro / AirPods Pro: hints come from the direction of the cell. Literally hear where the answer goes.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era6">
+  <div class="version-header"><span class="version-num">v23.0</span><span class="version-title">Widgets & Live Activities</span></div>
+  <p class="version-tagline">CouchWord leaks onto every surface.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📌</div><div class="feature-detail"><div class="feature-name">Lock screen widget</div><div class="feature-desc">Shows today's puzzle status, streak count, and time until daily reset. Glanceable motivation.</div></div></li>
+    <li><div class="feature-icon">🏝️</div><div class="feature-detail"><div class="feature-name">StandBy mode display</div><div class="feature-desc">iPhone in StandBy shows a mini crossword you can solve with taps. Nightstand crossword.</div></div></li>
+    <li><div class="feature-icon">🔴</div><div class="feature-detail"><div class="feature-name">Live Activity during solve</div><div class="feature-desc">Dynamic Island shows elapsed time, cells remaining, current streak while you solve on TV. Glance at your phone for progress.</div></div></li>
+    <li><div class="feature-icon">🎯</div><div class="feature-detail"><div class="feature-name">Interactive widget puzzle</div><div class="feature-desc">A tiny 3x3 crossword playable directly in the iOS widget. One micro-puzzle per day, solvable without opening the app.</div></div></li>
+    <li><div class="feature-icon">⌚</div><div class="feature-detail"><div class="feature-name">Watch mini-game</div><div class="feature-desc">Apple Watch gets its own tiny word game: 3 clues, 3 answers, spin the crown to pick letters. 60-second brain break.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era6">
+  <div class="version-header"><span class="version-num">v24.0</span><span class="version-title">Apple Pencil & Touch</span></div>
+  <p class="version-tagline">Write your answers by hand.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">✏️</div><div class="feature-detail"><div class="feature-name">Handwriting recognition</div><div class="feature-desc">On iPad, write letters directly into cells with Apple Pencil. Scribble recognition converts to typed text. Feels like pen on newspaper.</div></div></li>
+    <li><div class="feature-icon">📝</div><div class="feature-detail"><div class="feature-name">Pencil scratch notes</div><div class="feature-desc">Scribble working notes in the margin of the puzzle. "Maybe 7 down is OCEAN?" Erasable. Stays with your save.</div></div></li>
+    <li><div class="feature-icon">🖊️</div><div class="feature-detail"><div class="feature-name">Ink style options</div><div class="feature-desc">Pencil writes in: ballpoint, fountain pen, felt tip, crayon. Purely cosmetic but delightful. Your handwriting appears on screen.</div></div></li>
+    <li><div class="feature-icon">🔄</div><div class="feature-detail"><div class="feature-name">Pencil shake undo</div><div class="feature-desc">Double-tap Apple Pencil barrel = undo. Same smart undo logic as TV shake. Consistent across platforms.</div></div></li>
+    <li><div class="feature-icon">🎨</div><div class="feature-detail"><div class="feature-name">Color-code your confidence</div><div class="feature-desc">Write in blue when confident, red when guessing. Visual at-a-glance indicator of which answers you're sure about.</div></div></li>
+  </ul>
+</div>
+
+<!-- ERA 7: STORYTELLING & CONTENT -->
+<h3>Era 7: Storytelling & Content (v25 - v28)</h3>
+<p>Crosswords become narrative experiences.</p>
+
+<div class="version-card era7">
+  <div class="version-header"><span class="version-num">v25.0</span><span class="version-title">Story Mode</span></div>
+  <p class="version-tagline">A crossword RPG. Yes, really.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📖</div><div class="feature-detail"><div class="feature-name">Campaign mode</div><div class="feature-desc">A 50-chapter story. Each chapter is a puzzle. The answers advance the plot. "The detective found a _____ at the crime scene." Your answer IS the story.</div></div></li>
+    <li><div class="feature-icon">🗺️</div><div class="feature-detail"><div class="feature-name">World map progression</div><div class="feature-desc">Visual map with regions. Each region has 10 puzzles with a local theme. Complete a region to unlock the next. RPG overworld vibes.</div></div></li>
+    <li><div class="feature-icon">🧑‍🤝‍🧑</div><div class="feature-detail"><div class="feature-name">Characters</div><div class="feature-desc">NPCs who give you puzzles and react to your solving. The librarian, the detective, the chef. Each has their own puzzle style.</div></div></li>
+    <li><div class="feature-icon">🔀</div><div class="feature-detail"><div class="feature-name">Branching paths</div><div class="feature-desc">Some puzzles have multiple valid answers. Your choice changes the story branch. "The villain escaped to _____ (PARIS or TOKYO)." Different puzzles follow.</div></div></li>
+    <li><div class="feature-icon">🎭</div><div class="feature-detail"><div class="feature-name">Story seasons</div><div class="feature-desc">New story campaigns released quarterly. Season 1: Mystery. Season 2: Sci-Fi. Season 3: Historical Adventure. Collectible.</div></div></li>
+    <li><div class="feature-icon">🏆</div><div class="feature-detail"><div class="feature-name">Boss puzzles</div><div class="feature-desc">End-of-region 15x15 boss puzzle. Timed. Extra hard. Dramatic music. Beat it to unlock a rare reward.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era7">
+  <div class="version-header"><span class="version-num">v26.0</span><span class="version-title">Streaming & Spectating</span></div>
+  <p class="version-tagline">Crossword puzzles as spectator sport.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📺</div><div class="feature-detail"><div class="feature-name">Built-in streaming</div><div class="feature-desc">Stream your solve to Twitch/YouTube directly from the app. Overlay shows grid, timer, streak. One-button broadcast.</div></div></li>
+    <li><div class="feature-icon">👀</div><div class="feature-detail"><div class="feature-name">Spectator mode</div><div class="feature-desc">Watch any active player solving in real-time (if they've opted in). Follow top solvers. Learn their patterns.</div></div></li>
+    <li><div class="feature-icon">💬</div><div class="feature-detail"><div class="feature-name">Live chat</div><div class="feature-desc">Spectators can chat during live solves. Emotes: 🧠 (smart move), 😬 (wrong letter), 🔥 (fast solve).</div></div></li>
+    <li><div class="feature-icon">🎙️</div><div class="feature-detail"><div class="feature-name">Commentary mode</div><div class="feature-desc">Two-person commentary over a competitive match. Play-by-play for crossword races. Built into the app.</div></div></li>
+    <li><div class="feature-icon">📹</div><div class="feature-detail"><div class="feature-name">Replay system</div><div class="feature-desc">Watch a replay of any completed puzzle. Speed up, slow down, see the solver's cursor path. Study the masters.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era7">
+  <div class="version-header"><span class="version-num">v27.0</span><span class="version-title">Celebrity & Guest Puzzles</span></div>
+  <p class="version-tagline">Famous people make crosswords for you.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">⭐</div><div class="feature-detail"><div class="feature-name">Celebrity puzzle series</div><div class="feature-desc">Famous people create (or co-create with AI) puzzles themed to their expertise. A chef's food puzzle. An astronaut's space puzzle.</div></div></li>
+    <li><div class="feature-icon">🎤</div><div class="feature-detail"><div class="feature-name">Voice-over introductions</div><div class="feature-desc">The celebrity records a short intro: "Hey, I'm [name]. I made this puzzle about my favorite things. Good luck!" Plays before you start.</div></div></li>
+    <li><div class="feature-icon">📰</div><div class="feature-detail"><div class="feature-name">Newspaper crossword legends</div><div class="feature-desc">Partner with famous constructors (Will Shortz, etc.) to bring their puzzles to TV. Their name on the puzzle. Prestige content.</div></div></li>
+    <li><div class="feature-icon">🎁</div><div class="feature-detail"><div class="feature-name">Fan-made tribute puzzles</div><div class="feature-desc">Community creates puzzles honoring their favorite creators. Curated collection. "The Will Shortz Fan Pack."</div></div></li>
+    <li><div class="feature-icon">🗓️</div><div class="feature-detail"><div class="feature-name">Guest constructor of the month</div><div class="feature-desc">Each month features a different guest constructor. Their puzzles replace the daily for one week. Interview/bio on their profile.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era7">
+  <div class="version-header"><span class="version-num">v28.0</span><span class="version-title">Clubs & Teams</span></div>
+  <p class="version-tagline">Build your crossword crew.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🏘️</div><div class="feature-detail"><div class="feature-name">Clubs</div><div class="feature-desc">Create or join a club (up to 50 members). Private leaderboard. Club chat. Club-only puzzles posted by members.</div></div></li>
+    <li><div class="feature-icon">⚔️</div><div class="feature-detail"><div class="feature-name">Club wars</div><div class="feature-desc">Clubs challenge other clubs. 5 solvers per side. Total combined time wins. Weekly matchups. Rank your club.</div></div></li>
+    <li><div class="feature-icon">📊</div><div class="feature-detail"><div class="feature-name">Club stats</div><div class="feature-desc">Club-wide analytics: total puzzles solved, average time, strongest categories. Club knowledge radar.</div></div></li>
+    <li><div class="feature-icon">🏅</div><div class="feature-detail"><div class="feature-name">Club achievements</div><div class="feature-desc">"Club solved 10,000 puzzles." "Every member completed the daily for 30 straight days." Shared accomplishments.</div></div></li>
+    <li><div class="feature-icon">🎌</div><div class="feature-detail"><div class="feature-name">Club customization</div><div class="feature-desc">Club name, logo, banner, motto. Club colors show on member profiles. Identity and belonging.</div></div></li>
+  </ul>
+</div>
+
+<!-- ERA 8: HEALTH & WELLNESS -->
+<h3>Era 8: Health & Wellness (v29 - v32)</h3>
+<p>Crosswords as brain fitness.</p>
+
+<div class="version-card era8">
+  <div class="version-header"><span class="version-num">v29.0</span><span class="version-title">Cognitive Tracking</span></div>
+  <p class="version-tagline">Your brain's fitness tracker.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🧠</div><div class="feature-detail"><div class="feature-name">Cognitive performance score</div><div class="feature-desc">Weekly score based on speed, accuracy, vocabulary breadth, and consistency. Track your brain health over months and years.</div></div></li>
+    <li><div class="feature-icon">📈</div><div class="feature-detail"><div class="feature-name">Trend analysis</div><div class="feature-desc">"Your vocabulary recall is 12% faster than 3 months ago." "You solve best between 7-9pm." Personalized insights.</div></div></li>
+    <li><div class="feature-icon">❤️</div><div class="feature-detail"><div class="feature-name">Apple Health integration</div><div class="feature-desc">Log "Mindful Minutes" to HealthKit when solving. Track correlation between sleep, exercise, and puzzle performance.</div></div></li>
+    <li><div class="feature-icon">🎯</div><div class="feature-detail"><div class="feature-name">Daily brain workout</div><div class="feature-desc">Curated 10-minute session: 1 speed puzzle + 1 vocabulary builder + 1 hard puzzle. Designed to exercise different cognitive skills.</div></div></li>
+    <li><div class="feature-icon">📋</div><div class="feature-detail"><div class="feature-name">Monthly brain report</div><div class="feature-desc">Beautiful PDF report of your cognitive activity. Share with your doctor if you want. Vocabulary growth, response time trends, category improvements.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era8">
+  <div class="version-header"><span class="version-num">v30.0</span><span class="version-title">Mindfulness Mode</span></div>
+  <p class="version-tagline">Crosswords as meditation.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🧘</div><div class="feature-detail"><div class="feature-name">Zen solving</div><div class="feature-desc">No timer. No score. No streak pressure. Just you and the puzzle. Ambient sounds. Breathing prompts between clues.</div></div></li>
+    <li><div class="feature-icon">🫁</div><div class="feature-detail"><div class="feature-name">Breathe-between-clues</div><div class="feature-desc">Optional: after solving each word, a gentle breathing animation plays. 4 seconds in, 4 seconds out. Puzzle as relaxation practice.</div></div></li>
+    <li><div class="feature-icon">🌿</div><div class="feature-detail"><div class="feature-name">Nature soundscapes</div><div class="feature-desc">Extended ambient audio: forest with birds, ocean waves, gentle rain, crackling fire, night crickets. 30+ minute loops. Spatial audio on Vision Pro.</div></div></li>
+    <li><div class="feature-icon">🌙</div><div class="feature-detail"><div class="feature-name">Wind-down mode</div><div class="feature-desc">Scheduled evening routine: easy puzzle + calming theme + sleep-friendly warm colors. "It's 9:30pm. Ready to wind down?"</div></div></li>
+    <li><div class="feature-icon">📵</div><div class="feature-detail"><div class="feature-name">Focus mode integration</div><div class="feature-desc">When iOS Focus mode is "Do Not Disturb" or "Sleep", CouchWord automatically enters Zen mode. No notifications, no leaderboards.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era8">
+  <div class="version-header"><span class="version-num">v31.0</span><span class="version-title">Senior & Accessibility+</span></div>
+  <p class="version-tagline">Designed for grandparents. Used by everyone.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🔍</div><div class="feature-detail"><div class="feature-name">Extra-large mode</div><div class="feature-desc">Massive cells, huge text, high contrast. Designed for aging eyes. One word visible at a time with jumbo clue text above.</div></div></li>
+    <li><div class="feature-icon">🐌</div><div class="feature-detail"><div class="feature-name">Relaxed pacing</div><div class="feature-desc">No time pressure ever. Extra-long hint delays. Gentle encouragement. "Take your time, there's no rush."</div></div></li>
+    <li><div class="feature-icon">📞</div><div class="feature-detail"><div class="feature-name">Family sharing notifications</div><div class="feature-desc">Family member gets a notification: "Mom completed her daily puzzle!" Stay connected through word games. Optional, consent-based.</div></div></li>
+    <li><div class="feature-icon">🧩</div><div class="feature-detail"><div class="feature-name">Guided solving</div><div class="feature-desc">An AI guide walks you through the puzzle step by step. "Let's try 1 Across first. The clue is... what do you think?" Tutorial that never ends.</div></div></li>
+    <li><div class="feature-icon">📖</div><div class="feature-detail"><div class="feature-name">Word stories</div><div class="feature-desc">After solving each word, a short story about the word appears: origin, fun facts, usage. "Did you know QUIXOTIC comes from Don Quixote?"</div></div></li>
+    <li><div class="feature-icon">🖨️</div><div class="feature-detail"><div class="feature-name">Print mode</div><div class="feature-desc">Generate a printable PDF of any puzzle. For people who still prefer pencil and paper. AirPrint to any printer.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era8">
+  <div class="version-header"><span class="version-num">v32.0</span><span class="version-title">Family Mode</span></div>
+  <p class="version-tagline">The whole household plays.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">👨‍👩‍👧‍👦</div><div class="feature-detail"><div class="feature-name">Family account</div><div class="feature-desc">One subscription covers the whole family (Apple Family Sharing). Each member has their own profile, stats, and difficulty level.</div></div></li>
+    <li><div class="feature-icon">👶</div><div class="feature-detail"><div class="feature-name">Kids mode</div><div class="feature-desc">Age-appropriate puzzles: 3x3 for ages 6-8, 5x5 for 9-12. Simple vocabulary. Colorful themes. No time pressure. Educational focus.</div></div></li>
+    <li><div class="feature-icon">🏠</div><div class="feature-detail"><div class="feature-name">Family leaderboard</div><div class="feature-desc">See how everyone in the family did on today's puzzle. Mom vs Dad vs Kids. Normalized by difficulty so kids can compete fairly.</div></div></li>
+    <li><div class="feature-icon">🎯</div><div class="feature-detail"><div class="feature-name">Family challenges</div><div class="feature-desc">Weekly challenge the whole family does together. "This week: solve 20 puzzles as a family." Shared progress bar.</div></div></li>
+    <li><div class="feature-icon">🔒</div><div class="feature-detail"><div class="feature-name">Parental controls</div><div class="feature-desc">Set time limits per kid. Block social features. Approve friend requests. Content filtering for kid-safe clues only.</div></div></li>
+  </ul>
+</div>
+
+<!-- ERA 9: ENTERPRISE & EDUCATION -->
+<h3>Era 9: Enterprise & Education (v33 - v36)</h3>
+<p>CouchWord at school, at work, at conferences.</p>
+
+<div class="version-card era9">
+  <div class="version-header"><span class="version-num">v33.0</span><span class="version-title">Classroom Edition</span></div>
+  <p class="version-tagline">Every teacher's favorite review tool.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🏫</div><div class="feature-detail"><div class="feature-name">Teacher dashboard</div><div class="feature-desc">Web portal where teachers create classes, assign puzzles, track student progress, export grades. Free for educators.</div></div></li>
+    <li><div class="feature-icon">📝</div><div class="feature-detail"><div class="feature-name">Curriculum puzzle builder</div><div class="feature-desc">Paste a vocabulary list, get a puzzle. Import from Quizlet. Aligned to Common Core, state standards. Auto-generates age-appropriate clues.</div></div></li>
+    <li><div class="feature-icon">📊</div><div class="feature-detail"><div class="feature-name">Student analytics</div><div class="feature-desc">Which students are struggling with which vocabulary? Heatmap of class performance. Identify gaps before the test.</div></div></li>
+    <li><div class="feature-icon">🏆</div><div class="feature-detail"><div class="feature-name">Classroom competitions</div><div class="feature-desc">Teacher projects puzzle on classroom TV (Apple TV!). Students race on their iPads. Live leaderboard. Friday review game.</div></div></li>
+    <li><div class="feature-icon">🔗</div><div class="feature-detail"><div class="feature-name">LMS integration</div><div class="feature-desc">Connect to Google Classroom, Canvas, Schoology. Assign puzzles as homework. Grades sync automatically.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era9">
+  <div class="version-header"><span class="version-num">v34.0</span><span class="version-title">Corporate Team Building</span></div>
+  <p class="version-tagline">Better than trust falls.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🏢</div><div class="feature-detail"><div class="feature-name">Team puzzle events</div><div class="feature-desc">Company books a CouchWord event. Custom puzzles themed to their industry. Teams of 4 compete. Live results on conference room TV.</div></div></li>
+    <li><div class="feature-icon">🏷️</div><div class="feature-detail"><div class="feature-name">Custom branding</div><div class="feature-desc">Company logo on puzzles. Brand colors on the grid. "Welcome to the Acme Corp Team Challenge." White-label experience.</div></div></li>
+    <li><div class="feature-icon">🧊</div><div class="feature-detail"><div class="feature-name">Icebreaker puzzles</div><div class="feature-desc">Clues are about your coworkers: "Sarah's favorite food" or "Department with the most people." Learn about each other through puzzles.</div></div></li>
+    <li><div class="feature-icon">📧</div><div class="feature-detail"><div class="feature-name">Self-serve booking</div><div class="feature-desc">Web portal: pick date, team size, theme, difficulty. Pay per event ($49-199). Puzzle auto-generated. Link sent to participants.</div></div></li>
+    <li><div class="feature-icon">📋</div><div class="feature-detail"><div class="feature-name">Post-event report</div><div class="feature-desc">Who won, funniest wrong answers, fastest solve, MVP. Shareable PDF. Slack-ready summary.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era9">
+  <div class="version-header"><span class="version-num">v35.0</span><span class="version-title">Conference & Event Puzzles</span></div>
+  <p class="version-tagline">Every conference needs a puzzle.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🎪</div><div class="feature-detail"><div class="feature-name">Event-specific puzzles</div><div class="feature-desc">WWDC, CES, SXSW partner with CouchWord. Clues about the event, speakers, announcements. Attendees compete on a live board in the lobby.</div></div></li>
+    <li><div class="feature-icon">📱</div><div class="feature-detail"><div class="feature-name">QR code join</div><div class="feature-desc">Scan a QR at the event booth. Instantly join the event puzzle. No download needed (web version). 60-second solve challenge.</div></div></li>
+    <li><div class="feature-icon">🎁</div><div class="feature-detail"><div class="feature-name">Prize integration</div><div class="feature-desc">Event sponsors offer prizes to top solvers. "Solve in under 2 minutes for a free t-shirt." Gamified booth traffic.</div></div></li>
+    <li><div class="feature-icon">📡</div><div class="feature-detail"><div class="feature-name">Jumbotron mode</div><div class="feature-desc">Display the puzzle solving live on a massive screen. Audience watches as letters fill in. Names scroll as people finish. Stadium energy.</div></div></li>
+    <li><div class="feature-icon">🏷️</div><div class="feature-detail"><div class="feature-name">Sponsor puzzles</div><div class="feature-desc">Sponsors create branded puzzles. All clues about their product. Subtle, fun advertising. "4 across: Our flagship product (5 letters)."</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era9">
+  <div class="version-header"><span class="version-num">v36.0</span><span class="version-title">API & White Label</span></div>
+  <p class="version-tagline">CouchWord as infrastructure.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🔌</div><div class="feature-detail"><div class="feature-name">Puzzle API</div><div class="feature-desc">REST API: generate puzzles, validate answers, fetch daily puzzles. Other apps embed CouchWord puzzles. $0.01 per puzzle generated.</div></div></li>
+    <li><div class="feature-icon">🏗️</div><div class="feature-detail"><div class="feature-name">Embeddable widget</div><div class="feature-desc">JavaScript widget any website can embed. News sites put a daily crossword on their homepage. CouchWord powers it invisibly.</div></div></li>
+    <li><div class="feature-icon">🏷️</div><div class="feature-detail"><div class="feature-name">White-label SDK</div><div class="feature-desc">Other apps license the CouchWord engine. Their branding, our tech. Airlines put crosswords in their seatback apps. Hotels on room TVs.</div></div></li>
+    <li><div class="feature-icon">📊</div><div class="feature-detail"><div class="feature-name">Analytics API</div><div class="feature-desc">Partners get analytics on their embedded puzzles: completion rates, average times, popular clues. Data-driven content.</div></div></li>
+    <li><div class="feature-icon">🧩</div><div class="feature-detail"><div class="feature-name">Puzzle format standard</div><div class="feature-desc">Publish the CouchWord JSON format as an open standard. Other apps can import/export. Become the .MP3 of crossword files.</div></div></li>
+  </ul>
+</div>
+
+<!-- ERA 10: EXPERIMENTAL & WEIRD -->
+<h3>Era 10: Experimental (v37 - v40)</h3>
+<p>The weird stuff. Some will fail. Some will be genius.</p>
+
+<div class="version-card era10">
+  <div class="version-header"><span class="version-num">v37.0</span><span class="version-title">3D Crosswords</span></div>
+  <p class="version-tagline">Across, Down, and now... Through.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🧊</div><div class="feature-detail"><div class="feature-name">Cube puzzle</div><div class="feature-desc">A 5x5x5 crossword cube. Words go across, down, AND through the depth. Rotate the cube with swipes. Mind-bending spatial reasoning.</div></div></li>
+    <li><div class="feature-icon">🔄</div><div class="feature-detail"><div class="feature-name">Layer view</div><div class="feature-desc">Slice through the cube layer by layer. Like an MRI for crosswords. See one 5x5 plane at a time. Toggle between layers.</div></div></li>
+    <li><div class="feature-icon">🥽</div><div class="feature-detail"><div class="feature-name">Vision Pro 3D native</div><div class="feature-desc">On Vision Pro, the cube floats in space. Reach in and tap cells. Rotate with hand gestures. The killer Vision Pro puzzle game.</div></div></li>
+    <li><div class="feature-icon">🌀</div><div class="feature-detail"><div class="feature-name">Spiral puzzles</div><div class="feature-desc">Words spiral inward from the edge to the center. One continuous path. Read clockwise. A crossword meets a maze.</div></div></li>
+    <li><div class="feature-icon">🔺</div><div class="feature-detail"><div class="feature-name">Hexagonal grids</div><div class="feature-desc">Cells are hexagons. Words go in 6 directions instead of 2. Totally different solving strategy. Beautiful to look at.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era10">
+  <div class="version-header"><span class="version-num">v38.0</span><span class="version-title">Multimedia Clues</span></div>
+  <p class="version-tagline">Clues you hear, see, smell... well, not smell.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🖼️</div><div class="feature-detail"><div class="feature-name">Image clues</div><div class="feature-desc">Instead of text, some clues are photos. Picture of the Eiffel Tower = PARIS. Picture of a cat = FELINE. Visual vocabulary.</div></div></li>
+    <li><div class="feature-icon">🎵</div><div class="feature-detail"><div class="feature-name">Music clues</div><div class="feature-desc">A 5-second clip of a song plays. Name the artist, song, or genre. "🎵 [guitar riff] = HENDRIX." Spotify/Apple Music integration for full tracks.</div></div></li>
+    <li><div class="feature-icon">🎬</div><div class="feature-detail"><div class="feature-name">Video clues</div><div class="feature-desc">3-second GIF clips. A movie scene = the movie title. An animal doing something = the animal name. Rich media crosswords.</div></div></li>
+    <li><div class="feature-icon">🗣️</div><div class="feature-detail"><div class="feature-name">Voice clues</div><div class="feature-desc">A famous person's voice saying something. Identify who it is. Or an accent: identify the country. Audio crossword meets Name That Tune.</div></div></li>
+    <li><div class="feature-icon">🧩</div><div class="feature-detail"><div class="feature-name">Emoji clues</div><div class="feature-desc">Clues are emoji sequences. 🌊🏄‍♂️ = SURFING. 🍕🇮🇹 = ITALIAN. A whole puzzle where every clue is emojis. Surprisingly challenging.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era10">
+  <div class="version-header"><span class="version-num">v39.0</span><span class="version-title">Collaborative Storytelling</span></div>
+  <p class="version-tagline">The crossword writes a story together.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📖</div><div class="feature-detail"><div class="feature-name">Fill-in-the-blank stories</div><div class="feature-desc">A story with blanks. Each blank is a crossword clue. Solve the crossword, complete the story. The story only makes sense when the puzzle is solved.</div></div></li>
+    <li><div class="feature-icon">🎭</div><div class="feature-detail"><div class="feature-name">Mad Libs crossword</div><div class="feature-desc">Clues ask for word types: "A verb (5 letters)" "An animal (3 letters)". Your answers fill into a hilarious story. Different answers = different stories.</div></div></li>
+    <li><div class="feature-icon">🌐</div><div class="feature-detail"><div class="feature-name">Community story chain</div><div class="feature-desc">Each week the community collectively solves a chapter. The aggregate answers determine the plot direction. Thousands of people writing a story via crossword.</div></div></li>
+    <li><div class="feature-icon">🎲</div><div class="feature-detail"><div class="feature-name">Mystery puzzle</div><div class="feature-desc">A murder mystery where each clue reveals evidence. Solve the crossword, solve the case. "The weapon was a ___. The location was the ___." Whodunit crossword.</div></div></li>
+    <li><div class="feature-icon">📜</div><div class="feature-detail"><div class="feature-name">Poetry puzzles</div><div class="feature-desc">The answers form a poem when read in order. Solve to discover the hidden verse. Beautiful intersection of puzzle and art.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era10">
+  <div class="version-header"><span class="version-num">v40.0</span><span class="version-title">The Crossword RPG</span></div>
+  <p class="version-tagline">Dungeons & Crosswords.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">⚔️</div><div class="feature-detail"><div class="feature-name">Character classes</div><div class="feature-desc">Pick a class: Wordsmith (bonus hints), Speedster (time bonus), Scholar (harder clues = more XP), Socialite (multiplayer perks). Level up your character.</div></div></li>
+    <li><div class="feature-icon">🗡️</div><div class="feature-detail"><div class="feature-name">Dungeon crawl</div><div class="feature-desc">Navigate a dungeon map. Each room is a puzzle. Enemies are clues. Solve to defeat them. Boss at the end of each floor. Loot drops are cosmetics and power-ups.</div></div></li>
+    <li><div class="feature-icon">🎒</div><div class="feature-detail"><div class="feature-name">Inventory system</div><div class="feature-desc">Collect items: Hint Potions, Time Shields, Letter Bombs (reveal a random letter), Word Magnets (show first letter of answer). Use strategically.</div></div></li>
+    <li><div class="feature-icon">🐉</div><div class="feature-detail"><div class="feature-name">Raid bosses</div><div class="feature-desc">Weekly 21x21 boss puzzle. Community effort. Everyone who solves it contributes to the boss's HP bar. When HP hits zero, everyone gets loot.</div></div></li>
+    <li><div class="feature-icon">🏰</div><div class="feature-detail"><div class="feature-name">Guild halls</div><div class="feature-desc">Clubs get a visual guild hall. Decorate with trophies from completed challenges. Visit other guilds. Show off your achievements wall.</div></div></li>
+    <li><div class="feature-icon">📅</div><div class="feature-detail"><div class="feature-name">Seasonal dungeons</div><div class="feature-desc">New dungeon every season with unique theme, enemies, loot, and final boss. Limited-time content that drives engagement.</div></div></li>
+  </ul>
+</div>
+
+<!-- ERA 11: REAL WORLD -->
+<h3>Era 11: Real World (v41 - v44)</h3>
+<p>CouchWord leaves the screen.</p>
+
+<div class="version-card era11">
+  <div class="version-header"><span class="version-num">v41.0</span><span class="version-title">AR Crosswords</span></div>
+  <p class="version-tagline">Puzzles in the real world.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📸</div><div class="feature-detail"><div class="feature-name">Table-top puzzle</div><div class="feature-desc">Point your iPhone camera at a table. A crossword grid appears on the surface via AR. Tap cells on the table. Looks like a real newspaper.</div></div></li>
+    <li><div class="feature-icon">🧱</div><div class="feature-detail"><div class="feature-name">Wall puzzle</div><div class="feature-desc">Project a massive crossword onto any wall. Walk up to it. Point at cells. Fill them in. Museum-scale crossword in your living room.</div></div></li>
+    <li><div class="feature-icon">🚶</div><div class="feature-detail"><div class="feature-name">Walking puzzles</div><div class="feature-desc">AR clues appear as you walk. "Look to your left for a clue." A street sign, a building, a tree becomes part of the puzzle. Location-aware.</div></div></li>
+    <li><div class="feature-icon">🪞</div><div class="feature-detail"><div class="feature-name">Mirror mode</div><div class="feature-desc">Point camera at a mirror. The crossword appears reflected. Solve it backward. Brain-twisting AR novelty.</div></div></li>
+    <li><div class="feature-icon">📷</div><div class="feature-detail"><div class="feature-name">Scan-a-crossword</div><div class="feature-desc">Point camera at a newspaper crossword. App digitizes it. Solve the physical puzzle with voice input on your phone. Bridge between old and new.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era11">
+  <div class="version-header"><span class="version-num">v42.0</span><span class="version-title">Location-Based Puzzles</span></div>
+  <p class="version-tagline">Pokemon GO meets crosswords.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📍</div><div class="feature-detail"><div class="feature-name">City puzzles</div><div class="feature-desc">Each major city has a unique crossword. Clues about local landmarks, food, history. "Visit NYC, solve the NYC puzzle." Collectible city badges.</div></div></li>
+    <li><div class="feature-icon">🚶</div><div class="feature-detail"><div class="feature-name">Walking puzzle trails</div><div class="feature-desc">A route through a neighborhood. Each stop reveals a clue. Walk the path, solve the puzzle. Tourist experience + word game.</div></div></li>
+    <li><div class="feature-icon">🏛️</div><div class="feature-detail"><div class="feature-name">Museum partnerships</div><div class="feature-desc">Museums create puzzles about their exhibits. Solve while visiting. "The painting by _____ shows a _____ at _____." Educational scavenger hunt.</div></div></li>
+    <li><div class="feature-icon">✈️</div><div class="feature-detail"><div class="feature-name">Travel passport</div><div class="feature-desc">Visual passport that stamps with each city puzzle you complete. Collect the whole world. Motivates travel and exploration.</div></div></li>
+    <li><div class="feature-icon">🍽️</div><div class="feature-detail"><div class="feature-name">Restaurant puzzles</div><div class="feature-desc">Restaurants partner to create food-themed puzzles. Solve while waiting for your table. Clue: "Our signature appetizer (8 letters)." Fun, branded, local.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era11">
+  <div class="version-header"><span class="version-num">v43.0</span><span class="version-title">Physical Merch & Print</span></div>
+  <p class="version-tagline">Atoms, not just bits.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">📓</div><div class="feature-detail"><div class="feature-name">CouchWord puzzle book</div><div class="feature-desc">Print-on-demand puzzle books via Amazon. "CouchWord Volume 1: 100 Puzzles." Physical product from a digital app. New revenue stream.</div></div></li>
+    <li><div class="feature-icon">🎴</div><div class="feature-detail"><div class="feature-name">Crossword card game</div><div class="feature-desc">Physical card game version. Draw clue cards, race to answer. Plays 2-6 people. CouchWord branding. Sold via Shopify store.</div></div></li>
+    <li><div class="feature-icon">👕</div><div class="feature-detail"><div class="feature-name">Merch store</div><div class="feature-desc">T-shirts, mugs, posters with CouchWord branding and crossword designs. "I survived the Saturday Championship" shirts.</div></div></li>
+    <li><div class="feature-icon">🖼️</div><div class="feature-detail"><div class="feature-name">Puzzle art prints</div><div class="feature-desc">Your completed Puzzle DNA or Knowledge Radar as a high-quality art print. Frame it. Personalized data art for your wall.</div></div></li>
+    <li><div class="feature-icon">🎁</div><div class="feature-detail"><div class="feature-name">Gift subscriptions</div><div class="feature-desc">Buy CouchWord+ for someone. Comes with a physical gift card and QR code. Holiday gift for the word nerd in your life.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era11">
+  <div class="version-header"><span class="version-num">v44.0</span><span class="version-title">Live Events & Conventions</span></div>
+  <p class="version-tagline">CouchWord IRL.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🎪</div><div class="feature-detail"><div class="feature-name">CouchWord Con</div><div class="feature-desc">Annual convention. Live tournaments, creator meetups, panel discussions on puzzle design, celebrity guest constructors. The Comic-Con of word games.</div></div></li>
+    <li><div class="feature-icon">🏟️</div><div class="feature-detail"><div class="feature-name">Live championship finals</div><div class="feature-desc">Top 8 players compete on stage. Massive screen shows both grids. Live commentary. Audience votes on "Best Wrong Answer." Streamed worldwide.</div></div></li>
+    <li><div class="feature-icon">🍻</div><div class="feature-detail"><div class="feature-name">Pub quiz crossword nights</div><div class="feature-desc">Partner with bars/restaurants for weekly crossword nights. Teams of 4. Projected on the bar's TV. Prize for winners. Regular recurring event.</div></div></li>
+    <li><div class="feature-icon">📚</div><div class="feature-detail"><div class="feature-name">Library partnerships</div><div class="feature-desc">Public libraries host weekly CouchWord sessions. Accessible, free, community-building. Apple TV in the meeting room.</div></div></li>
+    <li><div class="feature-icon">🎓</div><div class="feature-detail"><div class="feature-name">University crossword league</div><div class="feature-desc">College teams compete in a semester-long crossword league. Playoffs, finals, championship trophy. Esports for word nerds.</div></div></li>
+  </ul>
+</div>
+
+<!-- ERA 12: AI DEEP -->
+<h3>Era 12: AI Deep Integration (v45 - v48)</h3>
+<p>AI isn't a feature. It's the foundation.</p>
+
+<div class="version-card era12">
+  <div class="version-header"><span class="version-num">v45.0</span><span class="version-title">AI Debate Mode</span></div>
+  <p class="version-tagline">Argue with the puzzle.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🗣️</div><div class="feature-detail"><div class="feature-name">Challenge a clue</div><div class="feature-desc">"I think 'vessel' should accept BOAT, not SHIP." Argue your case to the AI. If your reasoning is valid, the AI accepts the alternate answer. Dynamic adjudication.</div></div></li>
+    <li><div class="feature-icon">🤔</div><div class="feature-detail"><div class="feature-name">Clue explanation</div><div class="feature-desc">After solving (or giving up), ask "Why was the answer QUORUM?" AI explains the wordplay, double meaning, or cultural reference. Learn why each clue works.</div></div></li>
+    <li><div class="feature-icon">📐</div><div class="feature-detail"><div class="feature-name">Difficulty negotiation</div><div class="feature-desc">"This is too hard." The AI rewords specific clues in real-time to be easier without changing the answer. "Let me rephrase that for you..."</div></div></li>
+    <li><div class="feature-icon">🎓</div><div class="feature-detail"><div class="feature-name">Socratic hints</div><div class="feature-desc">Instead of revealing letters, the AI asks guiding questions. "What's another word for 'happy' that starts with J?" Teaches through questioning.</div></div></li>
+    <li><div class="feature-icon">💡</div><div class="feature-detail"><div class="feature-name">Etymology deep dives</div><div class="feature-desc">Tap any completed word for a 30-second AI-generated etymology lesson. Where the word comes from, how it evolved, related words. Micro-learning.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era12">
+  <div class="version-header"><span class="version-num">v46.0</span><span class="version-title">Personality-Driven Generation</span></div>
+  <p class="version-tagline">Puzzles that know you better than you know yourself.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🧬</div><div class="feature-detail"><div class="feature-name">Solver personality types</div><div class="feature-desc">AI classifies you: Methodical (top-left to bottom-right), Intuitive (jumps around), Speed Runner (accuracy be damned), Perfectionist (never wrong). Shows your type.</div></div></li>
+    <li><div class="feature-icon">🎯</div><div class="feature-detail"><div class="feature-name">Personality-matched puzzles</div><div class="feature-desc">Methodical types get structured grids. Intuitive types get open grids with more crossings. Puzzles designed to match how you think.</div></div></li>
+    <li><div class="feature-icon">🔄</div><div class="feature-detail"><div class="feature-name">Growth-edge puzzles</div><div class="feature-desc">Puzzles specifically designed to push against your solving weaknesses. Force you to try new strategies. "This puzzle is designed to make you uncomfortable."</div></div></li>
+    <li><div class="feature-icon">💌</div><div class="feature-detail"><div class="feature-name">Relationship puzzles</div><div class="feature-desc">Input info about a couple (how you met, shared memories). AI generates a personalized puzzle. Anniversary gift. Wedding activity.</div></div></li>
+    <li><div class="feature-icon">📅</div><div class="feature-detail"><div class="feature-name">Life event puzzles</div><div class="feature-desc">Retiring? Graduating? Moving? AI creates a puzzle celebrating the milestone. Clues reference your journey. Framed as art.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era12">
+  <div class="version-header"><span class="version-num">v47.0</span><span class="version-title">AI Game Master</span></div>
+  <p class="version-tagline">The AI runs the show.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🎭</div><div class="feature-detail"><div class="feature-name">Persistent AI narrator</div><div class="feature-desc">An AI character with personality who narrates your journey. Remembers your history. "Welcome back! You left off stuck on 7 Down last time. Shall we try again?"</div></div></li>
+    <li><div class="feature-icon">📖</div><div class="feature-detail"><div class="feature-name">Dynamic story puzzles</div><div class="feature-desc">AI generates puzzles and stories simultaneously. Your answers shape the narrative in real-time. No two playthroughs identical.</div></div></li>
+    <li><div class="feature-icon">🧪</div><div class="feature-detail"><div class="feature-name">AI puzzle experiments</div><div class="feature-desc">The AI invents new puzzle formats. "I've been thinking about a new kind of word puzzle. Want to be the first to try it?" Actual novel game mechanics generated by AI.</div></div></li>
+    <li><div class="feature-icon">🎤</div><div class="feature-detail"><div class="feature-name">Voice personality</div><div class="feature-desc">The AI narrator has a voice. Warm, witty, encouraging. Not robotic. Feels like solving with a friend who's really into words. Custom voice via Apple's Personal Voice.</div></div></li>
+    <li><div class="feature-icon">🌍</div><div class="feature-detail"><div class="feature-name">Cultural context AI</div><div class="feature-desc">AI adjusts clues based on your cultural background. American references for US users. Cricket references for UK/India. Not just language, but cultural fluency.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era12">
+  <div class="version-header"><span class="version-num">v48.0</span><span class="version-title">AI Crossword Lab</span></div>
+  <p class="version-tagline">The puzzle laboratory.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🔬</div><div class="feature-detail"><div class="feature-name">Puzzle sandbox</div><div class="feature-desc">Design your own puzzle format. "What if the grid is circular?" "What if words can overlap?" "What if clues are riddles?" Tell the AI your idea, it builds the rules engine.</div></div></li>
+    <li><div class="feature-icon">🧪</div><div class="feature-detail"><div class="feature-name">A/B testing for clues</div><div class="feature-desc">Creators submit two versions of a clue. The platform serves both and measures which one has better completion rates. Data-driven clue improvement.</div></div></li>
+    <li><div class="feature-icon">🤖</div><div class="feature-detail"><div class="feature-name">AI vs Human puzzles</div><div class="feature-desc">Play a puzzle made by AI, then the same grid made by a human. Vote which clues were better. Train the AI with your preferences.</div></div></li>
+    <li><div class="feature-icon">📊</div><div class="feature-detail"><div class="feature-name">Solve-path analysis</div><div class="feature-desc">After completing, see a heatmap of how all users solved the puzzle. Which clues were first? Last? Which tripped everyone up? Puzzle forensics.</div></div></li>
+    <li><div class="feature-icon">🌊</div><div class="feature-detail"><div class="feature-name">Evolving puzzles</div><div class="feature-desc">A puzzle that changes based on aggregate solving data. If everyone gets 5 Across instantly, the AI makes it harder for the next person. Living, breathing difficulty.</div></div></li>
+  </ul>
+</div>
+
+<!-- ERA 13: LEGACY -->
+<h3>Era 13: Legacy (v49 - v52)</h3>
+<p>CouchWord becomes an institution.</p>
+
+<div class="version-card era13">
+  <div class="version-header"><span class="version-num">v49.0</span><span class="version-title">Open Source Engine</span></div>
+  <p class="version-tagline">Give it away. Change the game.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🔓</div><div class="feature-detail"><div class="feature-name">Open source puzzle engine</div><div class="feature-desc">The core crossword engine (grid logic, validation, generation) released as open source on GitHub. MIT license. Anyone can build crossword apps on it.</div></div></li>
+    <li><div class="feature-icon">📦</div><div class="feature-detail"><div class="feature-name">Swift package</div><div class="feature-desc">Published as a Swift Package: `import CouchWordEngine`. Drop crossword functionality into any iOS/tvOS/macOS app in minutes.</div></div></li>
+    <li><div class="feature-icon">🐍</div><div class="feature-detail"><div class="feature-name">Python library</div><div class="feature-desc">Python port for puzzle generation and validation. Used by researchers, educators, hobbyists. `pip install couchword`.</div></div></li>
+    <li><div class="feature-icon">👥</div><div class="feature-detail"><div class="feature-name">Contributor community</div><div class="feature-desc">Active open source community. Pull requests for new puzzle types, better algorithms, accessibility improvements. CouchWord becomes bigger than one person.</div></div></li>
+    <li><div class="feature-icon">📄</div><div class="feature-detail"><div class="feature-name">Research papers</div><div class="feature-desc">Publish findings on AI puzzle generation, solving patterns, cognitive benefits. Academic credibility. Conference talks at NLP and game design events.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era13">
+  <div class="version-header"><span class="version-num">v50.0</span><span class="version-title">CouchWord Foundation</span></div>
+  <p class="version-tagline">Word games as a public good.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🏛️</div><div class="feature-detail"><div class="feature-name">Nonprofit arm</div><div class="feature-desc">CouchWord Foundation: a 501(c)(3) dedicated to using word games for literacy, education, and cognitive health. Funded by a percentage of premium revenue.</div></div></li>
+    <li><div class="feature-icon">📚</div><div class="feature-detail"><div class="feature-name">Literacy programs</div><div class="feature-desc">Free CouchWord access for Title I schools, community centers, libraries, and senior living facilities. Puzzle-based literacy curriculum.</div></div></li>
+    <li><div class="feature-icon">🧓</div><div class="feature-detail"><div class="feature-name">Cognitive health research</div><div class="feature-desc">Fund studies on crossword puzzles and cognitive decline prevention. Partner with universities. Anonymized aggregate data for research.</div></div></li>
+    <li><div class="feature-icon">🌍</div><div class="feature-detail"><div class="feature-name">Global literacy initiative</div><div class="feature-desc">CouchWord in underserved languages. Partner with NGOs to bring word games to places where literacy tools are scarce. Free forever in developing regions.</div></div></li>
+    <li><div class="feature-icon">🎓</div><div class="feature-detail"><div class="feature-name">Scholarship fund</div><div class="feature-desc">Annual scholarships for students pursuing linguistics, game design, or education. Funded by championship entry fees and community donations.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era13">
+  <div class="version-header"><span class="version-num">v51.0</span><span class="version-title">The Crossword Museum</span></div>
+  <p class="version-tagline">Preserving the history of words and puzzles.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">🏛️</div><div class="feature-detail"><div class="feature-name">In-app museum</div><div class="feature-desc">A beautiful, explorable museum space. History of crosswords from 1913 to today. Interactive exhibits. Famous puzzles you can solve. Narrated tours.</div></div></li>
+    <li><div class="feature-icon">📜</div><div class="feature-detail"><div class="feature-name">Historical puzzle archive</div><div class="feature-desc">Digitized classic crosswords from history. Solve the first-ever NYT crossword (1942). Solve a WWII-era propaganda crossword. Time capsule puzzles.</div></div></li>
+    <li><div class="feature-icon">🏆</div><div class="feature-detail"><div class="feature-name">Hall of Fame</div><div class="feature-desc">CouchWord Hall of Fame: legendary solvers, creators, and community members inducted annually. Virtual trophy room. Their best puzzles preserved forever.</div></div></li>
+    <li><div class="feature-icon">📖</div><div class="feature-detail"><div class="feature-name">Word etymology wing</div><div class="feature-desc">An interactive exhibit on where English words come from. Explore language trees. See how words traveled across civilizations. Educational and beautiful.</div></div></li>
+    <li><div class="feature-icon">🎨</div><div class="feature-detail"><div class="feature-name">Puzzle art gallery</div><div class="feature-desc">The most beautiful grids, most clever clues, and most elegant puzzle designs displayed as art. Community-curated. Rotates monthly.</div></div></li>
+  </ul>
+</div>
+
+<div class="version-card era13">
+  <div class="version-header"><span class="version-num">v52.0</span><span class="version-title">CouchWord OS</span></div>
+  <p class="version-tagline">The crossword becomes the computer.</p>
+  <ul class="feature-list">
+    <li><div class="feature-icon">💻</div><div class="feature-detail"><div class="feature-name">CouchWord OS</div><div class="feature-desc">Your Apple TV boots into CouchWord. Not an app. The operating system. The home screen IS a crossword. Solve to unlock apps. The TV is a word game console.</div></div></li>
+    <li><div class="feature-icon">🌅</div><div class="feature-detail"><div class="feature-name">Always-on word display</div><div class="feature-desc">When idle, your TV is a living word art installation. Slowly cycling through beautiful words, definitions, and puzzles. Digital art that exercises your brain passively.</div></div></li>
+    <li><div class="feature-icon">🔮</div><div class="feature-detail"><div class="feature-name">Predictive daily puzzles</div><div class="feature-desc">AI predicts what kind of puzzle you want based on time of day, mood signals, calendar events, weather. "Rainy Sunday? Here's a cozy 15x15 with coffee shop ambiance."</div></div></li>
+    <li><div class="feature-icon">🧠</div><div class="feature-detail"><div class="feature-name">Neural crossword interface</div><div class="feature-desc">When brain-computer interfaces arrive (2030s?), solve crosswords by thinking. The letters appear as you think them. No voice. No hands. Pure thought. The final input method.</div></div></li>
+    <li><div class="feature-icon">♾️</div><div class="feature-detail"><div class="feature-name">The Infinite Library</div><div class="feature-desc">Every puzzle ever created by every user, every AI, every constructor: searchable, playable, preserved. A Library of Alexandria for word puzzles. Humanity's crossword archive, forever.</div></div></li>
+    <li><div class="feature-icon">🌟</div><div class="feature-detail"><div class="feature-name">What comes next?</div><div class="feature-desc">Version 52 isn't the end. It's where the community decides what's next. The roadmap becomes open. The users vote on v53. CouchWord belongs to everyone now.</div></div></li>
+  </ul>
+</div>
+
+<hr class="section-divider">
+
+<h2>Monetization Strategy</h2>
+<p>Free to play. Clear upgrade. No ads ever.</p>
+
+<div class="money-grid">
+  <div class="money-card">
+    <h4>Free Tier</h4>
+    <div class="money-amount">$0</div>
+    <ul>
+      <li>Daily puzzle</li>
+      <li>5x5 mini puzzles (limited)</li>
+      <li>3 hints per puzzle</li>
+      <li>Basic stats</li>
+      <li>1 visual theme</li>
+    </ul>
+  </div>
+  <div class="money-card">
+    <h4>CouchWord+</h4>
+    <div class="money-amount">$2.99/mo</div>
+    <ul>
+      <li>All grid sizes</li>
+      <li>Full puzzle library</li>
+      <li>Unlimited hints</li>
+      <li>All themes & game modes</li>
+      <li>Knowledge radar</li>
+      <li>AI custom puzzles</li>
+      <li>Streak freeze (1/week)</li>
+    </ul>
+  </div>
+  <div class="money-card">
+    <h4>One-Time Purchases</h4>
+    <div class="money-amount">$0.99 - $4.99</div>
+    <ul>
+      <li>Themed puzzle packs</li>
+      <li>Premium visual themes</li>
+      <li>Sound packs</li>
+      <li>Season passes</li>
+      <li>Creator puzzle packs</li>
+    </ul>
+  </div>
+</div>
+
+<div class="note">
+  <strong>Napkin math:</strong> 10,000 downloads, 5% convert at $2.99/mo = $1,495/month. 50,000 downloads = $7,475/month. The daily puzzle + streak mechanic is the conversion engine.
+</div>
+
+<hr class="section-divider">
+
+<h2>Accessibility</h2>
+<ul>
+  <li><strong>VoiceOver:</strong> Every cell, clue, button labeled. Position announced.</li>
+  <li><strong>Screen-off mode (v11):</strong> Entire puzzle by voice. Opens crosswords to visually impaired users.</li>
+  <li><strong>High contrast:</strong> Bold grid lines, maximum contrast, larger text.</li>
+  <li><strong>Colorblind modes:</strong> Protanopia, deuteranopia, tritanopia. Patterns + color for feedback.</li>
+  <li><strong>Font scaling:</strong> Dynamic Type support. Fewer cells visible but always readable.</li>
+  <li><strong>Reduced motion:</strong> Respects system setting. No animations.</li>
+  <li><strong>Switch control:</strong> Full scanning mode for users who can't use the remote.</li>
+</ul>
+
+<div class="note">
+  <strong>Marketing angle:</strong> "The first crossword you can solve with your eyes closed" is a headline that gets press.
+</div>
+
+<hr class="section-divider">
+
+<h2>Analytics & Metrics</h2>
+
+<h3>North Star: Daily Active Solvers</h3>
+<p>Users who complete at least one puzzle per day.</p>
+
+<h3>Key Metrics</h3>
+<ul>
+  <li><strong>DAU/MAU ratio:</strong> Target 40%+</li>
+  <li><strong>D1/D7/D30 retention:</strong> 40% / 25% / 15% targets</li>
+  <li><strong>Daily completion rate:</strong> 70%+ of starters finish</li>
+  <li><strong>Hint usage:</strong> Under 1/puzzle average</li>
+  <li><strong>Voice vs remote ratio:</strong> Core differentiator check</li>
+  <li><strong>Streak distribution:</strong> Average length, 30+ day count</li>
+  <li><strong>Free to paid conversion:</strong> 5% within first month</li>
+  <li><strong>Session length:</strong> 8-15 minutes target</li>
+</ul>
+
+<h3>Implementation</h3>
+<ul>
+  <li>v1: Apple App Analytics (free)</li>
+  <li>v3+: TelemetryDeck or PostHog</li>
+  <li>Aggregate only. No user tracking without consent.</li>
+</ul>
+
+<hr class="section-divider">
+
+<h2>App Store Strategy</h2>
+
+<h3>Positioning</h3>
+<ul>
+  <li>First crossword app for Apple TV. Zero competition.</li>
+  <li>Voice input. Say answers instead of typing.</li>
+  <li>Big-screen. Crosswords look beautiful at 55".</li>
+  <li>Couch co-op. No other crossword has multiplayer.</li>
+</ul>
+
+<h3>Keywords</h3>
+<p>crossword, puzzle, word game, brain teaser, daily puzzle, voice, Siri, trivia, vocabulary</p>
+
+<h3>Launch Plan</h3>
+<ul>
+  <li>TestFlight beta: 50-100 testers from Reddit crossword communities</li>
+  <li>2-4 weeks of feedback and polish</li>
+  <li>Submit with "first crossword for Apple TV" narrative</li>
+  <li>Reddit: r/crossword, r/appletv, r/IndieGaming, r/SwiftUI</li>
+  <li>Email Apple editorial team (tvOS apps get attention because there are so few)</li>
+  <li>Product Hunt launch</li>
+</ul>
+
+<div class="note">
+  <strong>tvOS advantage:</strong> Maybe 5,000 total apps on tvOS vs millions on iOS. A quality app can rank page 1 for "crossword" with zero ad spend.
+</div>
+
+<hr class="section-divider">
+
+<h2>Claude Code Build Instructions</h2>
+<p>The prompt for the first overnight build on Nigel.</p>
+
+<div class="code-block"><span class="code-comment"># CouchWord - Overnight Build Challenge
+# Session 1: Build the v1.0 MVP</span>
+
+<span class="code-key">Project:</span> CouchWord - Apple TV crossword puzzle app
+<span class="code-key">Platform:</span> tvOS 17+, Swift, SwiftUI
+<span class="code-key">Repo:</span> github.com/[your-username]/couchword
+
+<span class="code-comment"># Build order (commit after each):</span>
+
+<span class="code-val">1. Project setup</span>
+   - tvOS target, SwiftUI lifecycle
+   - Folders: Models, Views, ViewModels, Services, Resources
+
+<span class="code-val">2. Data layer</span>
+   - Puzzle model (matches JSON schema in doc)
+   - UserProgress model with undo stack
+   - PuzzleStore: loads bundled JSON
+   - ProgressStore: saves via UserDefaults/SwiftData
+   - Generate 20 sample 5x5 puzzles as JSON
+
+<span class="code-val">3. Home screen</span>
+   - Logo, menu: Today's Puzzle, Quick Play, Continue, Settings
+   - tvOS focus engine navigation
+   - Dark theme, TV-optimized spacing
+
+<span class="code-val">4. Puzzle grid view</span>
+   - 5x5 grid with SwiftUI Grid/LazyVGrid
+   - Zoomed view filling screen, minimap in corner
+   - Cell states: empty, filled, active, correct, incorrect, black
+   - Clue panel on right, active clue highlighted
+   - Focus-based cell navigation
+   - Click center = toggle Across/Down
+   - Double-tap = zoom out/in
+
+<span class="code-val">5. Voice input</span>
+   - tvOS dictation (hold Siri button)
+   - Single letters: "B" fills current cell
+   - Full words: "BANANA" fills from cursor
+   - Visual feedback before confirming
+
+<span class="code-val">6. Shake-to-undo</span>
+   - CMMotionManager shake detection
+   - Undo stack: letter = 1 action, word = 1 action
+   - Word undo preserves pre-existing letters
+
+<span class="code-val">7. Hint system</span>
+   - 3 per puzzle, reveals correct letter
+   - Shows remaining count
+
+<span class="code-val">8. Completion flow</span>
+   - Detect all cells correct
+   - Screen: time, hints, streak
+   - Celebration animation
+   - Next Puzzle / Home
+
+<span class="code-val">9. Sound effects</span>
+   - Letter (click), word (chime), complete (celebration)
+   - Undo (whoosh), error (buzz)
+   - All mutable in settings
+
+<span class="code-val">10. Onboarding</span>
+   - 3 screens: swipe/click, voice, shake
+   - Skip button, don't-show-again flag
+
+<span class="code-comment"># Commit messages: "feat: puzzle grid view with cell navigation"
+# Tag final working state as v1.0
+# Must compile and run in tvOS Simulator
+# No third-party dependencies (Apple frameworks only)</span></div>
+
+<div class="note">
+  <strong>Morning review:</strong> Check git log. Open in Xcode. Run in tvOS Simulator. Test: navigate grid, voice input, shake undo, complete a puzzle. Note what's broken. That's the next session's todo list.
+</div>
+
+<hr class="section-divider">
+
+<h2>Name Ideas</h2>
+<ul>
+  <li><strong>CouchWord</strong> — couch + crossword</li>
+  <li><strong>BigGrid</strong> — big screen crosswords</li>
+  <li><strong>VoxWord</strong> — vox (voice) + word</li>
+  <li><strong>CrossVoice</strong> — crossword + voice</li>
+  <li><strong>GridNight</strong> — evening vibes</li>
+  <li><strong>WordLounge</strong> — relaxed word games</li>
+</ul>
+
+<p style="text-align:center; color:var(--dim); font-size:0.85em; margin-top:60px;">
+  CouchWord Concept Doc v1.0 — April 2026<br>
+  First overnight Claude Code build challenge on Nigel<br>
+  From a chat idea to a 52-version roadmap in one conversation
+</p>
+
+</div>
+</body>
+</html>
