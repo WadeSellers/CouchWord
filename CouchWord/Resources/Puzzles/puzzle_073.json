@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_073",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Vehicles",
+  "date": null,
+  "grid": [
+    ["T","R","O","L","L","E","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["S","C","O","O","T","E","R"],
+    ["#","#","#","#","#","#","#"],
+    ["T","R","A","C","T","O","R"],
+    ["#","#","#","#","#","#","#"],
+    ["M","I","N","I","V","A","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Streetcar on rails in a city", "answer": "TROLLEY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Two-wheeled motorized ride", "answer": "SCOOTER", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Farm vehicle for pulling equipment", "answer": "TRACTOR", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Family vehicle with sliding doors", "answer": "MINIVAN", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["vehicles"],
+  "author": "CouchWord"
+}

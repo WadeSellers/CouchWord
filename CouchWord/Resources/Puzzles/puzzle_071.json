@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_071",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Law",
+  "date": null,
+  "grid": [
+    ["J","U","S","T","I","C","E"],
+    ["#","#","#","#","#","#","#"],
+    ["V","E","R","D","I","C","T"],
+    ["#","#","#","#","#","#","#"],
+    ["S","T","A","T","U","T","E"],
+    ["#","#","#","#","#","#","#"],
+    ["P","E","N","A","L","T","Y"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Fairness under the law", "answer": "JUSTICE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Final decision by a jury", "answer": "VERDICT", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Written law passed by legislature", "answer": "STATUTE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Punishment for breaking a rule", "answer": "PENALTY", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["law"],
+  "author": "CouchWord"
+}

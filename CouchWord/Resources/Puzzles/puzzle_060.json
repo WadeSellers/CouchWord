@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_060",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Space",
+  "date": null,
+  "grid": [
+    ["E","C","L","I","P","S","E"],
+    ["#","#","#","#","#","#","#"],
+    ["G","R","A","V","I","T","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["N","E","B","U","L","A","E"],
+    ["#","#","#","#","#","#","#"],
+    ["Q","U","A","S","A","R","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Moon blocking the sun from view", "answer": "ECLIPSE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Force that keeps us grounded on Earth", "answer": "GRAVITY", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Clouds of gas and dust in outer space", "answer": "NEBULAE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Extremely bright distant galactic cores", "answer": "QUASARS", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["space"],
+  "author": "CouchWord"
+}

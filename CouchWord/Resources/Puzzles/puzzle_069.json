@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_069",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Architecture",
+  "date": null,
+  "grid": [
+    ["C","O","L","U","M","N","S"],
+    ["#","#","#","#","#","#","#"],
+    ["B","A","L","C","O","N","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["C","E","I","L","I","N","G"],
+    ["#","#","#","#","#","#","#"],
+    ["T","E","R","R","A","C","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Vertical pillars supporting a structure", "answer": "COLUMNS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Elevated outdoor platform on a building", "answer": "BALCONY", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Upper interior surface of a room", "answer": "CEILING", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Flat outdoor paved area beside a building", "answer": "TERRACE", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["architecture"],
+  "author": "CouchWord"
+}

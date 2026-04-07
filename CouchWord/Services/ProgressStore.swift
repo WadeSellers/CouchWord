@@ -9,15 +9,23 @@ class ProgressStore: ObservableObject {
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
 
-    private static let statsKey = "couchword_stats"
-    private static let progressKeyPrefix = "couchword_progress_"
-    private static let onboardingKey = "couchword_onboarding_shown"
-    private static let soundEnabledKey = "couchword_sound_enabled"
+    private let keyPrefix: String
 
-    init(defaults: UserDefaults = .standard) {
+    private var statsKey: String { "\(keyPrefix)stats" }
+    private var progressKeyPrefix: String { "\(keyPrefix)progress_" }
+    private var onboardingKeyValue: String { "\(keyPrefix)onboarding_shown" }
+    private var soundEnabledKeyValue: String { "\(keyPrefix)sound_enabled" }
+
+    /// Creates a ProgressStore. If profileID is provided, all keys are namespaced to that profile.
+    init(defaults: UserDefaults = .standard, profileID: String? = nil) {
         self.defaults = defaults
+        if let profileID {
+            self.keyPrefix = "couchword_\(profileID)_"
+        } else {
+            self.keyPrefix = "couchword_"
+        }
 
-        if let data = defaults.data(forKey: Self.statsKey),
+        if let data = defaults.data(forKey: "\(keyPrefix)stats"),
            let stats = try? JSONDecoder().decode(GameStats.self, from: data) {
             self.stats = stats
         } else {
@@ -28,27 +36,27 @@ class ProgressStore: ObservableObject {
     // MARK: - Progress
 
     func loadProgress(for puzzleID: String) -> UserProgress? {
-        let key = Self.progressKeyPrefix + puzzleID
+        let key = progressKeyPrefix + puzzleID
         guard let data = defaults.data(forKey: key) else { return nil }
         return try? decoder.decode(UserProgress.self, from: data)
     }
 
     func saveProgress(_ progress: UserProgress) {
-        let key = Self.progressKeyPrefix + progress.puzzleID
+        let key = progressKeyPrefix + progress.puzzleID
         if let data = try? encoder.encode(progress) {
             defaults.set(data, forKey: key)
         }
     }
 
     func deleteProgress(for puzzleID: String) {
-        let key = Self.progressKeyPrefix + puzzleID
+        let key = progressKeyPrefix + puzzleID
         defaults.removeObject(forKey: key)
     }
 
     func hasInProgressPuzzle() -> String? {
         // Check all stored progress for an in-progress puzzle
         let allKeys = defaults.dictionaryRepresentation().keys
-        for key in allKeys where key.hasPrefix(Self.progressKeyPrefix) {
+        for key in allKeys where key.hasPrefix(progressKeyPrefix) {
             if let data = defaults.data(forKey: key),
                let progress = try? decoder.decode(UserProgress.self, from: data),
                progress.state == .inProgress {
@@ -61,7 +69,7 @@ class ProgressStore: ObservableObject {
     var completedPuzzleIDs: Set<String> {
         let allKeys = defaults.dictionaryRepresentation().keys
         var ids = Set<String>()
-        for key in allKeys where key.hasPrefix(Self.progressKeyPrefix) {
+        for key in allKeys where key.hasPrefix(progressKeyPrefix) {
             if let data = defaults.data(forKey: key),
                let progress = try? decoder.decode(UserProgress.self, from: data),
                progress.state == .completed {
@@ -80,68 +88,68 @@ class ProgressStore: ObservableObject {
 
     private func saveStats() {
         if let data = try? encoder.encode(stats) {
-            defaults.set(data, forKey: Self.statsKey)
+            defaults.set(data, forKey: statsKey)
         }
     }
 
     // MARK: - Settings
 
     var hasShownOnboarding: Bool {
-        get { defaults.bool(forKey: Self.onboardingKey) }
-        set { defaults.set(newValue, forKey: Self.onboardingKey) }
+        get { defaults.bool(forKey: onboardingKeyValue) }
+        set { defaults.set(newValue, forKey: onboardingKeyValue) }
     }
 
     var soundEnabled: Bool {
-        get { defaults.object(forKey: Self.soundEnabledKey) as? Bool ?? true }
-        set { defaults.set(newValue, forKey: Self.soundEnabledKey) }
+        get { defaults.object(forKey: soundEnabledKeyValue) as? Bool ?? true }
+        set { defaults.set(newValue, forKey: soundEnabledKeyValue) }
     }
 
     // MARK: - Theme & Display
 
-    private static let themeKey = "couchword_theme"
-    private static let timerModeKey = "couchword_timer_mode"
-    private static let gridFontKey = "couchword_grid_font"
+    private var themeKeyValue: String { "\(keyPrefix)theme" }
+    private var timerModeKeyValue: String { "\(keyPrefix)timer_mode" }
+    private var gridFontKeyValue: String { "\(keyPrefix)grid_font" }
 
     var theme: AppTheme {
         get {
-            if let raw = defaults.string(forKey: Self.themeKey),
+            if let raw = defaults.string(forKey: themeKeyValue),
                let theme = AppTheme(rawValue: raw) {
                 return theme
             }
             return .midnight
         }
-        set { defaults.set(newValue.rawValue, forKey: Self.themeKey) }
+        set { defaults.set(newValue.rawValue, forKey: themeKeyValue) }
     }
 
     var timerMode: TimerMode {
         get {
-            if let raw = defaults.string(forKey: Self.timerModeKey),
+            if let raw = defaults.string(forKey: timerModeKeyValue),
                let mode = TimerMode(rawValue: raw) {
                 return mode
             }
             return .show
         }
-        set { defaults.set(newValue.rawValue, forKey: Self.timerModeKey) }
+        set { defaults.set(newValue.rawValue, forKey: timerModeKeyValue) }
     }
 
     var gridFont: GridFont {
         get {
-            if let raw = defaults.string(forKey: Self.gridFontKey),
+            if let raw = defaults.string(forKey: gridFontKeyValue),
                let font = GridFont(rawValue: raw) {
                 return font
             }
             return .system
         }
-        set { defaults.set(newValue.rawValue, forKey: Self.gridFontKey) }
+        set { defaults.set(newValue.rawValue, forKey: gridFontKeyValue) }
     }
 
     // MARK: - Daily / Streak
 
-    private static let streakFreezeKey = "couchword_last_streak_freeze"
+    private var streakFreezeKeyValue: String { "\(keyPrefix)last_streak_freeze" }
 
     var lastStreakFreezeDate: String? {
-        get { defaults.string(forKey: Self.streakFreezeKey) }
-        set { defaults.set(newValue, forKey: Self.streakFreezeKey) }
+        get { defaults.string(forKey: streakFreezeKeyValue) }
+        set { defaults.set(newValue, forKey: streakFreezeKeyValue) }
     }
 
     func updateStats(_ newStats: GameStats) {

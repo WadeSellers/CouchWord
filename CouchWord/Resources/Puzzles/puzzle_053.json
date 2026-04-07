@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_053",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Flowers",
+  "date": null,
+  "grid": [
+    ["J","A","S","M","I","N","E"],
+    ["#","#","#","#","#","#","#"],
+    ["P","E","T","U","N","I","A"],
+    ["#","#","#","#","#","#","#"],
+    ["H","E","A","T","H","E","R"],
+    ["#","#","#","#","#","#","#"],
+    ["B","L","O","S","S","O","M"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Fragrant white flower used in tea", "answer": "JASMINE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Trumpet-shaped garden flower", "answer": "PETUNIA", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Purple moor plant common in Scotland", "answer": "HEATHER", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Flower cluster on fruit trees in spring", "answer": "BLOSSOM", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["flowers"],
+  "author": "CouchWord"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_047",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Camping",
+  "date": null,
+  "grid": [
+    ["#","#","T","#","#"],
+    ["#","#","E","#","#"],
+    ["M","A","R","S","H"],
+    ["#","#","R","#","#"],
+    ["#","#","A","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "Wetland area with soft ground", "answer": "MARSH", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Latin word for earth or land", "answer": "TERRA", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["camping"],
+  "author": "CouchWord"
+}

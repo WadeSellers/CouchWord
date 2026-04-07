@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_043",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Metals",
+  "date": null,
+  "grid": [
+    ["S","T","E","E","L"],
+    ["#","#","#","#","#"],
+    ["B","R","A","S","S"],
+    ["#","#","#","#","#"],
+    ["I","R","O","N","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Iron alloy used in buildings and bridges", "answer": "STEEL", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Copper and zinc alloy", "answer": "BRASS", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Golf clubs or pressing devices", "answer": "IRONS", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["metals"],
+  "author": "CouchWord"
+}

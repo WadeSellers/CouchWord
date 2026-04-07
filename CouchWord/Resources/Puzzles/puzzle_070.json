@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_070",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Planets",
+  "date": null,
+  "grid": [
+    ["M","E","R","C","U","R","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["J","U","P","I","T","E","R"],
+    ["#","#","#","#","#","#","#"],
+    ["N","E","P","T","U","N","E"],
+    ["#","#","#","#","#","#","#"],
+    ["S","T","E","L","L","A","R"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Smallest planet, closest to the Sun", "answer": "MERCURY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Largest planet in our solar system", "answer": "JUPITER", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Blue ice giant, eighth planet", "answer": "NEPTUNE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Relating to the stars", "answer": "STELLAR", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["astronomy"],
+  "author": "CouchWord"
+}

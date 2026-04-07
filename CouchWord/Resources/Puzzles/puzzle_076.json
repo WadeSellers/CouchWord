@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_076",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Geography",
+  "date": null,
+  "grid": [
+    ["C","O","N","T","I","N","E","N","T"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["P","E","N","I","N","S","U","L","A"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","H","O","R","E","L","I","N","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["M","O","U","N","T","A","I","N","S"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["L","A","N","D","S","C","A","P","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "One of seven large landmasses on Earth", "answer": "CONTINENT", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Land surrounded by water on three sides", "answer": "PENINSULA", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Where the ocean meets the land", "answer": "SHORELINE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Tall peaks formed by tectonic forces", "answer": "MOUNTAINS", "row": 6, "col": 0 },
+      { "number": 5, "clue": "The visible features of an area of land", "answer": "LANDSCAPE", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["geography"],
+  "author": "CouchWord"
+}

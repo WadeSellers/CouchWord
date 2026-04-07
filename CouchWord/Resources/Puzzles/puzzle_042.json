@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_042",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Drinks",
+  "date": null,
+  "grid": [
+    ["W","A","T","E","R"],
+    ["#","#","#","#","#"],
+    ["J","U","I","C","E"],
+    ["#","#","#","#","#"],
+    ["C","I","D","E","R"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Clear liquid essential for life", "answer": "WATER", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Beverage squeezed from fruit", "answer": "JUICE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Apple-based autumn drink", "answer": "CIDER", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["drinks"],
+  "author": "CouchWord"
+}

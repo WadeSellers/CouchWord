@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_056",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Music Genres",
+  "date": null,
+  "grid": [
+    ["C","O","U","N","T","R","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["E","L","E","C","T","R","O"],
+    ["#","#","#","#","#","#","#"],
+    ["C","L","A","S","S","I","C"],
+    ["#","#","#","#","#","#","#"],
+    ["R","A","G","T","I","M","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Nashville sound with twang and stories", "answer": "COUNTRY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Electronic dance music genre", "answer": "ELECTRO", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Timeless, enduring style of music", "answer": "CLASSIC", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Early jazz piano style from Scott Joplin", "answer": "RAGTIME", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["music"],
+  "author": "CouchWord"
+}

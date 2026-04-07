@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_052",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Countries",
+  "date": null,
+  "grid": [
+    ["E","N","G","L","A","N","D"],
+    ["#","#","#","#","#","#","#"],
+    ["F","I","N","L","A","N","D"],
+    ["#","#","#","#","#","#","#"],
+    ["I","C","E","L","A","N","D"],
+    ["#","#","#","#","#","#","#"],
+    ["I","R","E","L","A","N","D"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Home of Big Ben and the Thames", "answer": "ENGLAND", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Nordic land of saunas and lakes", "answer": "FINLAND", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Island nation with geysers and volcanoes", "answer": "ICELAND", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Emerald Isle in the Atlantic", "answer": "IRELAND", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["countries"],
+  "author": "CouchWord"
+}

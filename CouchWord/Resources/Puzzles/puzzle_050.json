@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_050",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Home",
+  "date": null,
+  "grid": [
+    ["T","A","B","L","E"],
+    ["#","#","#","#","#"],
+    ["C","H","A","I","R"],
+    ["#","#","#","#","#"],
+    ["S","H","E","L","F"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Flat surface for eating or working", "answer": "TABLE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Seat with a back for one person", "answer": "CHAIR", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Horizontal board for storing items", "answer": "SHELF", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["home"],
+  "author": "CouchWord"
+}

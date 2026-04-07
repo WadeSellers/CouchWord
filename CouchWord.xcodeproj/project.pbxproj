@@ -30,6 +30,9 @@
 		A10017 /* DailyPuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017; };
 		A10018 /* ShareResultsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018; };
 		A10019 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019; };
+		A1001A /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001A; };
+		A1001B /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001B; };
+		A1001C /* ProfilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001C; };
 		A10014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10014; };
 		A10015 /* Puzzles in Resources */ = {isa = PBXBuildFile; fileRef = B10015; };
 		A10020 /* PuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020; };
@@ -70,6 +73,9 @@
 		B10017 /* DailyPuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPuzzleManager.swift; sourceTree = "<group>"; };
 		B10018 /* ShareResultsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareResultsGenerator.swift; sourceTree = "<group>"; };
 		B10019 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		B1001A /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		B1001B /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		B1001C /* ProfilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePickerView.swift; sourceTree = "<group>"; };
 		B10014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B10015 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Puzzles; sourceTree = "<group>"; };
 		B10020 /* PuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleTests.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 				B10004 /* UserProgress.swift */,
 				B10005 /* GameStats.swift */,
 				B10019 /* AppTheme.swift */,
+				B1001A /* UserProfile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -160,6 +167,7 @@
 				B10012 /* OnboardingView.swift */,
 				B10013 /* PuzzleGridView.swift */,
 				B10016 /* StatsDashboardView.swift */,
+				B1001C /* ProfilePickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +182,7 @@
 				B1000A /* VoiceInputManager.swift */,
 				B10017 /* DailyPuzzleManager.swift */,
 				B10018 /* ShareResultsGenerator.swift */,
+				B1001B /* ProfileManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -310,6 +319,9 @@
 				A10017 /* DailyPuzzleManager.swift in Sources */,
 				A10018 /* ShareResultsGenerator.swift in Sources */,
 				A10019 /* AppTheme.swift in Sources */,
+				A1001A /* UserProfile.swift in Sources */,
+				A1001B /* ProfileManager.swift in Sources */,
+				A1001C /* ProfilePickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

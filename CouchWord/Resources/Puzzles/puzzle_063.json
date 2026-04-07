@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_063",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Ancient World",
+  "date": null,
+  "grid": [
+    ["E","M","P","E","R","O","R"],
+    ["#","#","#","#","#","#","#"],
+    ["P","H","A","R","A","O","H"],
+    ["#","#","#","#","#","#","#"],
+    ["S","P","A","R","T","A","N"],
+    ["#","#","#","#","#","#","#"],
+    ["D","Y","N","A","S","T","Y"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Ruler of a vast empire like Rome", "answer": "EMPEROR", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Ancient Egyptian king or queen", "answer": "PHARAOH", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Warrior of an ancient Greek city-state", "answer": "SPARTAN", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Ruling family across generations", "answer": "DYNASTY", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["history"],
+  "author": "CouchWord"
+}

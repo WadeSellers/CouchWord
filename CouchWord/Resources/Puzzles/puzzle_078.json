@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_078",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "History",
+  "date": null,
+  "grid": [
+    ["G","L","A","D","I","A","T","O","R"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","R","U","S","A","D","E","R","S"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","O","N","Q","U","E","R","O","R"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["R","E","B","E","L","L","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","O","V","E","R","E","I","G","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Roman arena fighter", "answer": "GLADIATOR", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Medieval holy land warriors", "answer": "CRUSADERS", "row": 2, "col": 0 },
+      { "number": 3, "clue": "One who takes territory by force", "answer": "CONQUEROR", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Uprising against authority", "answer": "REBELLION", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Supreme ruler of a kingdom", "answer": "SOVEREIGN", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["history"],
+  "author": "CouchWord"
+}

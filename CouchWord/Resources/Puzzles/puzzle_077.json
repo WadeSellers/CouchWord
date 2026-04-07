@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_077",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Chemistry",
+  "date": null,
+  "grid": [
+    ["E","L","E","C","T","R","O","N","S"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["M","O","L","E","C","U","L","E","S"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","H","E","M","I","S","T","R","Y"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","O","M","P","O","U","N","D","S"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["R","E","A","C","T","I","O","N","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Negatively charged subatomic particles", "answer": "ELECTRONS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Groups of bonded atoms", "answer": "MOLECULES", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Study of matter and its properties", "answer": "CHEMISTRY", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Substances made of two or more elements", "answer": "COMPOUNDS", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Chemical changes between substances", "answer": "REACTIONS", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["chemistry"],
+  "author": "CouchWord"
+}

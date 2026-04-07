@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_059",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Landforms",
+  "date": null,
+  "grid": [
+    ["P","L","A","T","E","A","U"],
+    ["#","#","#","#","#","#","#"],
+    ["V","O","L","C","A","N","O"],
+    ["#","#","#","#","#","#","#"],
+    ["P","R","A","I","R","I","E"],
+    ["#","#","#","#","#","#","#"],
+    ["G","L","A","C","I","E","R"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Flat elevated landform like a mesa", "answer": "PLATEAU", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Mountain that can erupt with lava", "answer": "VOLCANO", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Wide open grassland of North America", "answer": "PRAIRIE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Slowly moving river of ice", "answer": "GLACIER", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["geography"],
+  "author": "CouchWord"
+}

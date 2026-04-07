@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_051",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Animals",
+  "date": null,
+  "grid": [
+    ["P","A","N","T","H","E","R"],
+    ["#","#","#","#","#","#","#"],
+    ["C","H","E","E","T","A","H"],
+    ["#","#","#","#","#","#","#"],
+    ["B","U","F","F","A","L","O"],
+    ["#","#","#","#","#","#","#"],
+    ["G","O","R","I","L","L","A"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Black jungle cat or pink cartoon character", "answer": "PANTHER", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Fastest land animal on Earth", "answer": "CHEETAH", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Large wild bovine of the American plains", "answer": "BUFFALO", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Great ape of African forests", "answer": "GORILLA", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["animals"],
+  "author": "CouchWord"
+}

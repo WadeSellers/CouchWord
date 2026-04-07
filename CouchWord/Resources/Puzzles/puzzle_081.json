@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_081",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Computing",
+  "date": null,
+  "grid": [
+    ["A","L","G","O","R","I","T","H","M"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["B","A","N","D","W","I","D","T","H"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","L","I","P","B","O","A","R","D"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["D","E","B","U","G","G","I","N","G"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["E","N","C","R","Y","P","T","E","D"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Step-by-step problem-solving procedure", "answer": "ALGORITHM", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Data transfer capacity of a network", "answer": "BANDWIDTH", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Temporary storage for copied text", "answer": "CLIPBOARD", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Finding and fixing errors in code", "answer": "DEBUGGING", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Encoded for security and privacy", "answer": "ENCRYPTED", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["technology"],
+  "author": "CouchWord"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_054",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Storms",
+  "date": null,
+  "grid": [
+    ["B","L","U","S","T","E","R"],
+    ["#","#","#","#","#","#","#"],
+    ["C","Y","C","L","O","N","E"],
+    ["#","#","#","#","#","#","#"],
+    ["D","R","O","U","G","H","T"],
+    ["#","#","#","#","#","#","#"],
+    ["M","O","N","S","O","O","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Windy, stormy conditions", "answer": "BLUSTER", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Rotating storm system", "answer": "CYCLONE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Extended period without rain", "answer": "DROUGHT", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Seasonal heavy rainfall in Asia", "answer": "MONSOON", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["storms"],
+  "author": "CouchWord"
+}

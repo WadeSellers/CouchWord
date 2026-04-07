@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_075",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Mythology",
+  "date": null,
+  "grid": [
+    ["C","E","N","T","A","U","R"],
+    ["#","#","#","#","#","#","#"],
+    ["P","H","O","E","N","I","X"],
+    ["#","#","#","#","#","#","#"],
+    ["G","R","I","F","F","I","N"],
+    ["#","#","#","#","#","#","#"],
+    ["C","H","I","M","E","R","A"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Half-human half-horse creature", "answer": "CENTAUR", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Bird that rises from its own ashes", "answer": "PHOENIX", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Lion-eagle hybrid mythical creature", "answer": "GRIFFIN", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Fire-breathing monster with mixed body parts", "answer": "CHIMERA", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["mythology"],
+  "author": "CouchWord"
+}

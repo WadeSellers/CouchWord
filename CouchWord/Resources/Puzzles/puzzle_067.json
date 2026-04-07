@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_067",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Medicine",
+  "date": null,
+  "grid": [
+    ["S","U","R","G","E","O","N"],
+    ["#","#","#","#","#","#","#"],
+    ["T","H","E","R","A","P","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["V","A","C","C","I","N","E"],
+    ["#","#","#","#","#","#","#"],
+    ["S","Y","M","P","T","O","M"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Doctor who performs operations", "answer": "SURGEON", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Treatment for healing or recovery", "answer": "THERAPY", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Shot that prevents disease", "answer": "VACCINE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Sign of illness or disease", "answer": "SYMPTOM", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["medicine"],
+  "author": "CouchWord"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_074",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Fabrics",
+  "date": null,
+  "grid": [
+    ["F","L","A","N","N","E","L"],
+    ["#","#","#","#","#","#","#"],
+    ["L","E","A","T","H","E","R"],
+    ["#","#","#","#","#","#","#"],
+    ["C","H","I","F","F","O","N"],
+    ["#","#","#","#","#","#","#"],
+    ["D","R","A","P","E","R","Y"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Soft plaid cloth for shirts and sheets", "answer": "FLANNEL", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Animal hide material for jackets", "answer": "LEATHER", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Sheer lightweight fabric for gowns", "answer": "CHIFFON", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Heavy cloth hung as curtains", "answer": "DRAPERY", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["fabrics"],
+  "author": "CouchWord"
+}

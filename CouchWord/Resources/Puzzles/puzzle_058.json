@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_058",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Marine Life",
+  "date": null,
+  "grid": [
+    ["D","O","L","P","H","I","N"],
+    ["#","#","#","#","#","#","#"],
+    ["L","O","B","S","T","E","R"],
+    ["#","#","#","#","#","#","#"],
+    ["O","C","T","O","P","U","S"],
+    ["#","#","#","#","#","#","#"],
+    ["P","I","R","A","N","H","A"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Intelligent marine mammal that clicks", "answer": "DOLPHIN", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Crustacean served with melted butter", "answer": "LOBSTER", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Eight-armed sea creature", "answer": "OCTOPUS", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Fearsome South American freshwater fish", "answer": "PIRANHA", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["marine"],
+  "author": "CouchWord"
+}

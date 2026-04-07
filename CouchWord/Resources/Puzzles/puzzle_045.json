@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_045",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Writing",
+  "date": null,
+  "grid": [
+    ["#","#","P","#","#"],
+    ["#","#","L","#","#"],
+    ["P","R","O","S","E"],
+    ["#","#","T","#","#"],
+    ["#","#","S","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "Written language, not verse", "answer": "PROSE", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Storylines or schemes", "answer": "PLOTS", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["writing"],
+  "author": "CouchWord"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_046",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Desserts",
+  "date": null,
+  "grid": [
+    ["C","A","N","D","Y"],
+    ["#","#","#","#","#"],
+    ["F","U","D","G","E"],
+    ["#","#","#","#","#"],
+    ["C","R","E","P","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Sweet treat, often wrapped in colorful paper", "answer": "CANDY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Rich chocolate confection", "answer": "FUDGE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Thin French pancake", "answer": "CREPE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["desserts"],
+  "author": "CouchWord"
+}

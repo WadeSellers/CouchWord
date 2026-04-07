@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_057",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Atomic",
+  "date": null,
+  "grid": [
+    ["N","U","C","L","E","U","S"],
+    ["#","#","#","#","#","#","#"],
+    ["E","L","E","M","E","N","T"],
+    ["#","#","#","#","#","#","#"],
+    ["N","E","U","T","R","O","N"],
+    ["#","#","#","#","#","#","#"],
+    ["I","S","O","T","O","P","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Center of an atom containing protons", "answer": "NUCLEUS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Pure substance on the periodic table", "answer": "ELEMENT", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Uncharged particle in an atom", "answer": "NEUTRON", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Variant of an element with different mass", "answer": "ISOTOPE", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["science"],
+  "author": "CouchWord"
+}

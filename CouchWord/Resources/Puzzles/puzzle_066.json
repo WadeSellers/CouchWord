@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_066",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Art",
+  "date": null,
+  "grid": [
+    ["G","A","L","L","E","R","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["P","A","L","E","T","T","E"],
+    ["#","#","#","#","#","#","#"],
+    ["F","R","A","M","I","N","G"],
+    ["#","#","#","#","#","#","#"],
+    ["C","O","L","L","A","G","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Room for displaying artwork", "answer": "GALLERY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Board for mixing paint colors", "answer": "PALETTE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Putting a picture in a border", "answer": "FRAMING", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Art made from glued paper pieces", "answer": "COLLAGE", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["art"],
+  "author": "CouchWord"
+}

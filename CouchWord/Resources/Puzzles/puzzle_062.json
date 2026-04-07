@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_062",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "hard",
+  "theme": "Technology",
+  "date": null,
+  "grid": [
+    ["B","I","T","C","O","I","N"],
+    ["#","#","#","#","#","#","#"],
+    ["N","E","T","W","O","R","K"],
+    ["#","#","#","#","#","#","#"],
+    ["D","I","G","I","T","A","L"],
+    ["#","#","#","#","#","#","#"],
+    ["S","T","O","R","A","G","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Decentralized cryptocurrency", "answer": "BITCOIN", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Connected system of computers", "answer": "NETWORK", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Using binary data, not analog", "answer": "DIGITAL", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Place to keep files and data", "answer": "STORAGE", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["technology"],
+  "author": "CouchWord"
+}

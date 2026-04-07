@@ -99,6 +99,41 @@ Started: 2026-04-06 ~9pm
 - Updated tests to use new data models (5 test suites)
 - Git tagged as v1.0
 
-## v2.0 Progress
+## v2.0 ✅
+- Dynamic cell sizing via GridLayout for any grid dimensions
+- PuzzlePickerView with size/difficulty/completion filters
+- DifficultyBadge with color-coded capsules
+- StatsDashboardView with totals, streaks, by-difficulty breakdown, best times
+- Generating additional puzzles (5x5, 7x7, 9x9, 11x11) — 60+ created so far, agent still running
 
-Starting v2.0 features: multiple grid sizes, 100+ puzzles, difficulty ratings, puzzle browser, stats dashboard.
+## v3.0 ✅ - The Daily Puzzle
+- DailyPuzzleManager with deterministic daily puzzle selection (same for all users based on date)
+- Streak freeze (1/week) to preserve streaks
+- Streak-at-risk indicator on home screen
+- ShareResultsGenerator produces Wordle-style emoji grid (🟩⬛🟨)
+- Share button on completion screen copies to clipboard
+
+## v4.0 ✅ - Themes & Customization
+- 5 visual themes: Midnight, Newspaper, Ocean, Forest, Neon
+- Full color palette per theme (grid bg, cells, accents, letters, borders)
+- Grid font options: System, Serif, Monospaced, Rounded
+- Timer modes: Show, Hide, Countdown
+- All preferences per-profile via namespaced UserDefaults keys
+- Enhanced Settings view with theme picker, font, timer
+
+**Decision:** Themes use a simple enum rather than a heavy theming framework. Each theme defines every color needed. Easy to add new themes — just add a case to AppTheme.
+
+## v5.0 ✅ - Household Profiles
+- Up to 4 profiles per Apple TV (UserProfile model with name, color, id)
+- ProfileManager manages profiles, active profile selection
+- ProfilePickerView shown at launch (skipped if only 1 profile)
+- CreateProfileView with name + color picker
+- ProgressStore now takes optional profileID to namespace all UserDefaults keys
+- Each profile has completely independent stats, progress, preferences, themes
+
+**Decision:** Rather than creating separate UserDefaults suites per profile, I namespace all keys with the profile ID prefix. This keeps everything in standard UserDefaults and makes cleanup easy.
+
+## Uncertainties Added
+
+- [ ] Profile-namespaced ProgressStore is created anew each time the view appears. May want to cache these or use a more sophisticated DI approach.
+- [ ] DailyPuzzleManager is created per profile switch — should verify it correctly tracks daily puzzles per profile.

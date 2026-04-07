@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_064",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Baking",
+  "date": null,
+  "grid": [
+    ["B","I","S","C","U","I","T"],
+    ["#","#","#","#","#","#","#"],
+    ["C","U","S","T","A","R","D"],
+    ["#","#","#","#","#","#","#"],
+    ["F","O","N","D","A","N","T"],
+    ["#","#","#","#","#","#","#"],
+    ["M","U","F","F","I","N","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Small baked bread roll or cookie", "answer": "BISCUIT", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Creamy egg-based dessert filling", "answer": "CUSTARD", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Smooth sugar icing for decorating cakes", "answer": "FONDANT", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Individual baked breakfast treats", "answer": "MUFFINS", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["baking"],
+  "author": "CouchWord"
+}

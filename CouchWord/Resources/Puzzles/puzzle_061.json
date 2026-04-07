@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_061",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Sports",
+  "date": null,
+  "grid": [
+    ["C","R","I","C","K","E","T"],
+    ["#","#","#","#","#","#","#"],
+    ["A","R","C","H","E","R","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["F","E","N","C","I","N","G"],
+    ["#","#","#","#","#","#","#"],
+    ["J","A","V","E","L","I","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Bat-and-ball game popular in England and India", "answer": "CRICKET", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Sport of shooting arrows at targets", "answer": "ARCHERY", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Sword fighting sport with foils", "answer": "FENCING", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Spear-throwing track and field event", "answer": "JAVELIN", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["sports"],
+  "author": "CouchWord"
+}

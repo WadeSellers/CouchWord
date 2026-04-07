@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_049",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Chemistry",
+  "date": null,
+  "grid": [
+    ["#","#","P","#","#"],
+    ["#","#","L","#","#"],
+    ["F","L","A","S","K"],
+    ["#","#","N","#","#"],
+    ["#","#","T","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "Glass container used in a laboratory", "answer": "FLASK", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Living organism that grows in soil", "answer": "PLANT", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["chemistry"],
+  "author": "CouchWord"
+}

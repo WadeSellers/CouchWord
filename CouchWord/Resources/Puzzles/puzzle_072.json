@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_072",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Emotions",
+  "date": null,
+  "grid": [
+    ["D","E","L","I","G","H","T"],
+    ["#","#","#","#","#","#","#"],
+    ["S","A","D","N","E","S","S"],
+    ["#","#","#","#","#","#","#"],
+    ["A","N","X","I","E","T","Y"],
+    ["#","#","#","#","#","#","#"],
+    ["C","O","U","R","A","G","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Great pleasure or happiness", "answer": "DELIGHT", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Feeling of deep sorrow", "answer": "SADNESS", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Worry or unease about the future", "answer": "ANXIETY", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Bravery in the face of danger", "answer": "COURAGE", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["emotions"],
+  "author": "CouchWord"
+}

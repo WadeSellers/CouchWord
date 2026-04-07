@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_079",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Nature",
+  "date": null,
+  "grid": [
+    ["B","U","T","T","E","R","F","L","Y"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["D","A","N","D","E","L","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["E","V","E","R","G","R","E","E","N"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["H","I","B","E","R","N","A","T","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["M","I","G","R","A","T","I","O","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Colorful winged insect", "answer": "BUTTERFLY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Yellow weed with puffy seed head", "answer": "DANDELION", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Tree that keeps its leaves year-round", "answer": "EVERGREEN", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Sleep through the winter", "answer": "HIBERNATE", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Seasonal animal journey to warmer lands", "answer": "MIGRATION", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["nature"],
+  "author": "CouchWord"
+}

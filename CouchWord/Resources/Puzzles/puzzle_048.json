@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_048",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Dance",
+  "date": null,
+  "grid": [
+    ["W","A","L","T","Z"],
+    ["#","#","#","#","#"],
+    ["T","A","N","G","O"],
+    ["#","#","#","#","#"],
+    ["S","A","L","S","A"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Elegant ballroom dance in 3/4 time", "answer": "WALTZ", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Passionate Argentine dance for two", "answer": "TANGO", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Spicy Latin dance or tomato dip", "answer": "SALSA", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["dance"],
+  "author": "CouchWord"
+}

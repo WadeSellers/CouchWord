@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_068",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Literature",
+  "date": null,
+  "grid": [
+    ["C","H","A","P","T","E","R"],
+    ["#","#","#","#","#","#","#"],
+    ["F","I","C","T","I","O","N"],
+    ["#","#","#","#","#","#","#"],
+    ["P","R","E","F","A","C","E"],
+    ["#","#","#","#","#","#","#"],
+    ["S","T","A","N","Z","A","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Numbered section of a book", "answer": "CHAPTER", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Made-up stories and novels", "answer": "FICTION", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Introduction at the start of a book", "answer": "PREFACE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Groups of lines in a poem", "answer": "STANZAS", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["literature"],
+  "author": "CouchWord"
+}

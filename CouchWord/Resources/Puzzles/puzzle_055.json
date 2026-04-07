@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_055",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Cooking",
+  "date": null,
+  "grid": [
+    ["B","A","S","T","I","N","G"],
+    ["#","#","#","#","#","#","#"],
+    ["G","R","I","L","L","E","D"],
+    ["#","#","#","#","#","#","#"],
+    ["P","O","A","C","H","E","D"],
+    ["#","#","#","#","#","#","#"],
+    ["S","A","U","T","E","E","D"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Spooning juices over roasting meat", "answer": "BASTING", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Cooked over direct flame on a grate", "answer": "GRILLED", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Gently simmered in liquid, as an egg", "answer": "POACHED", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Pan-fried quickly in a little oil", "answer": "SAUTEED", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["cooking"],
+  "author": "CouchWord"
+}

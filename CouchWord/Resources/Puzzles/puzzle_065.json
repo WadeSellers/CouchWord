@@ -1,0 +1,28 @@
+{
+  "id": "puzzle_065",
+  "version": 1,
+  "size": { "rows": 7, "cols": 7 },
+  "difficulty": "medium",
+  "theme": "Habitats",
+  "date": null,
+  "grid": [
+    ["S","A","V","A","N","N","A"],
+    ["#","#","#","#","#","#","#"],
+    ["W","E","T","L","A","N","D"],
+    ["#","#","#","#","#","#","#"],
+    ["T","R","O","P","I","C","S"],
+    ["#","#","#","#","#","#","#"],
+    ["E","S","T","U","A","R","Y"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "African grassland with scattered trees", "answer": "SAVANNA", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Marshy area rich in biodiversity", "answer": "WETLAND", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Hot region near the equator", "answer": "TROPICS", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Where a river meets the sea", "answer": "ESTUARY", "row": 6, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["nature"],
+  "author": "CouchWord"
+}
