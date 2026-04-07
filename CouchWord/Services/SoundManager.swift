@@ -1,3 +1,4 @@
+import AudioToolbox
 import AVFoundation
 
 /// Manages sound effects for the game.

@@ -1,13 +1,20 @@
-import CoreMotion
+import Foundation
 import Combine
+#if canImport(CoreMotion)
+import CoreMotion
+#endif
 
 /// Detects shake gestures from the Siri Remote using CMMotionManager.
 /// The Siri Remote has an accelerometer that reports via CoreMotion.
+/// Falls back gracefully on simulator where CoreMotion may not be available.
 @MainActor
 class ShakeDetector: ObservableObject {
     @Published private(set) var shakeDetected = false
 
+    #if canImport(CoreMotion)
     private let motionManager = CMMotionManager()
+    #endif
+
     private var lastShakeTime: Date = .distantPast
     private let shakeThreshold: Double = 2.5  // g-force threshold
     private let cooldownInterval: TimeInterval = 0.5  // prevent double-triggers
@@ -15,8 +22,9 @@ class ShakeDetector: ObservableObject {
     var onShake: (() -> Void)?
 
     func startDetecting() {
+        #if canImport(CoreMotion)
         guard motionManager.isAccelerometerAvailable else {
-            print("ShakeDetector: Accelerometer not available")
+            print("ShakeDetector: Accelerometer not available (likely running in simulator)")
             return
         }
 
@@ -40,20 +48,26 @@ class ShakeDetector: ObservableObject {
                     Task { @MainActor in
                         self.shakeDetected = true
                         self.onShake?()
-                        // Reset after a moment
                         try? await Task.sleep(for: .milliseconds(200))
                         self.shakeDetected = false
                     }
                 }
             }
         }
+        #else
+        print("ShakeDetector: CoreMotion not available on this platform")
+        #endif
     }
 
     func stopDetecting() {
+        #if canImport(CoreMotion)
         motionManager.stopAccelerometerUpdates()
+        #endif
     }
 
     deinit {
+        #if canImport(CoreMotion)
         motionManager.stopAccelerometerUpdates()
+        #endif
     }
 }

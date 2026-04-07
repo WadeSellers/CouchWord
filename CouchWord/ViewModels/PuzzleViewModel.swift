@@ -29,8 +29,8 @@ class PuzzleViewModel: ObservableObject {
         case checking  // show correct/incorrect colors
     }
 
-    init(progressStore: ProgressStore = ProgressStore()) {
-        self.progressStore = progressStore
+    init(progressStore: ProgressStore? = nil) {
+        self.progressStore = progressStore ?? ProgressStore()
     }
 
     // MARK: - Computed Properties

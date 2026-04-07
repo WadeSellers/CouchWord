@@ -9,7 +9,8 @@ struct CompletionView: View {
 
     @State private var showContent = false
     @State private var showStats = false
-    @State private var shareButtonText = "Share Results"
+    @State private var showingShareText = false
+    @State private var shareText = ""
 
     var body: some View {
         ZStack {
@@ -99,24 +100,19 @@ struct CompletionView: View {
                             .buttonStyle(.card)
                         }
 
-                        // Share Results
+                        // Share Results (shows shareable text overlay)
                         if let puzzle = viewModel.puzzle, let progress = viewModel.progress {
                             Button {
-                                let text = ShareResultsGenerator.generate(
+                                shareText = ShareResultsGenerator.generate(
                                     puzzle: puzzle,
                                     progress: progress,
                                     stats: progressStore.stats
                                 )
-                                UIPasteboard.general.string = text
-                                shareButtonText = "Copied!"
-                                Task {
-                                    try? await Task.sleep(for: .seconds(2))
-                                    shareButtonText = "Share Results"
-                                }
+                                showingShareText = true
                             } label: {
                                 HStack {
                                     Image(systemName: "square.and.arrow.up")
-                                    Text(shareButtonText)
+                                    Text("Share Results")
                                 }
                                 .font(.title3)
                                 .frame(maxWidth: 400)
@@ -144,6 +140,19 @@ struct CompletionView: View {
 
                 Spacer().frame(height: 40)
             }
+        }
+        .sheet(isPresented: $showingShareText) {
+            VStack(spacing: 20) {
+                Text("Share Your Results")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                Text(shareText)
+                    .font(.body)
+                    .monospaced()
+                    .multilineTextAlignment(.center)
+                Button("Done") { showingShareText = false }
+            }
+            .padding(40)
         }
         .onAppear {
             SoundManager.shared.play(.puzzleComplete)
