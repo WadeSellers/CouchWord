@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_038",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Birds",
+  "date": null,
+  "grid": [
+    ["E","A","G","L","E"],
+    ["#","#","#","#","#"],
+    ["C","R","A","N","E"],
+    ["#","#","#","#","#"],
+    ["R","A","V","E","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Majestic bird of prey, US national symbol", "answer": "EAGLE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Tall wading bird, also a lifting machine", "answer": "CRANE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Large black bird associated with Poe", "answer": "RAVEN", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["birds"],
+  "author": "CouchWord"
+}

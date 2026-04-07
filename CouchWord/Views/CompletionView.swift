@@ -9,6 +9,7 @@ struct CompletionView: View {
 
     @State private var showContent = false
     @State private var showStats = false
+    @State private var shareButtonText = "Share Results"
 
     var body: some View {
         ZStack {
@@ -92,6 +93,32 @@ struct CompletionView: View {
                                 }
                                 .font(.title3)
                                 .fontWeight(.semibold)
+                                .frame(maxWidth: 400)
+                                .padding(.vertical, 12)
+                            }
+                            .buttonStyle(.card)
+                        }
+
+                        // Share Results
+                        if let puzzle = viewModel.puzzle, let progress = viewModel.progress {
+                            Button {
+                                let text = ShareResultsGenerator.generate(
+                                    puzzle: puzzle,
+                                    progress: progress,
+                                    stats: progressStore.stats
+                                )
+                                UIPasteboard.general.string = text
+                                shareButtonText = "Copied!"
+                                Task {
+                                    try? await Task.sleep(for: .seconds(2))
+                                    shareButtonText = "Share Results"
+                                }
+                            } label: {
+                                HStack {
+                                    Image(systemName: "square.and.arrow.up")
+                                    Text(shareButtonText)
+                                }
+                                .font(.title3)
                                 .frame(maxWidth: 400)
                                 .padding(.vertical, 12)
                             }

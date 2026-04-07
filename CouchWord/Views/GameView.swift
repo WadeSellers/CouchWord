@@ -104,16 +104,19 @@ struct GameView: View {
 
 struct GameHUD: View {
     @ObservedObject var viewModel: PuzzleViewModel
+    @EnvironmentObject var progressStore: ProgressStore
 
     var body: some View {
         HStack(spacing: 24) {
-            // Timer
-            HStack(spacing: 6) {
-                Image(systemName: "clock")
-                Text(viewModel.elapsedTimeFormatted)
-                    .monospacedDigit()
+            // Timer (respects timer mode setting)
+            if progressStore.timerMode != .hide {
+                HStack(spacing: 6) {
+                    Image(systemName: "clock")
+                    Text(viewModel.elapsedTimeFormatted)
+                        .monospacedDigit()
+                }
+                .font(.title3)
             }
-            .font(.title3)
 
             Spacer()
 

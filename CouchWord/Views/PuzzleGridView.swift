@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PuzzleGridView: View {
     @ObservedObject var viewModel: PuzzleViewModel
+    @EnvironmentObject var progressStore: ProgressStore
     @FocusState private var focusedCellID: String?
 
     var body: some View {
@@ -20,7 +21,9 @@ struct PuzzleGridView: View {
                                 displayState: viewModel.cellState(row: row, col: col),
                                 isFocused: row == viewModel.focusedRow && col == viewModel.focusedCol,
                                 isHighlighted: isCellHighlighted(row: row, col: col),
-                                cellSize: size
+                                cellSize: size,
+                                theme: progressStore.theme,
+                                fontDesign: progressStore.gridFont.design
                             )
                             .focusable(!isBlack)
                             .focused($focusedCellID, equals: cellID(row: row, col: col))

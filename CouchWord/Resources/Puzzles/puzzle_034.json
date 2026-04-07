@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_034",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Gems",
+  "date": null,
+  "grid": [
+    ["T","O","P","A","Z"],
+    ["#","#","#","#","#"],
+    ["P","E","A","R","L"],
+    ["#","#","#","#","#"],
+    ["A","G","A","T","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Yellow-orange gemstone, November birthstone", "answer": "TOPAZ", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Lustrous gem formed inside an oyster", "answer": "PEARL", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Banded mineral often used in jewelry", "answer": "AGATE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["gems"],
+  "author": "CouchWord"
+}

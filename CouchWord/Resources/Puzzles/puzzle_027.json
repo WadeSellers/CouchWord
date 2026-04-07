@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_027",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Ocean",
+  "date": null,
+  "grid": [
+    ["S","H","A","R","K"],
+    ["#","#","#","#","#"],
+    ["C","O","R","A","L"],
+    ["#","#","#","#","#"],
+    ["W","H","A","L","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Feared predator of the deep", "answer": "SHARK", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Colorful reef structure built by tiny organisms", "answer": "CORAL", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Largest mammal on Earth", "answer": "WHALE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["ocean"],
+  "author": "CouchWord"
+}

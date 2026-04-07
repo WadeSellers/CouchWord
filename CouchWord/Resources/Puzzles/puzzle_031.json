@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_031",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Mythology",
+  "date": null,
+  "grid": [
+    ["#","#","M","#","#"],
+    ["#","#","E","#","#"],
+    ["A","T","L","A","S"],
+    ["#","#","O","#","#"],
+    ["#","#","N","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "Titan who held the world on his shoulders", "answer": "ATLAS", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Sweet cantaloupe fruit", "answer": "MELON", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["mythology"],
+  "author": "CouchWord"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_032",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Trees",
+  "date": null,
+  "grid": [
+    ["O","A","K","#","#"],
+    ["#","#","#","#","#"],
+    ["E","L","M","#","#"],
+    ["#","#","#","#","#"],
+    ["A","S","H","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Strong hardwood tree producing acorns", "answer": "OAK", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Shade tree common on streets", "answer": "ELM", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Tree whose wood is used for baseball bats", "answer": "ASH", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["trees"],
+  "author": "CouchWord"
+}

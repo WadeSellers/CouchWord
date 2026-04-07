@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeScreen: View {
     @EnvironmentObject var puzzleStore: PuzzleStore
     @EnvironmentObject var progressStore: ProgressStore
+    @EnvironmentObject var dailyManager: DailyPuzzleManager
 
     @State private var selectedDestination: Destination?
     @State private var showingSettings = false
@@ -120,20 +121,26 @@ struct HomeScreen: View {
     }
 
     private var todaysPuzzleDestination: Destination {
-        // Use a deterministic puzzle based on the date
-        let dayIndex = Calendar.current.ordinality(of: .day, in: .era, for: .now) ?? 0
-        let puzzleIndex = dayIndex % max(puzzleStore.puzzles.count, 1)
-        if let puzzle = puzzleStore.puzzles[safe: puzzleIndex] {
+        if let puzzle = dailyManager.todaysPuzzle {
             return .puzzle(puzzle.id)
         }
         return .quickPlay
     }
 
     private var todaysPuzzleSubtitle: String {
-        if progressStore.stats.currentStreak > 0 {
-            return "\(progressStore.stats.currentStreak)-day streak"
+        var parts: [String] = []
+        let streak = progressStore.stats.currentStreak
+        if streak > 0 {
+            parts.append("\(streak)-day streak")
         }
-        return "Start your streak!"
+        if dailyManager.isTodayCompleted {
+            parts.append("Completed!")
+        } else if dailyManager.streakAtRisk {
+            parts.append("Streak at risk!")
+        } else if streak == 0 {
+            parts.append("Start your streak!")
+        }
+        return parts.joined(separator: " • ")
     }
 
     private var availablePuzzleCount: Int {
@@ -380,11 +387,49 @@ struct DifficultyBadge: View {
 
 struct SettingsView: View {
     @EnvironmentObject var progressStore: ProgressStore
+    @EnvironmentObject var puzzleStore: PuzzleStore
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
             List {
+                Section("Theme") {
+                    Picker("Visual Theme", selection: Binding(
+                        get: { progressStore.theme },
+                        set: { progressStore.theme = $0 }
+                    )) {
+                        ForEach(AppTheme.allCases) { theme in
+                            VStack(alignment: .leading) {
+                                Text(theme.rawValue)
+                                Text(theme.preview)
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .tag(theme)
+                        }
+                    }
+
+                    Picker("Grid Font", selection: Binding(
+                        get: { progressStore.gridFont },
+                        set: { progressStore.gridFont = $0 }
+                    )) {
+                        ForEach(GridFont.allCases, id: \.self) { font in
+                            Text(font.rawValue).tag(font)
+                        }
+                    }
+                }
+
+                Section("Timer") {
+                    Picker("Timer Display", selection: Binding(
+                        get: { progressStore.timerMode },
+                        set: { progressStore.timerMode = $0 }
+                    )) {
+                        ForEach(TimerMode.allCases, id: \.self) { mode in
+                            Text(mode.rawValue).tag(mode)
+                        }
+                    }
+                }
+
                 Section("Audio") {
                     Toggle("Sound Effects", isOn: Binding(
                         get: { progressStore.soundEnabled },
@@ -393,8 +438,8 @@ struct SettingsView: View {
                 }
 
                 Section("About") {
-                    LabeledContent("Version", value: "1.0")
-                    LabeledContent("Puzzles", value: "\(20)")
+                    LabeledContent("Version", value: "4.0")
+                    LabeledContent("Puzzles", value: "\(puzzleStore.puzzles.count)")
                 }
             }
             .navigationTitle("Settings")

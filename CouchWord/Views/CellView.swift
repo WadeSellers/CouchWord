@@ -7,11 +7,13 @@ struct CellView: View {
     let isFocused: Bool
     let isHighlighted: Bool
     var cellSize: CGFloat = 90
+    var theme: AppTheme = .midnight
+    var fontDesign: Font.Design = .default
 
     var body: some View {
         if displayState == .black {
             Rectangle()
-                .fill(.black)
+                .fill(theme.blackCellColor)
                 .frame(width: cellSize, height: cellSize)
         } else {
             ZStack(alignment: .topLeading) {
@@ -27,21 +29,21 @@ struct CellView: View {
                 if let number = clueNumber {
                     Text("\(number)")
                         .font(.system(size: clueNumberFontSize, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(theme.clueNumberColor)
                         .padding(clueNumberPadding)
                 }
 
                 // Letter
                 if !letter.isEmpty {
                     Text(letter)
-                        .font(.system(size: letterFontSize, weight: .medium, design: .default))
+                        .font(.system(size: letterFontSize, weight: .medium, design: fontDesign))
                         .foregroundStyle(letterColor)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
             .frame(width: cellSize, height: cellSize)
             .scaleEffect(isFocused ? 1.12 : 1.0)
-            .shadow(color: isFocused ? .blue.opacity(0.7) : .clear, radius: isFocused ? 12 : 0)
+            .shadow(color: isFocused ? theme.accentColor.opacity(0.7) : .clear, radius: isFocused ? 12 : 0)
             .animation(.easeInOut(duration: 0.15), value: isFocused)
             .animation(.easeInOut(duration: 0.2), value: displayState)
         }
@@ -55,29 +57,29 @@ struct CellView: View {
     private var backgroundColor: Color {
         switch displayState {
         case .correct:
-            return .green.opacity(0.3)
+            return theme.correctColor.opacity(0.3)
         case .incorrect:
-            return .red.opacity(0.3)
+            return theme.incorrectColor.opacity(0.3)
         default:
             if isFocused {
-                return .blue.opacity(0.5)
+                return theme.focusColor
             } else if isHighlighted {
-                return .blue.opacity(0.15)
+                return theme.highlightColor
             } else {
-                return Color(white: 0.18)
+                return theme.cellBackground
             }
         }
     }
 
     private var borderColor: Color {
-        isFocused ? .blue : Color(white: 0.3)
+        isFocused ? theme.accentColor : theme.cellBorder
     }
 
     private var letterColor: Color {
         switch displayState {
-        case .correct: return .green
-        case .incorrect: return .red
-        default: return .white
+        case .correct: return theme.correctColor
+        case .incorrect: return theme.incorrectColor
+        default: return theme.letterColor
         }
     }
 }

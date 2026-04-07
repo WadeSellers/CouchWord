@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_041",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Shapes",
+  "date": null,
+  "grid": [
+    ["#","#","C","#","#"],
+    ["#","#","U","#","#"],
+    ["T","U","B","E","S"],
+    ["#","#","E","#","#"],
+    ["#","#","S","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "Hollow cylinders or TV sets", "answer": "TUBES", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Three-dimensional box shapes", "answer": "CUBES", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["shapes"],
+  "author": "CouchWord"
+}

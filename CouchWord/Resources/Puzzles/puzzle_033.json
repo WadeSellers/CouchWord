@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_033",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Clothing",
+  "date": null,
+  "grid": [
+    ["S","C","A","R","F"],
+    ["#","#","#","#","#"],
+    ["S","H","I","R","T"],
+    ["#","#","#","#","#"],
+    ["P","A","N","T","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Warm wrap worn around the neck", "answer": "SCARF", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Garment with collar and buttons", "answer": "SHIRT", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Clothing covering each leg separately", "answer": "PANTS", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["clothing"],
+  "author": "CouchWord"
+}

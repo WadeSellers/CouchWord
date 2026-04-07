@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_024",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Weather",
+  "date": null,
+  "grid": [
+    ["S","T","O","R","M"],
+    ["#","#","#","#","#"],
+    ["S","L","E","E","T"],
+    ["#","#","#","#","#"],
+    ["C","L","O","U","D"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Violent weather with thunder and lightning", "answer": "STORM", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Freezing rain that coats surfaces", "answer": "SLEET", "row": 2, "col": 0 },
+      { "number": 3, "clue": "White puffy mass in the sky", "answer": "CLOUD", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["weather"],
+  "author": "CouchWord"
+}

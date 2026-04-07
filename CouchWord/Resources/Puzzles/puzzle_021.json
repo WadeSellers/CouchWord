@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_021",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Fruit",
+  "date": null,
+  "grid": [
+    ["A","P","P","L","E"],
+    ["#","#","#","#","#"],
+    ["G","R","A","P","E"],
+    ["#","#","#","#","#"],
+    ["M","A","N","G","O"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Red or green fruit from an orchard", "answer": "APPLE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Small fruit used to make wine", "answer": "GRAPE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Tropical fruit with orange flesh", "answer": "MANGO", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["fruit"],
+  "author": "CouchWord"
+}

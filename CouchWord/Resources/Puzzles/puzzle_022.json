@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_022",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Colors",
+  "date": null,
+  "grid": [
+    ["G","R","E","E","N"],
+    ["#","#","#","#","#"],
+    ["B","L","A","C","K"],
+    ["#","#","#","#","#"],
+    ["W","H","I","T","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Color of grass and leaves", "answer": "GREEN", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Darkest color, absence of light", "answer": "BLACK", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Color of fresh snow", "answer": "WHITE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["colors"],
+  "author": "CouchWord"
+}

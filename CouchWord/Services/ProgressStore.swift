@@ -95,4 +95,57 @@ class ProgressStore: ObservableObject {
         get { defaults.object(forKey: Self.soundEnabledKey) as? Bool ?? true }
         set { defaults.set(newValue, forKey: Self.soundEnabledKey) }
     }
+
+    // MARK: - Theme & Display
+
+    private static let themeKey = "couchword_theme"
+    private static let timerModeKey = "couchword_timer_mode"
+    private static let gridFontKey = "couchword_grid_font"
+
+    var theme: AppTheme {
+        get {
+            if let raw = defaults.string(forKey: Self.themeKey),
+               let theme = AppTheme(rawValue: raw) {
+                return theme
+            }
+            return .midnight
+        }
+        set { defaults.set(newValue.rawValue, forKey: Self.themeKey) }
+    }
+
+    var timerMode: TimerMode {
+        get {
+            if let raw = defaults.string(forKey: Self.timerModeKey),
+               let mode = TimerMode(rawValue: raw) {
+                return mode
+            }
+            return .show
+        }
+        set { defaults.set(newValue.rawValue, forKey: Self.timerModeKey) }
+    }
+
+    var gridFont: GridFont {
+        get {
+            if let raw = defaults.string(forKey: Self.gridFontKey),
+               let font = GridFont(rawValue: raw) {
+                return font
+            }
+            return .system
+        }
+        set { defaults.set(newValue.rawValue, forKey: Self.gridFontKey) }
+    }
+
+    // MARK: - Daily / Streak
+
+    private static let streakFreezeKey = "couchword_last_streak_freeze"
+
+    var lastStreakFreezeDate: String? {
+        get { defaults.string(forKey: Self.streakFreezeKey) }
+        set { defaults.set(newValue, forKey: Self.streakFreezeKey) }
+    }
+
+    func updateStats(_ newStats: GameStats) {
+        stats = newStats
+        saveStats()
+    }
 }

@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_030",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Travel",
+  "date": null,
+  "grid": [
+    ["T","R","A","I","N"],
+    ["#","#","#","#","#"],
+    ["P","L","A","N","E"],
+    ["#","#","#","#","#"],
+    ["C","A","N","O","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Vehicle that runs on railway tracks", "answer": "TRAIN", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Flying vehicle with wings", "answer": "PLANE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Narrow boat paddled on rivers", "answer": "CANOE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["travel"],
+  "author": "CouchWord"
+}

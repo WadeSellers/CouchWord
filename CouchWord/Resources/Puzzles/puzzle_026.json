@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_026",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Kitchen",
+  "date": null,
+  "grid": [
+    ["K","N","I","F","E"],
+    ["#","#","#","#","#"],
+    ["S","P","O","O","N"],
+    ["#","#","#","#","#"],
+    ["P","L","A","T","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Sharp utensil for cutting food", "answer": "KNIFE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Utensil for stirring or sipping soup", "answer": "SPOON", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Flat dish for serving food", "answer": "PLATE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["kitchen"],
+  "author": "CouchWord"
+}

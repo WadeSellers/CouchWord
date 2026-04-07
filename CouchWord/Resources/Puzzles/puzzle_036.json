@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_036",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Family",
+  "date": null,
+  "grid": [
+    ["C","H","I","L","D"],
+    ["#","#","#","#","#"],
+    ["N","I","E","C","E"],
+    ["#","#","#","#","#"],
+    ["U","N","C","L","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Young person, son or daughter", "answer": "CHILD", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Daughter of your brother or sister", "answer": "NIECE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Brother of your mother or father", "answer": "UNCLE", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["family"],
+  "author": "CouchWord"
+}

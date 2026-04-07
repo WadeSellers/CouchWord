@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_039",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "hard",
+  "theme": "Math",
+  "date": null,
+  "grid": [
+    ["#","#","A","#","#"],
+    ["#","#","N","#","#"],
+    ["R","A","G","E","S"],
+    ["#","#","L","#","#"],
+    ["#","#","E","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "Fits of fury", "answer": "RAGES", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Measure of direction or temperature unit", "answer": "ANGLE", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["math"],
+  "author": "CouchWord"
+}

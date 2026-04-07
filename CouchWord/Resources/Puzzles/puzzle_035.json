@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_035",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Garden",
+  "date": null,
+  "grid": [
+    ["S","E","E","D","S"],
+    ["#","#","#","#","#"],
+    ["R","O","S","E","S"],
+    ["#","#","#","#","#"],
+    ["V","I","N","E","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Tiny plant starters you sow in soil", "answer": "SEEDS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Fragrant flowers with thorny stems", "answer": "ROSES", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Climbing plants on a trellis", "answer": "VINES", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["garden"],
+  "author": "CouchWord"
+}

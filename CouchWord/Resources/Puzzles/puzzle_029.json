@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_029",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "easy",
+  "theme": "Body",
+  "date": null,
+  "grid": [
+    ["H","E","A","R","T"],
+    ["#","#","#","#","#"],
+    ["B","R","A","I","N"],
+    ["#","#","#","#","#"],
+    ["B","O","N","E","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Organ that pumps blood", "answer": "HEART", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Organ inside your skull", "answer": "BRAIN", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Parts of the skeleton", "answer": "BONES", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["body"],
+  "author": "CouchWord"
+}

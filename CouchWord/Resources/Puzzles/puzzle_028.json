@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_028",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "School",
+  "date": null,
+  "grid": [
+    ["#","#","P","#","#"],
+    ["#","#","E","#","#"],
+    ["C","H","A","L","K"],
+    ["#","#","R","#","#"],
+    ["#","#","L","#","#"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 2, "clue": "White stick for writing on a blackboard", "answer": "CHALK", "row": 2, "col": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Gem of great value, or a necklace gem", "answer": "PEARL", "row": 0, "col": 2 }
+    ]
+  },
+  "tags": ["school"],
+  "author": "CouchWord"
+}

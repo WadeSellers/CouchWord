@@ -1,0 +1,25 @@
+{
+  "id": "puzzle_040",
+  "version": 1,
+  "size": { "rows": 5, "cols": 5 },
+  "difficulty": "medium",
+  "theme": "Spices",
+  "date": null,
+  "grid": [
+    ["C","L","O","V","E"],
+    ["#","#","#","#","#"],
+    ["T","H","Y","M","E"],
+    ["#","#","#","#","#"],
+    ["C","U","M","I","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Aromatic spice bud used in holiday hams", "answer": "CLOVE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Herb in the mint family, used with chicken", "answer": "THYME", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Earthy spice essential in chili and curry", "answer": "CUMIN", "row": 4, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["spices"],
+  "author": "CouchWord"
+}
