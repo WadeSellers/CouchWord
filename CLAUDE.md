@@ -26,65 +26,71 @@ xcodebuild -project CouchWord.xcodeproj -scheme CouchWord -destination 'platform
 
 ## Architecture
 
-**MVVM with environment-injected services.** Two `@StateObject` services (`PuzzleStore`, `ProgressStore`) are created in `CouchWordApp` and injected via `.environmentObject()`.
+**MVVM with environment-injected services.** `ProfileManager` and `PuzzleStore` are created in `CouchWordApp`. Per-profile `ProgressStore` and `DailyPuzzleManager` are created in `RootView` based on the active profile.
 
 ### App Flow
-`CouchWordApp` → `RootView` (checks onboarding) → `HomeScreen` → `GameView` (puzzle session)
+`CouchWordApp` → `RootView` (profile selection + onboarding) → `HomeScreen` → `GameView` (puzzle session)
 
-### Data Layer
-- **Puzzle** (Codable) — matches the JSON schema in `tv-crossword-concept.html`. Loaded from bundled JSON files in `Resources/Puzzles/`. Each puzzle has an id, grid (2D string array where "#" = black), clues with across/down arrays, difficulty, theme, and tags.
-- **UserProgress** (Codable) — tracks the user's grid state, undo stack, hints used, elapsed time. Serialized to UserDefaults via `ProgressStore`.
-- **GameStats** (Codable) — lifetime stats: total solved, streaks, best times.
-- **UndoAction** — captures `CellSnapshot`s. Word undo stores all cells changed by that word; letter undo stores one cell. Shake-to-undo pops the stack and restores only the snapshotted cells.
+### Models
+- **Puzzle** (Codable) — JSON schema matching `tv-crossword-concept.html`. Grid is 2D string array ("#" = black). 100 puzzles bundled in `Resources/Puzzles/`.
+- **UserProgress** (Codable) — tracks user grid, undo stack (letter/word/hint granularity), hints, elapsed time.
+- **GameStats** (Codable) — lifetime stats: solved count, streaks, best times.
+- **UserProfile** — household profiles (up to 4) with name and avatar color.
+- **SkillProfile** — per-category performance tracking for adaptive difficulty. Knowledge radar data.
+- **AppTheme** — 5 visual themes (Midnight, Newspaper, Ocean, Forest, Neon) with full color palettes.
+- **GameMode** — Standard, Speed Round (60s), Mystery Grid (hidden blacks), Clueless (no clue text).
+- **Achievement** — 18 achievements across 5 categories with automatic unlock checking.
+- **WordJournal** — tracks every unique word encountered with count and dates.
 
 ### Services
-- **PuzzleStore** — loads and indexes bundled puzzle JSON from `Resources/Puzzles/`.
-- **ProgressStore** — wraps UserDefaults for save/resume, stats, and settings (sound, onboarding flag).
-- **ShakeDetector** — CMMotionManager accelerometer monitoring on Siri Remote. Fires `onShake` closure when acceleration exceeds threshold, with cooldown to prevent double-triggers.
-- **SoundManager** — singleton playing system sounds via `AudioServicesPlaySystemSound`. Effects: letterPlaced, wordCompleted, puzzleComplete, undo, error, hint, navigate.
-- **VoiceInputManager** — processes raw dictation text into `.letter(Character)` or `.word(String)`. Handles phonetic names ("BEE" → B), "the letter X" patterns, and multi-character word input.
+- **PuzzleStore** — loads bundled puzzle JSON from `Resources/Puzzles/`.
+- **ProgressStore** — wraps UserDefaults with profile-namespaced keys. Stores progress, stats, skill profile, achievements, word journal, theme, and settings.
+- **ProfileManager** — manages household profiles (create, delete, switch active).
+- **DailyPuzzleManager** — deterministic daily puzzle selection, streak freeze logic.
+- **ShakeDetector** — CMMotionManager accelerometer for Siri Remote shake-to-undo.
+- **SoundManager** — system sounds via AudioServicesPlaySystemSound.
+- **VoiceInputManager** — processes dictation text into letter/word input.
+- **ShareResultsGenerator** — Wordle-style emoji grid for sharing results.
 
 ### Views
-- **HomeScreen** — menu with Today's Puzzle, Quick Play, Continue, Settings. Uses `NavigationStack` with typed destinations.
-- **GameView** — main game container. Owns `PuzzleViewModel` and `ShakeDetector`. Wires up `.onMoveCommand`, `.onPlayPauseCommand`, shake-to-undo, and presents completion overlay.
-- **PuzzleGridView** — the 5x5 grid using `@FocusState` with cell ID strings. Focus syncs bidirectionally with the view model.
-- **CellView** — renders a single cell with states: empty, filled, correct, incorrect, black. Focus scale/glow animation.
-- **ClueListView** — across/down sections with scroll-to-active behavior.
-- **LetterInputView** — A-Z card grid + hidden TextField for Siri dictation capture.
-- **CompletionView** — animated results: time, hints, streak, accuracy. Next puzzle / home buttons.
-- **OnboardingView** — 3-page tutorial (navigate, voice, shake). Skippable, persisted via ProgressStore.
+- **HomeScreen** — menu: Today's Puzzle, Quick Play, Continue, Statistics, Achievements, Settings.
+- **GameView** — game container with grid, clue panel, HUD, shake detection.
+- **PuzzleGridView** — focus-engine grid with dynamic cell sizing via `GridLayout`.
+- **CellView** — themed cells with VoiceOver labels, reduced motion support.
+- **ClueListView** — across/down sections with scroll-to-active.
+- **CompletionView** — animated results with share button.
+- **StatsDashboardView** — totals, streaks, by-difficulty, best times, knowledge radar.
+- **AchievementsView** — achievement cards + word journal cloud.
+- **ProfilePickerView** — multi-player profile selection.
+- **OnboardingView** — 3-page tutorial.
+- **SettingsView** — theme, font, timer mode, sound toggle.
 
 ### tvOS Focus & Input
-- Grid cells use `.focusable()` + `@FocusState` tracked by "row-col" string IDs.
-- `.onMoveCommand` handles Siri Remote d-pad — view model skips black cells.
-- Play/Pause button toggles across/down direction.
-- Click center on a cell opens the letter input sheet.
-- Shake remote triggers undo via CMMotionManager.
-- Voice input uses system dictation through a focused TextField.
+- Grid: `.focusable()` + `@FocusState` with "row-col" IDs, bidirectional sync.
+- `.onMoveCommand` for d-pad, `.onPlayPauseCommand` for direction toggle.
+- Shake-to-undo via CMMotionManager.
+- Voice input via system dictation through focused TextField.
 
 ### Tests
-Tests use Swift Testing (`@Test`, `#expect`). Suites: PuzzleTests, UserProgressTests, GameStatsTests, PuzzleViewModelTests, VoiceInputManagerTests.
+Swift Testing (`@Test`, `#expect`). Suites: PuzzleTests, UserProgressTests, GameStatsTests, PuzzleViewModelTests, VoiceInputManagerTests.
 
 ### Puzzle JSON Format
-Each puzzle file in `Resources/Puzzles/` follows this schema:
 ```json
 {
-  "id": "puzzle_001",
-  "version": 1,
-  "size": {"rows": 5, "cols": 5},
-  "difficulty": "easy",
-  "theme": "Space",
-  "date": null,
+  "id": "puzzle_001", "version": 1,
+  "size": {"rows": 5, "cols": 5}, "difficulty": "easy",
+  "theme": "Space", "date": null,
   "grid": [["S","T","A","R","S"], ...],
   "clues": {
     "across": [{"number": 1, "clue": "...", "answer": "STARS", "row": 0, "col": 0}],
     "down": [...]
   },
-  "tags": ["space"],
-  "author": "CouchWord"
+  "tags": ["space"], "author": "CouchWord"
 }
 ```
 
-## Product Spec
+## Product Spec & Build Log
 
-Full product roadmap is in `tv-crossword-concept.html` (52 versions across 13 eras). Current build is v1.0 MVP. Build decisions and morning review items are logged in `BUILD_LOG.md`.
+Full 52-version roadmap: `tv-crossword-concept.html`
+Build decisions and progress: `BUILD_LOG.md`
+Current build: through v15.0 (of 52 versions)

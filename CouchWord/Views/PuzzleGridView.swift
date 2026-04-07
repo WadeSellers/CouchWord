@@ -23,7 +23,9 @@ struct PuzzleGridView: View {
                                 isHighlighted: isCellHighlighted(row: row, col: col),
                                 cellSize: size,
                                 theme: progressStore.theme,
-                                fontDesign: progressStore.gridFont.design
+                                fontDesign: progressStore.gridFont.design,
+                                row: row,
+                                col: col
                             )
                             .focusable(!isBlack)
                             .focused($focusedCellID, equals: cellID(row: row, col: col))

@@ -9,6 +9,10 @@ struct CellView: View {
     var cellSize: CGFloat = 90
     var theme: AppTheme = .midnight
     var fontDesign: Font.Design = .default
+    var row: Int = 0
+    var col: Int = 0
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         if displayState == .black {
@@ -42,11 +46,32 @@ struct CellView: View {
                 }
             }
             .frame(width: cellSize, height: cellSize)
-            .scaleEffect(isFocused ? 1.12 : 1.0)
+            .scaleEffect(isFocused && !reduceMotion ? 1.12 : 1.0)
             .shadow(color: isFocused ? theme.accentColor.opacity(0.7) : .clear, radius: isFocused ? 12 : 0)
-            .animation(.easeInOut(duration: 0.15), value: isFocused)
-            .animation(.easeInOut(duration: 0.2), value: displayState)
+            .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: isFocused)
+            .animation(reduceMotion ? nil : .easeInOut(duration: 0.2), value: displayState)
+            .accessibilityLabel(accessibilityDescription)
+            .accessibilityHint(isFocused ? "Selected. Click to enter a letter." : "")
         }
+    }
+
+    private var accessibilityDescription: String {
+        var parts: [String] = []
+        parts.append("Row \(row + 1), Column \(col + 1)")
+        if let number = clueNumber {
+            parts.append("Clue \(number)")
+        }
+        if !letter.isEmpty {
+            parts.append("Letter \(letter)")
+        } else {
+            parts.append("Empty")
+        }
+        switch displayState {
+        case .correct: parts.append("Correct")
+        case .incorrect: parts.append("Incorrect")
+        default: break
+        }
+        return parts.joined(separator: ". ")
     }
 
     // Dynamic font sizes based on cell size
