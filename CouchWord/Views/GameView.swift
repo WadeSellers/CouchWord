@@ -39,8 +39,8 @@ struct GameView: View {
             .padding(.horizontal, 50)
             .padding(.vertical, 30)
 
-            // Minimap overlay (when not zoomed out)
-            if !viewModel.isZoomedOut, let puzzle = viewModel.puzzle, puzzle.rows > 5 {
+            // Minimap overlay (always shown for grids larger than 5x5)
+            if !viewModel.isZoomedOut, let puzzle = viewModel.puzzle, (puzzle.rows > 5 || puzzle.cols > 5) {
                 VStack {
                     HStack {
                         MinimapOverlay(viewModel: viewModel)

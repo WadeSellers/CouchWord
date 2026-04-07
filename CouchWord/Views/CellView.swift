@@ -6,8 +6,7 @@ struct CellView: View {
     let displayState: CellDisplayState
     let isFocused: Bool
     let isHighlighted: Bool
-
-    private let cellSize: CGFloat = 90
+    var cellSize: CGFloat = 90
 
     var body: some View {
         if displayState == .black {
@@ -27,15 +26,15 @@ struct CellView: View {
                 // Clue number
                 if let number = clueNumber {
                     Text("\(number)")
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.system(size: clueNumberFontSize, weight: .medium))
                         .foregroundStyle(.secondary)
-                        .padding(4)
+                        .padding(clueNumberPadding)
                 }
 
                 // Letter
                 if !letter.isEmpty {
                     Text(letter)
-                        .font(.system(size: 38, weight: .medium, design: .default))
+                        .font(.system(size: letterFontSize, weight: .medium, design: .default))
                         .foregroundStyle(letterColor)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -47,6 +46,11 @@ struct CellView: View {
             .animation(.easeInOut(duration: 0.2), value: displayState)
         }
     }
+
+    // Dynamic font sizes based on cell size
+    private var letterFontSize: CGFloat { cellSize * 0.42 }
+    private var clueNumberFontSize: CGFloat { max(cellSize * 0.15, 10) }
+    private var clueNumberPadding: CGFloat { max(cellSize * 0.04, 2) }
 
     private var backgroundColor: Color {
         switch displayState {
@@ -66,10 +70,7 @@ struct CellView: View {
     }
 
     private var borderColor: Color {
-        if isFocused {
-            return .blue
-        }
-        return Color(white: 0.3)
+        isFocused ? .blue : Color(white: 0.3)
     }
 
     private var letterColor: Color {
@@ -78,5 +79,19 @@ struct CellView: View {
         case .incorrect: return .red
         default: return .white
         }
+    }
+}
+
+/// Calculates the optimal cell size for a given grid dimension on tvOS.
+/// The grid area is roughly 700pt wide for the puzzle portion of the screen.
+enum GridLayout {
+    static let gridAreaWidth: CGFloat = 700
+    static let gridAreaHeight: CGFloat = 700
+    static let cellSpacing: CGFloat = 2
+
+    static func cellSize(forRows rows: Int, cols: Int) -> CGFloat {
+        let maxWidth = (gridAreaWidth - CGFloat(cols - 1) * cellSpacing) / CGFloat(cols)
+        let maxHeight = (gridAreaHeight - CGFloat(rows - 1) * cellSpacing) / CGFloat(rows)
+        return min(maxWidth, maxHeight).rounded(.down)
     }
 }

@@ -26,6 +26,7 @@
 		A10011 /* LetterInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
 		A10012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
 		A10013 /* PuzzleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013; };
+		A10016 /* StatsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016; };
 		A10014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10014; };
 		A10015 /* Puzzles in Resources */ = {isa = PBXBuildFile; fileRef = B10015; };
 		A10020 /* PuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020; };
@@ -62,6 +63,7 @@
 		B10011 /* LetterInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterInputView.swift; sourceTree = "<group>"; };
 		B10012 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B10013 /* PuzzleGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGridView.swift; sourceTree = "<group>"; };
+		B10016 /* StatsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDashboardView.swift; sourceTree = "<group>"; };
 		B10014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B10015 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Puzzles; sourceTree = "<group>"; };
 		B10020 /* PuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleTests.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				B10011 /* LetterInputView.swift */,
 				B10012 /* OnboardingView.swift */,
 				B10013 /* PuzzleGridView.swift */,
+				B10016 /* StatsDashboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				A10011 /* LetterInputView.swift in Sources */,
 				A10012 /* OnboardingView.swift in Sources */,
 				A10013 /* PuzzleGridView.swift in Sources */,
+				A10016 /* StatsDashboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,9 +6,11 @@ struct PuzzleGridView: View {
 
     var body: some View {
         if let puzzle = viewModel.puzzle {
-            VStack(spacing: 2) {
+            let size = GridLayout.cellSize(forRows: puzzle.rows, cols: puzzle.cols)
+
+            VStack(spacing: GridLayout.cellSpacing) {
                 ForEach(0..<puzzle.rows, id: \.self) { row in
-                    HStack(spacing: 2) {
+                    HStack(spacing: GridLayout.cellSpacing) {
                         ForEach(0..<puzzle.cols, id: \.self) { col in
                             let isBlack = puzzle.isBlack(row: row, col: col)
 
@@ -17,7 +19,8 @@ struct PuzzleGridView: View {
                                 clueNumber: puzzle.clueNumber(row: row, col: col),
                                 displayState: viewModel.cellState(row: row, col: col),
                                 isFocused: row == viewModel.focusedRow && col == viewModel.focusedCol,
-                                isHighlighted: isCellHighlighted(row: row, col: col)
+                                isHighlighted: isCellHighlighted(row: row, col: col),
+                                cellSize: size
                             )
                             .focusable(!isBlack)
                             .focused($focusedCellID, equals: cellID(row: row, col: col))
@@ -35,7 +38,6 @@ struct PuzzleGridView: View {
             .onChange(of: viewModel.focusedRow) { _, _ in syncFocus() }
             .onChange(of: viewModel.focusedCol) { _, _ in syncFocus() }
             .onAppear { syncFocus() }
-            // Press select to toggle direction or open letter input
             .onExitCommand {
                 viewModel.saveCurrentProgress()
             }

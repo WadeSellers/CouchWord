@@ -11,6 +11,7 @@ struct HomeScreen: View {
         case quickPlay
         case continuePuzzle(String) // puzzle ID
         case puzzle(String) // puzzle ID for "Today's Puzzle"
+        case stats
     }
 
     var body: some View {
@@ -66,6 +67,16 @@ struct HomeScreen: View {
                         .buttonStyle(.card)
                     }
 
+                    // Stats
+                    NavigationLink(value: Destination.stats) {
+                        MenuButton(
+                            title: "Statistics",
+                            subtitle: "\(progressStore.stats.totalSolved) solved",
+                            icon: "chart.bar.fill"
+                        )
+                    }
+                    .buttonStyle(.card)
+
                     // Settings
                     Button {
                         showingSettings = true
@@ -98,6 +109,8 @@ struct HomeScreen: View {
                     if let puzzle = puzzleStore.puzzle(byID: id) {
                         GameView(puzzle: puzzle)
                     }
+                case .stats:
+                    StatsDashboardView()
                 }
             }
             .sheet(isPresented: $showingSettings) {
@@ -196,26 +209,105 @@ struct StatItem: View {
     }
 }
 
-// MARK: - Puzzle Picker
+// MARK: - Puzzle Picker with Filters
 
 struct PuzzlePickerView: View {
     @EnvironmentObject var puzzleStore: PuzzleStore
     @EnvironmentObject var progressStore: ProgressStore
 
-    var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20)], spacing: 20) {
-                ForEach(puzzleStore.puzzles) { puzzle in
-                    NavigationLink(value: HomeScreen.Destination.puzzle(puzzle.id)) {
-                        PuzzleCard(
-                            puzzle: puzzle,
-                            isCompleted: progressStore.completedPuzzleIDs.contains(puzzle.id)
-                        )
-                    }
-                    .buttonStyle(.card)
-                }
+    @State private var sizeFilter: SizeFilter = .all
+    @State private var difficultyFilter: DifficultyFilter = .all
+    @State private var showCompleted = true
+
+    enum SizeFilter: String, CaseIterable {
+        case all = "All Sizes"
+        case small = "5×5"
+        case medium = "9×9"
+        case large = "13×13"
+        case full = "15×15"
+
+        func matches(_ puzzle: Puzzle) -> Bool {
+            switch self {
+            case .all: return true
+            case .small: return puzzle.rows == 5
+            case .medium: return puzzle.rows == 9
+            case .large: return puzzle.rows == 13
+            case .full: return puzzle.rows == 15
             }
-            .padding(40)
+        }
+    }
+
+    enum DifficultyFilter: String, CaseIterable {
+        case all = "All Levels"
+        case easy = "Easy"
+        case medium = "Medium"
+        case hard = "Hard"
+        case expert = "Expert"
+
+        func matches(_ puzzle: Puzzle) -> Bool {
+            switch self {
+            case .all: return true
+            case .easy: return puzzle.difficulty == .easy
+            case .medium: return puzzle.difficulty == .medium
+            case .hard: return puzzle.difficulty == .hard
+            case .expert: return puzzle.difficulty == .expert
+            }
+        }
+    }
+
+    private var filteredPuzzles: [Puzzle] {
+        let completed = progressStore.completedPuzzleIDs
+        return puzzleStore.puzzles.filter { puzzle in
+            sizeFilter.matches(puzzle)
+            && difficultyFilter.matches(puzzle)
+            && (showCompleted || !completed.contains(puzzle.id))
+        }
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Filters bar
+            HStack(spacing: 20) {
+                Picker("Size", selection: $sizeFilter) {
+                    ForEach(SizeFilter.allCases, id: \.self) { filter in
+                        Text(filter.rawValue).tag(filter)
+                    }
+                }
+                .frame(width: 200)
+
+                Picker("Difficulty", selection: $difficultyFilter) {
+                    ForEach(DifficultyFilter.allCases, id: \.self) { filter in
+                        Text(filter.rawValue).tag(filter)
+                    }
+                }
+                .frame(width: 200)
+
+                Toggle("Show Completed", isOn: $showCompleted)
+
+                Spacer()
+
+                Text("\(filteredPuzzles.count) puzzles")
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 40)
+            .padding(.vertical, 16)
+
+            // Puzzle grid
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20)], spacing: 20) {
+                    ForEach(filteredPuzzles) { puzzle in
+                        NavigationLink(value: HomeScreen.Destination.puzzle(puzzle.id)) {
+                            PuzzleCard(
+                                puzzle: puzzle,
+                                isCompleted: progressStore.completedPuzzleIDs.contains(puzzle.id),
+                                bestTime: progressStore.stats.bestTimes[puzzle.id]
+                            )
+                        }
+                        .buttonStyle(.card)
+                    }
+                }
+                .padding(40)
+            }
         }
         .navigationTitle("Quick Play")
     }
@@ -224,6 +316,7 @@ struct PuzzlePickerView: View {
 struct PuzzleCard: View {
     let puzzle: Puzzle
     let isCompleted: Bool
+    var bestTime: TimeInterval? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -239,13 +332,47 @@ struct PuzzleCard: View {
 
             HStack(spacing: 12) {
                 Label("\(puzzle.rows)×\(puzzle.cols)", systemImage: "grid")
-                Label(puzzle.difficulty.rawValue.capitalized, systemImage: "speedometer")
+
+                DifficultyBadge(difficulty: puzzle.difficulty)
+
+                if let bestTime {
+                    Label(formatTime(bestTime), systemImage: "clock")
+                }
             }
             .font(.caption)
             .foregroundStyle(.secondary)
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func formatTime(_ seconds: TimeInterval) -> String {
+        let total = Int(seconds)
+        return "\(total / 60):\(String(format: "%02d", total % 60))"
+    }
+}
+
+struct DifficultyBadge: View {
+    let difficulty: Difficulty
+
+    var body: some View {
+        Text(difficulty.rawValue.capitalized)
+            .font(.caption2)
+            .fontWeight(.semibold)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 2)
+            .background(color.opacity(0.2))
+            .foregroundStyle(color)
+            .clipShape(Capsule())
+    }
+
+    private var color: Color {
+        switch difficulty {
+        case .easy: return .green
+        case .medium: return .yellow
+        case .hard: return .orange
+        case .expert: return .red
+        }
     }
 }
 
