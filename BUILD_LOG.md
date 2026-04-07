@@ -133,7 +133,39 @@ Started: 2026-04-06 ~9pm
 
 **Decision:** Rather than creating separate UserDefaults suites per profile, I namespace all keys with the profile ID prefix. This keeps everything in standard UserDefaults and makes cleanup easy.
 
+## v9.0 ✅ - Adaptive Difficulty
+- SkillProfile model tracking performance by category (tag-based)
+- CategoryScore with combined accuracy/speed score
+- Knowledge radar data (bar chart visualization in StatsDashboardView)
+- Strengths/weaknesses identification
+- Recommended difficulty based on overall score
+- Auto-records on puzzle completion
+
+## v13.0 ✅ - Game Modes
+- GameMode enum: Standard, Speed Round, Mystery Grid, Clueless
+- Speed Round: 60-second countdown timer, chain counter
+- Mystery Grid: black cells hidden until adjacent cells are filled
+- Clueless: clue text replaced with word length only
+- Game mode selector in PuzzlePickerView with icon/description cards
+
+## v15.0 ✅ - Achievements & Word Journal
+- 18 achievements across 5 categories (Milestones, Speed, Skill, Dedication, Special)
+- AchievementProgress tracks no-hint solves, perfect accuracy count, fastest time, etc.
+- AchievementRegistry.checkUnlocks() evaluates all requirements on each completion
+- WordJournal tracks every unique word encountered with count and dates
+- AchievementsView with unlocked/locked cards and word cloud
+- FlowLayout for word tag display
+- Achievements and word journal accessible from home screen
+
+## Puzzle Library
+- 100 total puzzles generated: 50 × 5x5, 25 × 7x7, 15 × 9x9, 10 × 11x11
+- Mix of easy, medium, hard, and expert difficulties
+- 20+ themes across all categories
+
 ## Uncertainties Added
 
-- [ ] Profile-namespaced ProgressStore is created anew each time the view appears. May want to cache these or use a more sophisticated DI approach.
-- [ ] DailyPuzzleManager is created per profile switch — should verify it correctly tracks daily puzzles per profile.
+- [ ] Profile-namespaced ProgressStore is created anew each time the view appears. May want to cache.
+- [ ] DailyPuzzleManager is created per profile switch.
+- [ ] pbxproj needs all new files added. May need Xcode to regenerate if hand-edited UUIDs are rejected.
+- [ ] Game modes are defined but GameView doesn't fully pass game mode to PuzzleViewModel yet — need to wire up the mode selection from PuzzlePickerView through to GameView.
+- [ ] Achievement unlock notifications not yet shown as toasts — silently unlocked for now.

@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_098",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "expert",
+  "theme": "Culture",
+  "date": null,
+  "grid": [
+    ["R","E","S","T","A","U","R","A","N","T","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["B","L","A","C","K","S","M","I","T","H","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["W","O","N","D","E","R","F","U","L","L","Y"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["V","O","L","U","N","T","E","E","R","E","D"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["T","R","A","M","P","O","L","I","N","E","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["P","H","O","T","O","G","R","A","P","H","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Places to dine out and enjoy meals", "answer": "RESTAURANTS", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Workers who forge iron at an anvil", "answer": "BLACKSMITHS", "row": 2, "col": 0 },
+      { "number": 3, "clue": "In a marvelous and delightful manner", "answer": "WONDERFULLY", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Offered to help without being paid", "answer": "VOLUNTEERED", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Bouncy devices for jumping and acrobatics", "answer": "TRAMPOLINES", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Printed images captured by a camera", "answer": "PHOTOGRAPHS", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["culture"],
+  "author": "CouchWord"
+}

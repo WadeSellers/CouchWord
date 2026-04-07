@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_099",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "hard",
+  "theme": "Discovery",
+  "date": null,
+  "grid": [
+    ["A","N","N","I","V","E","R","S","A","R","Y"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["D","I","S","C","O","V","E","R","I","E","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["D","R","A","G","O","N","F","L","I","E","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["E","X","P","R","E","S","S","I","O","N","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["F","I","R","E","F","I","G","H","T","E","R"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["H","E","A","V","Y","W","E","I","G","H","T"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Yearly commemoration of a special event", "answer": "ANNIVERSARY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "New findings or revelations", "answer": "DISCOVERIES", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Large flying insects often seen near ponds", "answer": "DRAGONFLIES", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Facial looks or verbal phrases", "answer": "EXPRESSIONS", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Person who battles blazes professionally", "answer": "FIREFIGHTER", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Boxing class for the largest fighters", "answer": "HEAVYWEIGHT", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["discovery"],
+  "author": "CouchWord"
+}

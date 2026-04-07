@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_083",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Literature",
+  "date": null,
+  "grid": [
+    ["N","A","R","R","A","T","I","V","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["B","I","O","G","R","A","P","H","Y"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["A","N","T","H","O","L","O","G","Y"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["D","E","T","E","C","T","I","V","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["E","P","I","L","O","G","U","E","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Story or account of events", "answer": "NARRATIVE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Written account of someone's life", "answer": "BIOGRAPHY", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Collection of literary works", "answer": "ANTHOLOGY", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Mystery-solving investigator", "answer": "DETECTIVE", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Concluding sections of books", "answer": "EPILOGUES", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["literature"],
+  "author": "CouchWord"
+}

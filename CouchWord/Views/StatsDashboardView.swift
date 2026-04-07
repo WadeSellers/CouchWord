@@ -57,6 +57,9 @@ struct StatsDashboardView: View {
                     }
                 }
 
+                // Knowledge Radar
+                KnowledgeRadarView(profile: progressStore.skillProfile)
+
                 // By difficulty breakdown
                 VStack(alignment: .leading, spacing: 12) {
                     Text("By Difficulty")

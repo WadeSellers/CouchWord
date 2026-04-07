@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_089",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Architecture",
+  "date": null,
+  "grid": [
+    ["C","A","T","H","E","D","R","A","L"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","T","A","I","R","C","A","S","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["A","P","A","R","T","M","E","N","T"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","O","U","R","T","Y","A","R","D"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["P","E","N","T","H","O","U","S","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Grand church with a bishop's seat", "answer": "CATHEDRAL", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Series of steps between floors", "answer": "STAIRCASE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Unit in a residential building", "answer": "APARTMENT", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Open area enclosed by walls of a building", "answer": "COURTYARD", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Luxury top-floor dwelling", "answer": "PENTHOUSE", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["architecture"],
+  "author": "CouchWord"
+}

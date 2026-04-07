@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_094",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "expert",
+  "theme": "Wildlife",
+  "date": null,
+  "grid": [
+    ["B","U","T","T","E","R","F","L","I","E","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["G","R","A","S","S","H","O","P","P","E","R"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["N","I","G","H","T","I","N","G","A","L","E"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["W","O","O","D","P","E","C","K","E","R","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["H","I","B","E","R","N","A","T","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["W","O","N","D","E","R","L","A","N","D","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Colorful winged insects found in gardens", "answer": "BUTTERFLIES", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Jumping insect that chirps in fields", "answer": "GRASSHOPPER", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Songbird famous for its beautiful melody", "answer": "NIGHTINGALE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Birds that drum on tree trunks", "answer": "WOODPECKERS", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Winter sleep of bears and other animals", "answer": "HIBERNATION", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Magical or enchanting places", "answer": "WONDERLANDS", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["wildlife"],
+  "author": "CouchWord"
+}

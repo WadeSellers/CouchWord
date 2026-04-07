@@ -14,6 +14,11 @@ class PuzzleViewModel: ObservableObject {
     @Published var isSolved: Bool = false
     @Published var showingVoiceInput: Bool = false
     @Published var checkMode: CheckMode = .none
+    @Published var gameMode: GameMode = .standard
+    @Published var speedRoundCount: Int = 0
+    @Published var speedRoundTimeRemaining: TimeInterval = GameMode.speedRoundTimeLimit
+    @Published var speedRoundGameOver: Bool = false
+    @Published var revealedCells: Set<String> = [] // for mystery grid mode
 
     private var timerCancellable: AnyCancellable?
     private var startTime: Date?
@@ -283,12 +288,49 @@ class PuzzleViewModel: ObservableObject {
         saveCurrentProgress()
     }
 
+    // MARK: - Game Mode Helpers
+
+    /// In mystery grid mode, black cells are hidden until adjacent cells are filled.
+    func isCellVisiblyBlack(row: Int, col: Int) -> Bool {
+        guard let puzzle else { return false }
+        guard puzzle.isBlack(row: row, col: col) else { return false }
+
+        if gameMode != .mysteryGrid { return true }
+
+        // In mystery mode, black cells are revealed when any adjacent non-black cell has a letter
+        let key = "\(row)-\(col)"
+        if revealedCells.contains(key) { return true }
+
+        let neighbors = [(row-1, col), (row+1, col), (row, col-1), (row, col+1)]
+        for (r, c) in neighbors {
+            if isValidPosition(row: r, col: c),
+               !puzzle.isBlack(row: r, col: c),
+               let progress,
+               !progress.letterAt(row: r, col: c).isEmpty {
+                return true
+            }
+        }
+        return false
+    }
+
+    /// In clueless mode, clue text is hidden. Only word lengths shown.
+    var cluelessClueText: String? {
+        guard gameMode == .clueless, let clue = activeClue else { return nil }
+        return "\(clue.length) letters"
+    }
+
     // MARK: - Checking
 
     func cellState(row: Int, col: Int) -> CellDisplayState {
         guard let puzzle, let progress else { return .empty }
 
-        if puzzle.isBlack(row: row, col: col) { return .black }
+        if puzzle.isBlack(row: row, col: col) {
+            // In mystery mode, hide black cells until revealed
+            if gameMode == .mysteryGrid && !isCellVisiblyBlack(row: row, col: col) {
+                return .empty // Looks like an empty cell
+            }
+            return .black
+        }
 
         let userLetter = progress.letterAt(row: row, col: col)
         if userLetter.isEmpty { return .empty }
@@ -366,6 +408,37 @@ class PuzzleViewModel: ObservableObject {
             time: progress.elapsedSeconds,
             hints: progress.hintsUsed
         )
+
+        // Record skill profile and achievements data
+        if let puzzle {
+            progressStore.recordSkillSolve(
+                tags: puzzle.tags,
+                time: progress.elapsedSeconds,
+                accuracy: progress.accuracy ?? 1.0,
+                hints: progress.hintsUsed
+            )
+            progressStore.recordPuzzleCompletion(
+                puzzle: puzzle,
+                time: progress.elapsedSeconds,
+                hints: progress.hintsUsed,
+                accuracy: progress.accuracy ?? 1.0
+            )
+
+            // Check for new achievements
+            let newAchievements = AchievementRegistry.checkUnlocks(
+                stats: progressStore.stats,
+                achievementProgress: progressStore.achievementProgress,
+                skillProfile: progressStore.skillProfile,
+                wordCount: progressStore.wordJournal.totalUniqueWords
+            )
+            if !newAchievements.isEmpty {
+                var ap = progressStore.achievementProgress
+                for achievement in newAchievements {
+                    ap.unlockedIDs.insert(achievement.id)
+                }
+                progressStore.achievementProgress = ap
+            }
+        }
     }
 
     private func advanceToNextCell() {
@@ -408,9 +481,20 @@ class PuzzleViewModel: ObservableObject {
             .sink { [weak self] _ in
                 guard let self, var progress = self.progress, !self.isSolved else { return }
                 if let start = self.startTime {
-                    progress.elapsedSeconds += Date().timeIntervalSince(start)
+                    let elapsed = Date().timeIntervalSince(start)
+                    progress.elapsedSeconds += elapsed
                     self.startTime = Date()
                     self.progress = progress
+
+                    // Speed round countdown
+                    if self.gameMode == .speedRound {
+                        self.speedRoundTimeRemaining -= elapsed
+                        if self.speedRoundTimeRemaining <= 0 {
+                            self.speedRoundTimeRemaining = 0
+                            self.speedRoundGameOver = true
+                            self.stopTimer()
+                        }
+                    }
                 }
             }
     }

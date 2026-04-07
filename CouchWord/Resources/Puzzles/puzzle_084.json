@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_084",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Weather",
+  "date": null,
+  "grid": [
+    ["B","A","R","O","M","E","T","E","R"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["H","U","R","R","I","C","A","N","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["L","I","G","H","T","N","I","N","G"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","N","O","W","S","T","O","R","M"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["W","H","I","R","L","W","I","N","D"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Instrument measuring atmospheric pressure", "answer": "BAROMETER", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Powerful tropical storm with an eye", "answer": "HURRICANE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Electric flash during a thunderstorm", "answer": "LIGHTNING", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Heavy winter weather event with snow", "answer": "SNOWSTORM", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Rapidly rotating column of air", "answer": "WHIRLWIND", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["weather"],
+  "author": "CouchWord"
+}

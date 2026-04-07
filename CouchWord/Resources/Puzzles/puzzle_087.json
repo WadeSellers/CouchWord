@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_087",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Art",
+  "date": null,
+  "grid": [
+    ["S","C","U","L","P","T","U","R","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["M","I","N","I","A","T","U","R","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["E","N","G","R","A","V","I","N","G"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["M","O","D","E","R","N","I","S","M"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["P","O","R","C","E","L","A","I","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Three-dimensional artwork carved or molded", "answer": "SCULPTURE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Very small detailed painting or model", "answer": "MINIATURE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Design cut into a hard surface", "answer": "ENGRAVING", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Art movement rejecting tradition", "answer": "MODERNISM", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Fine white ceramic material", "answer": "PORCELAIN", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["art"],
+  "author": "CouchWord"
+}

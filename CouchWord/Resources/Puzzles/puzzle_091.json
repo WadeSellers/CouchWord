@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_091",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "hard",
+  "theme": "Exploration",
+  "date": null,
+  "grid": [
+    ["A","R","C","H","A","E","O","L","O","G","Y"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["C","O","U","N","T","R","Y","S","I","D","E"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["D","E","S","T","I","N","A","T","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["E","N","V","I","R","O","N","M","E","N","T"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["F","U","R","T","H","E","R","M","O","R","E"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["U","N","D","E","R","G","R","O","U","N","D"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Study of ancient civilizations through artifacts", "answer": "ARCHAEOLOGY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Rural area outside of cities", "answer": "COUNTRYSIDE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Place one is traveling to", "answer": "DESTINATION", "row": 4, "col": 0 },
+      { "number": 4, "clue": "The natural world and surroundings", "answer": "ENVIRONMENT", "row": 6, "col": 0 },
+      { "number": 5, "clue": "In addition to what was already said", "answer": "FURTHERMORE", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Below the surface of the earth", "answer": "UNDERGROUND", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["exploration"],
+  "author": "CouchWord"
+}

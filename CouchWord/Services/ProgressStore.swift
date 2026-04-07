@@ -156,4 +156,79 @@ class ProgressStore: ObservableObject {
         stats = newStats
         saveStats()
     }
+
+    // MARK: - Skill Profile
+
+    private var skillProfileKeyValue: String { "\(keyPrefix)skill_profile" }
+
+    var skillProfile: SkillProfile {
+        get {
+            if let data = defaults.data(forKey: skillProfileKeyValue),
+               let profile = try? decoder.decode(SkillProfile.self, from: data) {
+                return profile
+            }
+            return SkillProfile()
+        }
+        set {
+            if let data = try? encoder.encode(newValue) {
+                defaults.set(data, forKey: skillProfileKeyValue)
+            }
+        }
+    }
+
+    func recordSkillSolve(tags: [String], time: TimeInterval, accuracy: Double, hints: Int) {
+        var profile = skillProfile
+        profile.recordSolve(tags: tags, time: time, accuracy: accuracy, hints: hints)
+        skillProfile = profile
+    }
+
+    // MARK: - Achievement Progress
+
+    private var achievementKeyValue: String { "\(keyPrefix)achievements" }
+
+    var achievementProgress: AchievementProgress {
+        get {
+            if let data = defaults.data(forKey: achievementKeyValue),
+               let progress = try? decoder.decode(AchievementProgress.self, from: data) {
+                return progress
+            }
+            return AchievementProgress()
+        }
+        set {
+            if let data = try? encoder.encode(newValue) {
+                defaults.set(data, forKey: achievementKeyValue)
+            }
+        }
+    }
+
+    // MARK: - Word Journal
+
+    private var wordJournalKeyValue: String { "\(keyPrefix)word_journal" }
+
+    var wordJournal: WordJournal {
+        get {
+            if let data = defaults.data(forKey: wordJournalKeyValue),
+               let journal = try? decoder.decode(WordJournal.self, from: data) {
+                return journal
+            }
+            return WordJournal()
+        }
+        set {
+            if let data = try? encoder.encode(newValue) {
+                defaults.set(data, forKey: wordJournalKeyValue)
+            }
+        }
+    }
+
+    func recordPuzzleCompletion(puzzle: Puzzle, time: TimeInterval, hints: Int, accuracy: Double) {
+        // Update achievement progress
+        var ap = achievementProgress
+        ap.recordSolve(time: time, hints: hints, accuracy: accuracy, difficulty: puzzle.difficulty)
+        achievementProgress = ap
+
+        // Update word journal
+        var journal = wordJournal
+        journal.recordWords(from: puzzle)
+        wordJournal = journal
+    }
 }

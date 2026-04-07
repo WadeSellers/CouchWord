@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_082",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Food",
+  "date": null,
+  "grid": [
+    ["G","U","A","C","A","M","O","L","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["P","E","P","P","E","R","O","N","I"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","R","O","I","S","S","A","N","T"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["A","S","P","A","R","A","G","U","S"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","A","S","S","E","R","O","L","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Mashed avocado dip from Mexico", "answer": "GUACAMOLE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Spicy cured meat pizza topping", "answer": "PEPPERONI", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Flaky French crescent-shaped pastry", "answer": "CROISSANT", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Long green spear-shaped vegetable", "answer": "ASPARAGUS", "row": 6, "col": 0 },
+      { "number": 5, "clue": "One-dish oven-baked meal", "answer": "CASSEROLE", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["food"],
+  "author": "CouchWord"
+}

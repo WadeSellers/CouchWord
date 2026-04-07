@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_095",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "hard",
+  "theme": "Achievement",
+  "date": null,
+  "grid": [
+    ["Q","U","A","R","T","E","R","B","A","C","K"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["S","T","E","A","M","R","O","L","L","E","R"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["P","A","R","T","N","E","R","S","H","I","P"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["A","C","H","I","E","V","E","M","E","N","T"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["C","E","L","E","B","R","A","T","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["C","O","M","F","O","R","T","A","B","L","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Football player who throws the passes", "answer": "QUARTERBACK", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Heavy machine for paving roads flat", "answer": "STEAMROLLER", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Two people or groups working together", "answer": "PARTNERSHIP", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Something accomplished successfully", "answer": "ACHIEVEMENT", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Festive occasion or party", "answer": "CELEBRATION", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Providing ease and physical relaxation", "answer": "COMFORTABLE", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["achievement"],
+  "author": "CouchWord"
+}

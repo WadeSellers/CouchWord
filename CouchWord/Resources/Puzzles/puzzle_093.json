@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_093",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "hard",
+  "theme": "Science",
+  "date": null,
+  "grid": [
+    ["T","E","M","P","E","R","A","T","U","R","E"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["E","L","E","C","T","R","I","C","I","T","Y"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["M","I","C","R","O","S","C","O","P","I","C"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["O","B","S","E","R","V","A","T","O","R","Y"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["I","N","F","O","R","M","A","T","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["D","E","M","O","N","S","T","R","A","T","E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Measure of heat or cold in degrees", "answer": "TEMPERATURE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Energy from the flow of charged particles", "answer": "ELECTRICITY", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Too small to see without magnification", "answer": "MICROSCOPIC", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Building equipped for watching the stars", "answer": "OBSERVATORY", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Facts and knowledge about a subject", "answer": "INFORMATION", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Show clearly how something works", "answer": "DEMONSTRATE", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["science"],
+  "author": "CouchWord"
+}

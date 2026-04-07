@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_092",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "expert",
+  "theme": "Creativity",
+  "date": null,
+  "grid": [
+    ["I","M","A","G","I","N","A","T","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["P","H","O","T","O","G","R","A","P","H","Y"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["M","A","S","T","E","R","P","I","E","C","E"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["P","E","R","F","O","R","M","A","N","C","E"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["S","T","O","R","Y","T","E","L","L","E","R"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["H","A","N","D","C","R","A","F","T","E","D"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Ability to form mental images and ideas", "answer": "IMAGINATION", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Art of capturing images with a camera", "answer": "PHOTOGRAPHY", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Greatest work of an artist or craftsman", "answer": "MASTERPIECE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Live show or stage presentation", "answer": "PERFORMANCE", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Person who narrates tales and legends", "answer": "STORYTELLER", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Made skillfully by hand, not machine", "answer": "HANDCRAFTED", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["creativity"],
+  "author": "CouchWord"
+}

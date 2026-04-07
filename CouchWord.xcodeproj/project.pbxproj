@@ -33,6 +33,12 @@
 		A1001A /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001A; };
 		A1001B /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001B; };
 		A1001C /* ProfilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001C; };
+		A1001D /* SkillProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001D; };
+		A1001E /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001E; };
+		A1001F /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001F; };
+		A10022 /* WordJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022; };
+		A10023 /* KnowledgeRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10023; };
+		A10024 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024; };
 		A10014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10014; };
 		A10015 /* Puzzles in Resources */ = {isa = PBXBuildFile; fileRef = B10015; };
 		A10020 /* PuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020; };
@@ -76,6 +82,12 @@
 		B1001A /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		B1001B /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		B1001C /* ProfilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePickerView.swift; sourceTree = "<group>"; };
+		B1001D /* SkillProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillProfile.swift; sourceTree = "<group>"; };
+		B1001E /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		B1001F /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		B10022 /* WordJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordJournal.swift; sourceTree = "<group>"; };
+		B10023 /* KnowledgeRadarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeRadarView.swift; sourceTree = "<group>"; };
+		B10024 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		B10014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B10015 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Puzzles; sourceTree = "<group>"; };
 		B10020 /* PuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleTests.swift; sourceTree = "<group>"; };
@@ -143,6 +155,10 @@
 				B10005 /* GameStats.swift */,
 				B10019 /* AppTheme.swift */,
 				B1001A /* UserProfile.swift */,
+				B1001D /* SkillProfile.swift */,
+				B1001E /* GameMode.swift */,
+				B1001F /* Achievement.swift */,
+				B10022 /* WordJournal.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,6 +184,8 @@
 				B10013 /* PuzzleGridView.swift */,
 				B10016 /* StatsDashboardView.swift */,
 				B1001C /* ProfilePickerView.swift */,
+				B10023 /* KnowledgeRadarView.swift */,
+				B10024 /* AchievementsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,6 +340,12 @@
 				A1001A /* UserProfile.swift in Sources */,
 				A1001B /* ProfileManager.swift in Sources */,
 				A1001C /* ProfilePickerView.swift in Sources */,
+				A1001D /* SkillProfile.swift in Sources */,
+				A1001E /* GameMode.swift in Sources */,
+				A1001F /* Achievement.swift in Sources */,
+				A10022 /* WordJournal.swift in Sources */,
+				A10023 /* KnowledgeRadarView.swift in Sources */,
+				A10024 /* AchievementsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

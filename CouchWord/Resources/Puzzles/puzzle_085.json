@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_085",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Space",
+  "date": null,
+  "grid": [
+    ["A","S","T","R","O","N","A","U","T"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","A","T","E","L","L","I","T","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["T","E","L","E","S","C","O","P","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","T","A","R","L","I","G","H","T"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","P","A","C","E","S","H","I","P"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Person who travels to outer space", "answer": "ASTRONAUT", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Object orbiting a planet", "answer": "SATELLITE", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Instrument for viewing distant celestial objects", "answer": "TELESCOPE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Luminescence from distant suns", "answer": "STARLIGHT", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Vehicle for traveling through the cosmos", "answer": "SPACESHIP", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["space"],
+  "author": "CouchWord"
+}

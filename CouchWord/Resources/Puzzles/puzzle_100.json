@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_100",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "expert",
+  "theme": "Adventure",
+  "date": null,
+  "grid": [
+    ["B","A","C","K","P","A","C","K","I","N","G"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["C","H","A","L","K","B","O","A","R","D","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["M","I","S","C","H","I","E","V","O","U","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["S","N","O","W","B","O","A","R","D","E","R"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["S","W","I","T","C","H","B","O","A","R","D"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["B","A","C","K","G","R","O","U","N","D","S"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Hiking with all your gear on your back", "answer": "BACKPACKING", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Writing surfaces found in classrooms", "answer": "CHALKBOARDS", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Playfully causing trouble or pranks", "answer": "MISCHIEVOUS", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Person who rides down snowy mountain slopes", "answer": "SNOWBOARDER", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Telephone routing panel or connection hub", "answer": "SWITCHBOARD", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Settings or contexts behind a scene", "answer": "BACKGROUNDS", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["adventure"],
+  "author": "CouchWord"
+}

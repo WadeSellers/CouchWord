@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_090",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Oceans",
+  "date": null,
+  "grid": [
+    ["S","U","B","M","A","R","I","N","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["M","A","E","L","S","T","R","O","M"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","E","A","S","H","E","L","L","S"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["C","O","A","S","T","L","I","N","E"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["S","H","I","P","W","R","E","C","K"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Underwater naval vessel", "answer": "SUBMARINE", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Powerful ocean whirlpool", "answer": "MAELSTROM", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Hard casings of marine mollusks on the beach", "answer": "SEASHELLS", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Where land meets the ocean", "answer": "COASTLINE", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Sunken vessel on the ocean floor", "answer": "SHIPWRECK", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["oceans"],
+  "author": "CouchWord"
+}

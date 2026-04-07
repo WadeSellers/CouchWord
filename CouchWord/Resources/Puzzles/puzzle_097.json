@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_097",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "hard",
+  "theme": "Forces of Nature",
+  "date": null,
+  "grid": [
+    ["E","A","R","T","H","Q","U","A","K","E","S"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["T","H","U","N","D","E","R","B","O","L","T"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["M","A","R","K","E","T","P","L","A","C","E"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["C","O","N","T","I","N","E","N","T","A","L"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["I","N","S","P","I","R","A","T","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["H","A","N","D","W","R","I","T","I","N","G"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Sudden ground-shaking seismic events", "answer": "EARTHQUAKES", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Flash of lightning with a loud crack", "answer": "THUNDERBOLT", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Place where goods are bought and sold", "answer": "MARKETPLACE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Relating to a large landmass", "answer": "CONTINENTAL", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Motivation or creative spark", "answer": "INSPIRATION", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Penmanship or personal script style", "answer": "HANDWRITING", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["nature"],
+  "author": "CouchWord"
+}

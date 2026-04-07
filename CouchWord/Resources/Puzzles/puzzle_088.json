@@ -1,0 +1,31 @@
+{
+  "id": "puzzle_088",
+  "version": 1,
+  "size": { "rows": 9, "cols": 9 },
+  "difficulty": "hard",
+  "theme": "Medicine",
+  "date": null,
+  "grid": [
+    ["E","N","D","O","S","C","O","P","Y"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["D","I","A","G","N","O","S","I","S"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["O","P","E","R","A","T","I","N","G"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["I","N","F","E","C","T","I","O","N"],
+    ["#","#","#","#","#","#","#","#","#"],
+    ["T","R","E","A","T","M","E","N","T"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Internal exam using a tiny camera", "answer": "ENDOSCOPY", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Identifying a disease from symptoms", "answer": "DIAGNOSIS", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Performing surgery in a medical room", "answer": "OPERATING", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Invasion of harmful germs in the body", "answer": "INFECTION", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Medical care for an illness", "answer": "TREATMENT", "row": 8, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["medicine"],
+  "author": "CouchWord"
+}

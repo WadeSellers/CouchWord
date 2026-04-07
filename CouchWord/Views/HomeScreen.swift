@@ -13,6 +13,7 @@ struct HomeScreen: View {
         case continuePuzzle(String) // puzzle ID
         case puzzle(String) // puzzle ID for "Today's Puzzle"
         case stats
+        case achievements
     }
 
     var body: some View {
@@ -78,6 +79,16 @@ struct HomeScreen: View {
                     }
                     .buttonStyle(.card)
 
+                    // Achievements
+                    NavigationLink(value: Destination.achievements) {
+                        MenuButton(
+                            title: "Achievements",
+                            subtitle: "\(progressStore.achievementProgress.unlockedIDs.count)/\(AchievementRegistry.all.count) unlocked",
+                            icon: "trophy.fill"
+                        )
+                    }
+                    .buttonStyle(.card)
+
                     // Settings
                     Button {
                         showingSettings = true
@@ -112,6 +123,8 @@ struct HomeScreen: View {
                     }
                 case .stats:
                     StatsDashboardView()
+                case .achievements:
+                    AchievementsView()
                 }
             }
             .sheet(isPresented: $showingSettings) {
@@ -225,6 +238,7 @@ struct PuzzlePickerView: View {
     @State private var sizeFilter: SizeFilter = .all
     @State private var difficultyFilter: DifficultyFilter = .all
     @State private var showCompleted = true
+    @State private var selectedGameMode: GameMode = .standard
 
     enum SizeFilter: String, CaseIterable {
         case all = "All Sizes"
@@ -273,6 +287,37 @@ struct PuzzlePickerView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            // Game mode selector
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(GameMode.allCases) { mode in
+                        Button {
+                            selectedGameMode = mode
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: mode.icon)
+                                VStack(alignment: .leading) {
+                                    Text(mode.rawValue)
+                                        .font(.caption)
+                                        .fontWeight(.semibold)
+                                    Text(mode.description)
+                                        .font(.caption2)
+                                        .lineLimit(1)
+                                }
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(selectedGameMode == mode ? mode.color.opacity(0.3) : Color(white: 0.15))
+                            .foregroundStyle(selectedGameMode == mode ? mode.color : .secondary)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 40)
+                .padding(.vertical, 12)
+            }
+
             // Filters bar
             HStack(spacing: 20) {
                 Picker("Size", selection: $sizeFilter) {

@@ -1,0 +1,34 @@
+{
+  "id": "puzzle_096",
+  "version": 1,
+  "size": { "rows": 11, "cols": 11 },
+  "difficulty": "expert",
+  "theme": "Technology",
+  "date": null,
+  "grid": [
+    ["F","I","N","G","E","R","P","R","I","N","T"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["T","R","A","N","S","F","O","R","M","E","R"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["A","C","K","N","O","W","L","E","D","G","E"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["I","N","D","E","P","E","N","D","E","N","T"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["B","R","O","T","H","E","R","H","O","O","D"],
+    ["#","#","#","#","#","#","#","#","#","#","#"],
+    ["D","E","S","T","R","U","C","T","I","O","N"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Unique pattern on your fingertip used for ID", "answer": "FINGERPRINT", "row": 0, "col": 0 },
+      { "number": 2, "clue": "Device that changes voltage levels", "answer": "TRANSFORMER", "row": 2, "col": 0 },
+      { "number": 3, "clue": "Admit or recognize something as true", "answer": "ACKNOWLEDGE", "row": 4, "col": 0 },
+      { "number": 4, "clue": "Free from outside control", "answer": "INDEPENDENT", "row": 6, "col": 0 },
+      { "number": 5, "clue": "Bond between male siblings or close allies", "answer": "BROTHERHOOD", "row": 8, "col": 0 },
+      { "number": 6, "clue": "Complete ruin or demolition", "answer": "DESTRUCTION", "row": 10, "col": 0 }
+    ],
+    "down": []
+  },
+  "tags": ["technology"],
+  "author": "CouchWord"
+}
