@@ -9,9 +9,10 @@ struct PuzzleGridView: View {
         if let puzzle = viewModel.puzzle {
             let size = GridLayout.cellSize(forRows: puzzle.rows, cols: puzzle.cols)
 
-            VStack(spacing: GridLayout.cellSpacing) {
+            // Grid with thick outer border (NYT style)
+            VStack(spacing: 0) {
                 ForEach(0..<puzzle.rows, id: \.self) { row in
-                    HStack(spacing: GridLayout.cellSpacing) {
+                    HStack(spacing: 0) {
                         ForEach(0..<puzzle.cols, id: \.self) { col in
                             let isBlack = puzzle.isBlack(row: row, col: col)
 
@@ -34,6 +35,7 @@ struct PuzzleGridView: View {
                     }
                 }
             }
+            .border(Color.black, width: 3) // Thick outer border per NYT spec
             .onChange(of: focusedCellID) { _, newValue in
                 if let newValue, let (row, col) = parseCellID(newValue) {
                     viewModel.focusedRow = row

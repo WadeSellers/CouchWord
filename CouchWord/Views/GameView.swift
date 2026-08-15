@@ -1,6 +1,8 @@
 import SwiftUI
 
-/// The main game screen — grid + clue panel + HUD.
+/// The main game screen — newspaper crossword layout.
+/// Grid on the left with active clue below, flowing clue columns on the right,
+/// daily puzzle banner at the bottom.
 struct GameView: View {
     let puzzle: Puzzle
 
@@ -10,48 +12,112 @@ struct GameView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var showingCompletion = false
-    @State private var showingLetterInput = false
+    @State private var isInputMode = false
+    @State private var inputText = ""
+    @FocusState private var inputFieldFocused: Bool
+
+    private var dailyDateText: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMMM d, yyyy"
+        return formatter.string(from: Date())
+    }
 
     var body: some View {
-        ZStack {
-            // Main content
-            HStack(spacing: 50) {
-                // Left: Puzzle Grid
-                ZStack(alignment: .topLeading) {
+        VStack(spacing: 0) {
+            // Main content — grid left, clue columns right
+            HStack(alignment: .top, spacing: 30) {
+                // Left side: Grid + active clue below
+                VStack(alignment: .leading, spacing: 10) {
                     if viewModel.isZoomedOut {
                         MinimapGridView(viewModel: viewModel)
                             .transition(.scale)
                     } else {
                         PuzzleGridView(viewModel: viewModel)
                     }
-                }
 
-                // Right: Clue Panel
-                VStack(alignment: .leading, spacing: 16) {
-                    // Timer & Hints HUD
-                    GameHUD(viewModel: viewModel)
-
-                    // Clue list
-                    ClueListView(viewModel: viewModel)
-                }
-                .frame(width: 420)
-            }
-            .padding(.horizontal, 50)
-            .padding(.vertical, 30)
-
-            // Minimap overlay (always shown for grids larger than 5x5)
-            if !viewModel.isZoomedOut, let puzzle = viewModel.puzzle, (puzzle.rows > 5 || puzzle.cols > 5) {
-                VStack {
-                    HStack {
-                        MinimapOverlay(viewModel: viewModel)
-                            .frame(width: 100, height: 100)
-                            .padding(16)
-                        Spacer()
+                    // Active clue — displayed prominently below the grid
+                    if let clue = viewModel.activeClue {
+                        HStack(spacing: 8) {
+                            Text("\(clue.number)")
+                                .font(.system(size: 22, weight: .bold, design: .serif))
+                                .foregroundStyle(Color(white: 0.15))
+                            Text(viewModel.currentDirection.rawValue.uppercased())
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundStyle(Color(white: 0.5))
+                                .tracking(1.5)
+                            Text(clue.clue)
+                                .font(.system(size: 20, weight: .regular, design: .serif))
+                                .foregroundStyle(Color(white: 0.15))
+                                .lineLimit(2)
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color(red: 0.83, green: 0.91, blue: 0.97))
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
                     }
-                    Spacer()
                 }
+
+                // Right side: Newspaper-style flowing clue columns
+                ClueListView(viewModel: viewModel)
+                    .frame(maxWidth: .infinity)
             }
+            .padding(.horizontal, 48)
+            .padding(.top, 20)
+
+            Spacer(minLength: 4)
+
+            // Inline input field
+            if isInputMode {
+                HStack(spacing: 16) {
+                    if let clue = viewModel.activeClue {
+                        Text("\(clue.number) \(viewModel.currentDirection.rawValue.uppercased()):")
+                            .font(.system(.headline, design: .serif))
+                            .foregroundStyle(.secondary)
+                    }
+
+                    TextField("Speak or type...", text: $inputText)
+                        .focused($inputFieldFocused)
+                        .textInputAutocapitalization(.characters)
+                        .onChange(of: inputText) { _, newValue in
+                            handleInput(newValue)
+                        }
+                        .frame(maxWidth: 400)
+                }
+                .padding(.horizontal, 48)
+                .padding(.vertical, 12)
+                .background(.ultraThinMaterial)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+
+            // Bottom banner — newspaper-style daily masthead
+            Rectangle()
+                .fill(Color(white: 0.3))
+                .frame(height: 1)
+                .padding(.horizontal, 48)
+
+            HStack(alignment: .center) {
+                Text("CouchWord")
+                    .font(.system(size: 26, weight: .black, design: .serif))
+                    .foregroundStyle(Color(white: 0.1))
+
+                Text("\u{2022}")
+                    .font(.system(size: 22))
+                    .foregroundStyle(Color(white: 0.4))
+                    .padding(.horizontal, 6)
+
+                Text(dailyDateText)
+                    .font(.system(size: 22, weight: .regular, design: .serif))
+                    .foregroundStyle(Color(white: 0.3))
+
+                Spacer()
+
+                GameHUD(viewModel: viewModel)
+            }
+            .padding(.horizontal, 48)
+            .padding(.vertical, 14)
         }
+        .background(Color(red: 0.97, green: 0.96, blue: 0.94))
         .navigationBarHidden(true)
         .onAppear {
             viewModel.loadPuzzle(puzzle)
@@ -76,6 +142,9 @@ struct GameView: View {
             viewModel.toggleDirection()
         }
         .onMoveCommand { direction in
+            if isInputMode {
+                exitInputMode()
+            }
             switch direction {
             case .up: viewModel.moveFocus(.up)
             case .down: viewModel.moveFocus(.down)
@@ -84,8 +153,16 @@ struct GameView: View {
             @unknown default: break
             }
         }
-        .sheet(isPresented: $showingLetterInput) {
-            LetterInputView(viewModel: viewModel)
+        .onExitCommand {
+            if isInputMode {
+                exitInputMode()
+            } else {
+                viewModel.saveCurrentProgress()
+                dismiss()
+            }
+        }
+        .onLongPressGesture(minimumDuration: 0.01, pressing: { _ in }) {
+            enterInputMode()
         }
         .onAppear {
             shakeDetector.onShake = { [weak viewModel] in
@@ -96,6 +173,42 @@ struct GameView: View {
         }
         .onDisappear {
             shakeDetector.stopDetecting()
+        }
+        .animation(.easeInOut(duration: 0.2), value: isInputMode)
+    }
+
+    // MARK: - Input Mode
+
+    private func enterInputMode() {
+        guard !viewModel.isSolved else { return }
+        inputText = ""
+        isInputMode = true
+        inputFieldFocused = true
+    }
+
+    private func exitInputMode() {
+        isInputMode = false
+        inputFieldFocused = false
+        inputText = ""
+    }
+
+    private func handleInput(_ text: String) {
+        let cleaned = text.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        guard !cleaned.isEmpty else { return }
+
+        let result = VoiceInputManager.process(cleaned)
+
+        switch result {
+        case .letter(let letter):
+            viewModel.enterLetter(letter)
+            SoundManager.shared.play(.letterPlaced)
+            inputText = ""
+        case .word(let word):
+            viewModel.enterWord(word)
+            SoundManager.shared.play(.wordCompleted)
+            inputText = ""
+        case .empty:
+            break
         }
     }
 }
@@ -108,17 +221,15 @@ struct GameHUD: View {
 
     var body: some View {
         HStack(spacing: 24) {
-            // Timer (respects timer mode setting)
+            // Timer
             if progressStore.timerMode != .hide {
                 HStack(spacing: 6) {
                     Image(systemName: "clock")
                     Text(viewModel.elapsedTimeFormatted)
                         .monospacedDigit()
                 }
-                .font(.title3)
+                .font(.system(size: 18))
             }
-
-            Spacer()
 
             // Hint button
             Button {
@@ -128,6 +239,7 @@ struct GameHUD: View {
                     Image(systemName: "lightbulb.fill")
                     Text("\(viewModel.hintsRemaining)")
                 }
+                .font(.system(size: 18))
             }
             .disabled(viewModel.hintsRemaining <= 0 || viewModel.isSolved)
 
@@ -136,10 +248,11 @@ struct GameHUD: View {
                 viewModel.checkPuzzle()
             } label: {
                 Image(systemName: "checkmark.circle")
+                    .font(.system(size: 18))
             }
             .disabled(viewModel.isSolved)
         }
-        .foregroundStyle(.secondary)
+        .foregroundStyle(Color(white: 0.4))
     }
 }
 
@@ -150,20 +263,21 @@ struct MinimapOverlay: View {
 
     var body: some View {
         if let puzzle = viewModel.puzzle {
-            VStack(spacing: 1) {
+            VStack(spacing: 0) {
                 ForEach(0..<puzzle.rows, id: \.self) { row in
-                    HStack(spacing: 1) {
+                    HStack(spacing: 0) {
                         ForEach(0..<puzzle.cols, id: \.self) { col in
                             Rectangle()
                                 .fill(minimapColor(row: row, col: col))
-                                .frame(width: 8, height: 8)
+                                .frame(width: 6, height: 6)
+                                .border(Color.gray.opacity(0.3), width: 0.5)
                         }
                     }
                 }
             }
-            .padding(6)
+            .padding(4)
             .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .clipShape(RoundedRectangle(cornerRadius: 4))
         }
     }
 
@@ -173,7 +287,7 @@ struct MinimapOverlay: View {
         if row == viewModel.focusedRow && col == viewModel.focusedCol { return .blue }
 
         let letter = viewModel.progress?.letterAt(row: row, col: col) ?? ""
-        return letter.isEmpty ? Color(.darkGray) : .white.opacity(0.7)
+        return letter.isEmpty ? .white : .gray
     }
 }
 
@@ -186,9 +300,9 @@ struct MinimapGridView: View {
 
     var body: some View {
         if let puzzle = viewModel.puzzle {
-            VStack(spacing: 2) {
+            VStack(spacing: 0) {
                 ForEach(0..<puzzle.rows, id: \.self) { row in
-                    HStack(spacing: 2) {
+                    HStack(spacing: 0) {
                         ForEach(0..<puzzle.cols, id: \.self) { col in
                             ZStack {
                                 Rectangle()
@@ -204,7 +318,7 @@ struct MinimapGridView: View {
                                 }
                             }
                             .frame(width: cellSize, height: cellSize)
-                            .border(Color.gray.opacity(0.5), width: 0.5)
+                            .border(Color.black.opacity(0.3), width: 0.5)
                         }
                     }
                 }
@@ -219,6 +333,6 @@ struct MinimapGridView: View {
         guard let puzzle = viewModel.puzzle else { return .clear }
         if puzzle.isBlack(row: row, col: col) { return .black }
         if row == viewModel.focusedRow && col == viewModel.focusedCol { return .blue.opacity(0.6) }
-        return Color(.darkGray)
+        return .white
     }
 }

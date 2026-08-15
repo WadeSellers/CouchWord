@@ -243,17 +243,19 @@ struct PuzzlePickerView: View {
     enum SizeFilter: String, CaseIterable {
         case all = "All Sizes"
         case small = "5×5"
+        case compact = "7×7"
         case medium = "9×9"
-        case large = "13×13"
-        case full = "15×15"
+        case large = "11×11"
+        case full = "13×13"
 
         func matches(_ puzzle: Puzzle) -> Bool {
             switch self {
             case .all: return true
             case .small: return puzzle.rows == 5
+            case .compact: return puzzle.rows == 7
             case .medium: return puzzle.rows == 9
-            case .large: return puzzle.rows == 13
-            case .full: return puzzle.rows == 15
+            case .large: return puzzle.rows == 11
+            case .full: return puzzle.rows == 13
             }
         }
     }

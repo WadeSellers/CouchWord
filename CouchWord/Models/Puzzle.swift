@@ -70,7 +70,7 @@ struct PuzzleClue: Codable, Identifiable, Hashable {
     let row: Int
     let col: Int
 
-    var id: String { "\(number)" }
+    var id: String { "\(number)-\(row)-\(col)" }
     var label: String { "\(number). \(clue)" }
     var length: Int { answer.count }
 }

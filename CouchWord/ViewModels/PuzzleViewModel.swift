@@ -133,6 +133,18 @@ class PuzzleViewModel: ObservableObject {
         if isValidPosition(row: newRow, col: newCol) {
             focusedRow = newRow
             focusedCol = newCol
+
+            // Auto-switch direction based on movement — feels natural in a crossword
+            switch direction {
+            case .left, .right:
+                if puzzle.acrossClue(forRow: newRow, col: newCol) != nil {
+                    currentDirection = .across
+                }
+            case .up, .down:
+                if puzzle.downClue(forRow: newRow, col: newCol) != nil {
+                    currentDirection = .down
+                }
+            }
         }
     }
 

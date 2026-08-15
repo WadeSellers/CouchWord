@@ -22,7 +22,19 @@ struct LetterInputView: View {
                     .foregroundStyle(.secondary)
             }
 
-            // Voice input field (hidden but captures Siri dictation)
+            // Siri dictation hint
+            HStack(spacing: 8) {
+                Image(systemName: "mic.fill")
+                    .foregroundStyle(.blue)
+                Text("Hold")
+                Image(systemName: "mic")
+                    .foregroundStyle(.secondary)
+                Text("on Siri Remote to dictate")
+            }
+            .font(.callout)
+            .foregroundStyle(.secondary)
+
+            // Voice input field (captures Siri dictation)
             TextField("Say a letter or word...", text: $dictatedText)
                 .focused($textFieldFocused)
                 .textInputAutocapitalization(.characters)
@@ -38,7 +50,6 @@ struct LetterInputView: View {
                     Button {
                         viewModel.enterLetter(letter)
                         SoundManager.shared.play(.letterPlaced)
-                        dismiss()
                     } label: {
                         Text(String(letter))
                             .font(.title2)
@@ -53,10 +64,9 @@ struct LetterInputView: View {
             HStack(spacing: 40) {
                 Button("Clear") {
                     viewModel.clearCurrentCell()
-                    dismiss()
                 }
 
-                Button("Cancel") {
+                Button("Done") {
                     dismiss()
                 }
             }

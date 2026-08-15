@@ -7,7 +7,7 @@ struct CellView: View {
     let isFocused: Bool
     let isHighlighted: Bool
     var cellSize: CGFloat = 90
-    var theme: AppTheme = .midnight
+    var theme: AppTheme = .newspaper
     var fontDesign: Font.Design = .default
     var row: Int = 0
     var col: Int = 0
@@ -17,7 +17,7 @@ struct CellView: View {
     var body: some View {
         if displayState == .black {
             Rectangle()
-                .fill(theme.blackCellColor)
+                .fill(Color.black)
                 .frame(width: cellSize, height: cellSize)
         } else {
             ZStack(alignment: .topLeading) {
@@ -25,31 +25,28 @@ struct CellView: View {
                 Rectangle()
                     .fill(backgroundColor)
 
-                // Border
+                // Grid lines — light gray internal, heavier when focused
                 Rectangle()
-                    .stroke(borderColor, lineWidth: isFocused ? 3 : 1)
+                    .stroke(Color(white: 0.75), lineWidth: 0.5)
 
-                // Clue number
+                // Clue number — small, top-left, sans-serif
                 if let number = clueNumber {
                     Text("\(number)")
-                        .font(.system(size: clueNumberFontSize, weight: .medium))
-                        .foregroundStyle(theme.clueNumberColor)
+                        .font(.system(size: clueNumberFontSize, weight: .regular))
+                        .foregroundStyle(Color(white: 0.33))
                         .padding(clueNumberPadding)
                 }
 
-                // Letter
+                // Letter — centered, bold, sans-serif (SF Pro)
                 if !letter.isEmpty {
                     Text(letter)
-                        .font(.system(size: letterFontSize, weight: .medium, design: fontDesign))
+                        .font(.system(size: letterFontSize, weight: .bold, design: fontDesign))
                         .foregroundStyle(letterColor)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .offset(y: clueNumber != nil ? 2 : 0) // Shift slightly down when number present
                 }
             }
             .frame(width: cellSize, height: cellSize)
-            .scaleEffect(isFocused && !reduceMotion ? 1.12 : 1.0)
-            .shadow(color: isFocused ? theme.accentColor.opacity(0.7) : .clear, radius: isFocused ? 12 : 0)
-            .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: isFocused)
-            .animation(reduceMotion ? nil : .easeInOut(duration: 0.2), value: displayState)
             .accessibilityLabel(accessibilityDescription)
             .accessibilityHint(isFocused ? "Selected. Click to enter a letter." : "")
         }
@@ -76,49 +73,46 @@ struct CellView: View {
 
     // Dynamic font sizes based on cell size
     private var letterFontSize: CGFloat { cellSize * 0.42 }
-    private var clueNumberFontSize: CGFloat { max(cellSize * 0.15, 10) }
+    private var clueNumberFontSize: CGFloat { max(cellSize * 0.18, 10) }
     private var clueNumberPadding: CGFloat { max(cellSize * 0.04, 2) }
 
     private var backgroundColor: Color {
         switch displayState {
         case .correct:
-            return theme.correctColor.opacity(0.3)
+            return Color.green.opacity(0.25)
         case .incorrect:
-            return theme.incorrectColor.opacity(0.3)
+            return Color.red.opacity(0.25)
         default:
             if isFocused {
-                return theme.focusColor
+                // Active cell — NYT signature blue (#5C9ACF)
+                return Color(red: 0.36, green: 0.60, blue: 0.81)
             } else if isHighlighted {
-                return theme.highlightColor
+                // Active word — lighter blue (#D4E7F7)
+                return Color(red: 0.83, green: 0.91, blue: 0.97)
             } else {
-                return theme.cellBackground
+                return .white
             }
         }
     }
 
-    private var borderColor: Color {
-        isFocused ? theme.accentColor : theme.cellBorder
-    }
-
     private var letterColor: Color {
         switch displayState {
-        case .correct: return theme.correctColor
-        case .incorrect: return theme.incorrectColor
-        default: return theme.letterColor
+        case .correct: return .green.opacity(0.8)
+        case .incorrect: return .red
+        default: return .black
         }
     }
 }
 
 /// Calculates the optimal cell size for a given grid dimension on tvOS.
-/// The grid area is roughly 700pt wide for the puzzle portion of the screen.
 enum GridLayout {
-    static let gridAreaWidth: CGFloat = 700
-    static let gridAreaHeight: CGFloat = 700
-    static let cellSpacing: CGFloat = 2
+    static let gridAreaWidth: CGFloat = 660
+    static let gridAreaHeight: CGFloat = 660
+    static let cellSpacing: CGFloat = 0  // Newspaper grids have no spacing — borders touch
 
     static func cellSize(forRows rows: Int, cols: Int) -> CGFloat {
-        let maxWidth = (gridAreaWidth - CGFloat(cols - 1) * cellSpacing) / CGFloat(cols)
-        let maxHeight = (gridAreaHeight - CGFloat(rows - 1) * cellSpacing) / CGFloat(rows)
-        return min(maxWidth, maxHeight).rounded(.down)
+        let maxWidth = gridAreaWidth / CGFloat(cols)
+        let maxHeight = gridAreaHeight / CGFloat(rows)
+        return min(min(maxWidth, maxHeight), 70).rounded(.down)
     }
 }

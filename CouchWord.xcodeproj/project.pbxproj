@@ -7,42 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10001 /* CouchWordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001; };
-		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002; };
-		A10003 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003; };
-		A10004 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004; };
-		A10005 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005; };
-		A10006 /* PuzzleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006; };
-		A10007 /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007; };
-		A10008 /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008; };
-		A10009 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009; };
-		A1000A /* VoiceInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000A; };
-		A1000B /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000B; };
-		A1000C /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000C; };
-		A1000D /* ClueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000D; };
-		A1000E /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000E; };
-		A1000F /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000F; };
-		A10010 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010; };
-		A10011 /* LetterInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
-		A10012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
-		A10013 /* PuzzleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013; };
-		A10016 /* StatsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016; };
-		A10017 /* DailyPuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017; };
-		A10018 /* ShareResultsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018; };
-		A10019 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019; };
-		A1001A /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001A; };
-		A1001B /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001B; };
-		A1001C /* ProfilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001C; };
-		A1001D /* SkillProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001D; };
-		A1001E /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001E; };
-		A1001F /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001F; };
-		A10022 /* WordJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022; };
-		A10023 /* KnowledgeRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10023; };
-		A10024 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024; };
-		A10014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10014; };
-		A10015 /* Puzzles in Resources */ = {isa = PBXBuildFile; fileRef = B10015; };
-		A10020 /* PuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020; };
-		A10021 /* PuzzleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021; };
+		A10001 /* CouchWordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* CouchWordApp.swift */; };
+		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* ContentView.swift */; };
+		A10003 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003 /* Puzzle.swift */; };
+		A10004 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* UserProgress.swift */; };
+		A10005 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* GameStats.swift */; };
+		A10006 /* PuzzleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006 /* PuzzleStore.swift */; };
+		A10007 /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* ProgressStore.swift */; };
+		A10008 /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008 /* ShakeDetector.swift */; };
+		A10009 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009 /* SoundManager.swift */; };
+		A1000A /* VoiceInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000A /* VoiceInputManager.swift */; };
+		A1000B /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000B /* PuzzleViewModel.swift */; };
+		A1000C /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000C /* CellView.swift */; };
+		A1000D /* ClueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000D /* ClueListView.swift */; };
+		A1000E /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000E /* CompletionView.swift */; };
+		A1000F /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000F /* GameView.swift */; };
+		A10010 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010 /* HomeScreen.swift */; };
+		A10011 /* LetterInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011 /* LetterInputView.swift */; };
+		A10012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012 /* OnboardingView.swift */; };
+		A10013 /* PuzzleGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013 /* PuzzleGridView.swift */; };
+		A10014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10014 /* Assets.xcassets */; };
+		A10015 /* Puzzles in Resources */ = {isa = PBXBuildFile; fileRef = B10015 /* Puzzles */; };
+		A10016 /* StatsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016 /* StatsDashboardView.swift */; };
+		A10017 /* DailyPuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017 /* DailyPuzzleManager.swift */; };
+		A10018 /* ShareResultsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018 /* ShareResultsGenerator.swift */; };
+		A10019 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019 /* AppTheme.swift */; };
+		A1001A /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001A /* UserProfile.swift */; };
+		A1001B /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001B /* ProfileManager.swift */; };
+		A1001C /* ProfilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001C /* ProfilePickerView.swift */; };
+		A1001D /* SkillProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001D /* SkillProfile.swift */; };
+		A1001E /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001E /* GameMode.swift */; };
+		A1001F /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1001F /* Achievement.swift */; };
+		A10020 /* PuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020 /* PuzzleTests.swift */; };
+		A10021 /* PuzzleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021 /* PuzzleViewModelTests.swift */; };
+		A10022 /* WordJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022 /* WordJournal.swift */; };
+		A10023 /* KnowledgeRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10023 /* KnowledgeRadarView.swift */; };
+		A10024 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024 /* AchievementsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +75,8 @@
 		B10011 /* LetterInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterInputView.swift; sourceTree = "<group>"; };
 		B10012 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B10013 /* PuzzleGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGridView.swift; sourceTree = "<group>"; };
+		B10014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10015 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Puzzles; sourceTree = "<group>"; };
 		B10016 /* StatsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDashboardView.swift; sourceTree = "<group>"; };
 		B10017 /* DailyPuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPuzzleManager.swift; sourceTree = "<group>"; };
 		B10018 /* ShareResultsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareResultsGenerator.swift; sourceTree = "<group>"; };
@@ -85,13 +87,11 @@
 		B1001D /* SkillProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillProfile.swift; sourceTree = "<group>"; };
 		B1001E /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		B1001F /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		B10020 /* PuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleTests.swift; sourceTree = "<group>"; };
+		B10021 /* PuzzleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModelTests.swift; sourceTree = "<group>"; };
 		B10022 /* WordJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordJournal.swift; sourceTree = "<group>"; };
 		B10023 /* KnowledgeRadarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeRadarView.swift; sourceTree = "<group>"; };
 		B10024 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
-		B10014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B10015 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Puzzles; sourceTree = "<group>"; };
-		B10020 /* PuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleTests.swift; sourceTree = "<group>"; };
-		B10021 /* PuzzleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModelTests.swift; sourceTree = "<group>"; };
 		B10030 /* CouchWord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CouchWord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B10031 /* CouchWordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CouchWordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -267,7 +267,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					E10001 = {
 						CreatedOnToolsVersion = 16.0;
@@ -425,6 +425,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TVOS_DEPLOYMENT_TARGET = 17.0;
@@ -480,6 +481,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				TVOS_DEPLOYMENT_TARGET = 17.0;
 				VALIDATE_PRODUCT = YES;
@@ -493,6 +495,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GV76VP4G8V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -516,6 +519,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GV76VP4G8V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;

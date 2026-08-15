@@ -116,7 +116,7 @@ class ProgressStore: ObservableObject {
                let theme = AppTheme(rawValue: raw) {
                 return theme
             }
-            return .midnight
+            return .newspaper
         }
         set { defaults.set(newValue.rawValue, forKey: themeKeyValue) }
     }

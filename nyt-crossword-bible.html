@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Complete NYT Newspaper Crossword Reference — CouchWord Build Bible</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f5f0e8;
+    --grid-black: #000000;
+    --grid-white: #ffffff;
+    --accent: #567;
+    --rule: #ccc;
+    --highlight: #d4e3f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  h1 {
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 6px;
+  }
+  h3 {
+    font-size: 1.15rem;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  p, li { margin-bottom: 12px; }
+  ul, ol { padding-left: 24px; }
+  code {
+    background: #e8e2d8;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.92em;
+  }
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 0.95rem;
+  }
+  .spec-table th, .spec-table td {
+    border: 1px solid var(--rule);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  .spec-table th {
+    background: #e0dbd2;
+    font-weight: bold;
+  }
+  .spec-table tr:nth-child(even) td {
+    background: #f0ebe3;
+  }
+  .callout {
+    background: var(--highlight);
+    border-left: 4px solid #3a6ea5;
+    padding: 14px 18px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout-warn {
+    background: #fff3cd;
+    border-left: 4px solid #c59a00;
+    padding: 14px 18px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 4px;
+  }
+  .toc {
+    background: #fff;
+    border: 1px solid var(--rule);
+    padding: 20px 28px;
+    margin: 24px 0 40px;
+    border-radius: 4px;
+  }
+  .toc ol { counter-reset: toc-counter; list-style: none; padding-left: 0; }
+  .toc li { counter-increment: toc-counter; margin-bottom: 6px; }
+  .toc li::before { content: counter(toc-counter) ". "; font-weight: bold; color: var(--accent); }
+  .toc a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--rule); }
+  .toc a:hover { color: #3a6ea5; }
+  .grid-demo {
+    display: inline-block;
+    border: 2px solid #000;
+    margin: 16px 0;
+  }
+  .grid-demo table { border-collapse: collapse; }
+  .grid-demo td {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #888;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    position: relative;
+  }
+  .grid-demo td.black { background: #000; }
+  .grid-demo td .num {
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    font-size: 8px;
+    line-height: 1;
+    color: #000;
+  }
+  section { page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<h1>The Complete NYT Newspaper Crossword Puzzle Reference</h1>
+<p class="subtitle">CouchWord Apple TV Build Bible — Every verifiable detail about the New York Times crossword puzzle as it appears in the printed newspaper, compiled for faithful digital recreation.</p>
+
+<div class="toc">
+  <strong>Table of Contents</strong>
+  <ol>
+    <li><a href="#grid-architecture">Grid Architecture & Dimensions</a></li>
+    <li><a href="#symmetry">Symmetry Rules</a></li>
+    <li><a href="#black-squares">Black Squares & White Space</a></li>
+    <li><a href="#numbering">Cell Numbering System</a></li>
+    <li><a href="#typography">Typography & Letterforms</a></li>
+    <li><a href="#visual-design">Visual Design & Print Aesthetics</a></li>
+    <li><a href="#clue-layout">Clue List Layout in Print</a></li>
+    <li><a href="#difficulty">Difficulty Progression (Mon-Sun)</a></li>
+    <li><a href="#themes">Theme Architecture</a></li>
+    <li><a href="#clue-conventions">Clue Writing Conventions</a></li>
+    <li><a href="#special-mechanics">Special Puzzle Mechanics (Rebus, Circles, etc.)</a></li>
+    <li><a href="#word-rules">Word & Fill Rules</a></li>
+    <li><a href="#what-makes-good">What Makes a Good Clue (The Art)</a></li>
+    <li><a href="#aesthetic-appeal">Why the Puzzle is Aesthetically Pleasing</a></li>
+    <li><a href="#interaction-model">Interaction Model for Digital Recreation</a></li>
+    <li><a href="#apple-tv">Apple TV-Specific Considerations</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<section id="grid-architecture">
+<h2>1. Grid Architecture & Dimensions</h2>
+
+<p>The NYT crossword grid is always a <strong>perfect square</strong> with an <strong>odd number</strong> of cells per side. This is not arbitrary — odd dimensions guarantee a single center cell, which is structurally important for rotational symmetry and theme placement.</p>
+
+<table class="spec-table">
+  <thead>
+    <tr><th>Puzzle Type</th><th>Grid Size</th><th>Total Cells</th><th>Published</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Monday-Saturday (Daily)</td><td>15 × 15</td><td>225</td><td>Every weekday + Saturday</td></tr>
+    <tr><td>Sunday</td><td>21 × 21</td><td>441</td><td>Sunday Magazine section</td></tr>
+    <tr><td>Sunday (rare variants)</td><td>23 × 23</td><td>529</td><td>Occasional special editions</td></tr>
+    <tr><td>Mini</td><td>5 × 5 (Sun-Fri) / 7 × 7 (Sat)</td><td>25 / 49</td><td>Daily (digital primary)</td></tr>
+    <tr><td>Midi</td><td>9 × 9 to 11 × 11</td><td>81-121</td><td>Daily (digital)</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>For CouchWord:</strong> Your primary build target is the 15×15 daily grid. This is the iconic crossword. The Sunday 21×21 is the second priority. The grid is always perfectly square — never rectangular.
+</div>
+
+<h3>Cell Dimensions in Print</h3>
+<p>In the printed newspaper, each cell in a 15×15 daily puzzle measures approximately <strong>0.33 inches × 0.33 inches</strong> (about 8.5mm). The entire grid occupies roughly a <strong>5-inch × 5-inch square</strong> on the page. The Sunday 21×21 grid is printed larger, approximately <strong>7 inches × 7 inches</strong>, because it appears in the Sunday Magazine which has larger pages.</p>
+
+<p>Every cell is an exact square — never a rectangle. The cell walls (grid lines) are thin, uniform, single-weight lines. The outer border of the entire grid is noticeably thicker than the internal grid lines, typically about 2-3× the weight. This thick outer border frames the puzzle and visually separates it from the surrounding newspaper content.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="symmetry">
+<h2>2. Symmetry Rules</h2>
+
+<p>Think of this like a playing card. If you rotate a King of Spades 180 degrees, the design looks the same. That's <strong>rotational symmetry</strong>, and it's the primary rule governing NYT crossword grid design.</p>
+
+<h3>180-Degree Rotational Symmetry (Standard)</h3>
+<p>Nearly every NYT crossword grid exhibits 180-degree rotational symmetry. This means: if you flip the grid upside down, the pattern of black and white squares is identical. Technically: if there is a black square at position (row, column), there must also be a black square at position (16-row, 16-column) in a 15×15 grid. The center cell of a 15×15 grid is position (8, 8). The center cell of a 21×21 grid is position (11, 11).</p>
+
+<p>This rule was established by the first NYT crossword editor, Margaret Farrar, starting in 1942. When asked why the symmetry rule existed, she reportedly answered: <em>"Because it is prettier."</em></p>
+
+<h3>Other Symmetry Types (Rare)</h3>
+<ul>
+  <li><strong>Left-right (mirror) symmetry:</strong> Occasionally used when a theme requires it. The grid can be folded along a vertical center line and the two halves match.</li>
+  <li><strong>Diagonal symmetry:</strong> Began appearing in Friday/Saturday puzzles starting in January 2020.</li>
+  <li><strong>Asymmetric grids:</strong> Extremely rare. Used only when an unusual theme absolutely demands it.</li>
+</ul>
+
+<div class="callout">
+  <strong>For CouchWord:</strong> Default to 180-degree rotational symmetry for all grid generation or validation. If you build a grid editor, auto-mirror black square placement around the center point.
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="black-squares">
+<h2>3. Black Squares & White Space</h2>
+
+<p>Black squares serve as word separators — they're the walls between answers. They also define the visual pattern of the grid, and their placement is what makes each puzzle's grid unique.</p>
+
+<h3>Quantity Guidelines</h3>
+<ul>
+  <li>Historical rule: no more than ~1/6 of the grid (about 16-17% of cells, or roughly 36-38 black squares in a 15×15).</li>
+  <li>Modern era (Will Shortz): no strict maximum, but black squares should be used in moderation. Large clumps of black squares are strongly discouraged.</li>
+  <li>Themed weekday puzzles typically have 36-42 black squares.</li>
+  <li>Themeless Friday/Saturday puzzles have <em>fewer</em> black squares (often 28-34), creating large open white areas that are harder to construct and solve.</li>
+  <li>Sunday 21×21 puzzles typically have approximately 55-84 black squares (commonly around 74).</li>
+</ul>
+
+<h3>Cheater Squares</h3>
+<p>A "cheater" (or "helper") black square is one that doesn't change the word count — it just makes the constructor's job easier. For instance, adding a black square at the end of a corner to shorten a word slot. These are frowned upon and should be minimized. They are visually detectable because they disrupt the grid's openness without adding new words.</p>
+
+<h3>What Black Squares Must NOT Do</h3>
+<ul>
+  <li><strong>Never cut the grid into disconnected regions.</strong> All white squares must be reachable from all other white squares by moving through adjacent (up/down/left/right) white squares. This is called "all-over interlock."</li>
+  <li><strong>Never create 2-letter words.</strong> Every sequence of consecutive white cells between black squares (or between a black square and the grid edge) must be at least 3 cells long.</li>
+  <li><strong>Never form large clumps.</strong> A 3×3 or larger block of solid black squares is considered ugly and poor construction.</li>
+</ul>
+
+<h3>Visual Properties of Black Squares</h3>
+<p>In print, black squares are <strong>pure solid black (#000000)</strong>. They fill the entire cell with no border visible within them. They contrast maximally with the white cells. This high-contrast black-on-white pattern is the most visually defining characteristic of the crossword puzzle — it's what makes it instantly recognizable even from across a room.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="numbering">
+<h2>4. Cell Numbering System</h2>
+
+<p>This is one of the most important things to get right for CouchWord. The numbering system is how clues connect to the grid, and there is exactly one correct way to do it.</p>
+
+<h3>The Algorithm</h3>
+<p>Scan every cell of the grid, left to right, top to bottom (like reading a book). A white cell gets a number if and only if it is the <strong>first letter of an Across word OR the first letter of a Down word</strong> (or both). Specifically:</p>
+
+<ol>
+  <li>A cell starts an <strong>Across word</strong> if it is white AND (it is in column 1 OR the cell immediately to its left is black) AND the cell immediately to its right is also white (meaning there's at least a 2nd letter going right; combined with the 3-letter minimum, the cell two to the right must also be white or this situation can't arise in a valid grid).</li>
+  <li>A cell starts a <strong>Down word</strong> if it is white AND (it is in row 1 OR the cell immediately above it is black) AND the cell immediately below it is also white.</li>
+  <li>Numbers are assigned sequentially: 1, 2, 3, 4... in reading order. A cell that starts both an Across and a Down word gets only <strong>one number</strong> — that same number is used for both the Across clue and the Down clue.</li>
+</ol>
+
+<h3>Number Placement Within the Cell</h3>
+<p>The clue number is rendered in the <strong>top-left corner</strong> of the cell. It is very small — roughly 1/4 to 1/5 the height of the cell. In a cell that is approximately 8.5mm tall, the number is about 2mm tall. The number is in a <strong>sans-serif font</strong> and is always black on white. It must never interfere with the solver's ability to write a letter in the cell — the letter goes in the center-to-lower-center of the cell, and the number sits in the top-left corner above it.</p>
+
+<div class="callout">
+  <strong>For CouchWord:</strong> Implement the numbering algorithm exactly as described. The number must be visually small, top-left aligned, and never obscure the answer letter. On a TV screen, you'll have more pixels, so the number can be proportionally small but still legible from couch distance (roughly 6-10 feet).
+</div>
+
+<h3>Example: How a Corner Gets Numbered</h3>
+<div class="grid-demo">
+<table>
+  <tr>
+    <td><span class="num">1</span></td>
+    <td><span class="num">2</span></td>
+    <td><span class="num">3</span></td>
+    <td class="black"></td>
+    <td><span class="num">4</span></td>
+  </tr>
+  <tr>
+    <td><span class="num">5</span></td>
+    <td></td>
+    <td></td>
+    <td><span class="num">6</span></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><span class="num">7</span></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td class="black"></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><span class="num">8</span></td>
+    <td></td>
+    <td><span class="num">9</span></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p><em>In this 5×5 fragment: Cell (1,1) starts both 1-Across and 1-Down, so it gets the number 1. Cell (1,2) starts 2-Down (the cell above doesn't exist = edge, and there's a cell below), so it gets 2. The black cell at (1,4) gets nothing. Cell (2,1) starts 5-Across (cell to its left is an edge), so it gets 5. And so on.</em></p>
+</section>
+
+<!-- ============================================================ -->
+<section id="typography">
+<h2>5. Typography & Letterforms</h2>
+
+<h3>Grid Letters (What the Solver Writes)</h3>
+<p>In print, solvers write by hand, so the "font" is their own handwriting. But in the printed <em>solution grid</em> (published the next day) and in digital versions, the answer letters use:</p>
+<ul>
+  <li><strong>A sans-serif typeface</strong> — specifically, the NYT has historically used their own version of <strong>Franklin Gothic</strong>, designed by Morris Fuller Benton. This is a clean, bold sans-serif with high legibility at small sizes.</li>
+  <li>Letters are <strong>ALL UPPERCASE</strong>. Crossword answers are always displayed in capitals.</li>
+  <li>Letters are <strong>centered</strong> within the cell, both horizontally and vertically (or slightly below center to leave room for the number in the top-left).</li>
+  <li>The font weight is medium-to-bold — thick enough to be readable at small print sizes.</li>
+</ul>
+
+<h3>Clue Text Typography</h3>
+<p>In the printed newspaper, clue text uses:</p>
+<ul>
+  <li>A <strong>sans-serif typeface</strong> — Franklin Gothic or a similar clean grotesque. This contrasts with the serif body text of the newspaper (which uses a custom version of Cheltenham for headlines and Imperial/Times for body text).</li>
+  <li>Clue numbers are in <strong>bold</strong>. The clue text itself is in regular weight.</li>
+  <li>Font size is small — typically around 7-8 point, to fit all clues in the available space.</li>
+  <li>The "ACROSS" and "DOWN" section headers are in <strong>bold, uppercase, sans-serif</strong>.</li>
+</ul>
+
+<h3>The Title Line</h3>
+<ul>
+  <li><strong>Sunday puzzles always have a title.</strong> This title appears above the grid and hints at the theme. It is typically in a larger, bold font.</li>
+  <li><strong>Monday-Saturday puzzles rarely have titles.</strong> Only unusual themed puzzles occasionally get them.</li>
+  <li>The constructor's name appears as a byline, typically below or beside the title, in a smaller font: e.g., "By Jane Smith" or "Edited by Will Shortz".</li>
+</ul>
+
+<div class="callout">
+  <strong>For CouchWord:</strong> Use a clean sans-serif like Franklin Gothic, Helvetica Neue, or SF Pro Display (Apple's system font, well-suited for tvOS). Letters should be uppercase, centered in cells, medium-bold weight. For clue text, use a slightly lighter weight of the same family. The number in the cell should be about 25% the size of the answer letter.
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="visual-design">
+<h2>6. Visual Design & Print Aesthetics</h2>
+
+<p>Understanding WHY the NYT crossword is beautiful is crucial for making CouchWord feel right.</p>
+
+<h3>The Color Palette</h3>
+<p>The newspaper crossword uses exactly <strong>two colors: black and white</strong>. That's it. No gray, no color, no gradients. This extreme reduction is a massive part of its visual power. The grid is a pure abstract pattern of black cells and white cells, bordered by thin black lines. It's essentially a piece of geometric art.</p>
+
+<h3>The Grid as Geometric Art</h3>
+<p>Because of the 180-degree rotational symmetry, every NYT crossword grid is a balanced, abstract geometric composition. Look at any grid and you'll see:</p>
+<ul>
+  <li><strong>Visual balance:</strong> The weight of black squares is evenly distributed. No corner is "heavier" than the opposite corner. This creates a sense of visual equilibrium and calm.</li>
+  <li><strong>Negative space rhythm:</strong> The white areas (where words go) form flowing, interconnected channels. These channels vary in width and direction, creating visual rhythm — like rivers through a city grid.</li>
+  <li><strong>Figure-ground interplay:</strong> Depending on how you look, either the black squares or the white squares form the "figure." This ambiguity keeps the eye engaged.</li>
+  <li><strong>Pattern recognition:</strong> The brain naturally seeks patterns in the black/white arrangement, making each grid visually interesting before a single letter is written.</li>
+</ul>
+
+<h3>Common Grid Pattern Motifs</h3>
+<p>Certain visual patterns recur across NYT grids because they satisfy both the symmetry constraint and the constructibility requirements:</p>
+<ul>
+  <li><strong>The Pinwheel:</strong> Four L-shaped clusters of black squares rotating around the center, creating a pinwheel effect.</li>
+  <li><strong>The Diamond:</strong> Black squares forming a diamond or rotated-square shape in the center of the grid.</li>
+  <li><strong>Staircase patterns:</strong> Diagonal runs of black squares that create staircase-like stepping patterns.</li>
+  <li><strong>Wide-open centers:</strong> Particularly in Friday/Saturday themeless puzzles — very few black squares in the center, creating a large, intimidating open area of interlocked long answers.</li>
+  <li><strong>Corner blocks:</strong> 3-4 cell clusters of black squares in corners to define long Across and Down entries along the edges.</li>
+</ul>
+
+<h3>Proportional Harmony</h3>
+<p>The grid sits on the page as a near-perfect square, surrounded by the clue text. In the weekday newspaper, the layout typically is:</p>
+<ul>
+  <li>The grid occupies the upper-left or center of the puzzle area.</li>
+  <li>The ACROSS clues are listed to the right of the grid or below it.</li>
+  <li>The DOWN clues follow the ACROSS clues.</li>
+  <li>Clues are set in narrow columns (typically 2-3 columns of clue text).</li>
+  <li>The overall puzzle area, including grid and clues, fits within roughly a quarter-page or third-page rectangle.</li>
+</ul>
+
+<h3>The Sunday Layout</h3>
+<p>The Sunday puzzle gets dramatically more space. The 21×21 grid is printed large — sometimes nearly half the page. The title appears prominently above it. The clue columns wrap around or beside the grid. The visual impression is of an important, substantial piece — not a filler, but a centerpiece.</p>
+
+<div class="callout">
+  <strong>For CouchWord:</strong> The grid itself IS the visual centerpiece. On a TV screen, give it 60-70% of the screen width. Use pure black (#000000) for black squares and pure white (#FFFFFF) for white cells. The grid border should be notably thicker than internal lines. Surround the grid with generous whitespace. The clue list gets the remaining 30-40% of the screen, or appears below/beside the grid. This high-contrast, minimal color approach is what makes it feel like the Times.
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="clue-layout">
+<h2>7. Clue List Layout in Print</h2>
+
+<h3>Structure</h3>
+<p>Clues are divided into two sections:</p>
+<ol>
+  <li><strong>ACROSS</strong> — always listed first</li>
+  <li><strong>DOWN</strong> — always listed second</li>
+</ol>
+
+<p>Within each section, clues are listed in <strong>numerical order</strong> (1, 5, 9, 14... etc.). Each clue entry consists of:</p>
+<ul>
+  <li>The clue number (bold)</li>
+  <li>The clue text (regular weight)</li>
+</ul>
+
+<p>The NYT print edition does NOT include word length indicators in parentheses. You never see "Capital of France (5)" — you just see "Capital of France" and you figure out from the grid that it's 5 letters. This is an American-style convention. (British crosswords do include word lengths.)</p>
+
+<h3>Clue Formatting Rules</h3>
+<ul>
+  <li>The <strong>first letter of every clue is capitalized</strong>, regardless of whether it's a proper noun or a full sentence. This is deliberate — it creates ambiguity. The clue "March locale" could refer to the month or to a march (parade/protest). This capitalization rule is a tool for misdirection.</li>
+  <li>Clues are separated by line breaks or sometimes by centered dots or spacing in dense layouts.</li>
+  <li>There are no periods after clue numbers.</li>
+  <li>Fill-in-the-blank clues use underscores: <code>___ Angeles</code></li>
+  <li>Spoken-phrase answers are indicated by quotes: <code>"Get out of here!"</code></li>
+  <li>Wordplay or pun clues end with a question mark: <code>What might keep a watch on you?</code></li>
+  <li>Abbreviation indicators: if the clue contains "Abbr." or uses abbreviations, the answer is also abbreviated.</li>
+</ul>
+
+<h3>Print Column Layout</h3>
+<p>In the newspaper, clues are set in <strong>2-3 narrow columns</strong> of small sans-serif type. The columns are typically justified or left-aligned. Clue numbers are slightly indented or outdented (hanging indent style) so the eye can quickly scan to find a specific number. The ACROSS header and DOWN header are visually distinct — bold, uppercase, sometimes slightly larger.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="difficulty">
+<h2>8. Difficulty Progression (Monday to Sunday)</h2>
+
+<p>This is one of the most defining characteristics of the NYT crossword. The difficulty escalates through the week like chapters of a book getting more complex.</p>
+
+<table class="spec-table">
+  <thead>
+    <tr><th>Day</th><th>Difficulty</th><th>Themed?</th><th>Grid Style</th><th>Clue Style</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Monday</td>
+      <td>Easiest</td>
+      <td>Yes, always themed</td>
+      <td>Standard 15×15, more black squares, shorter words</td>
+      <td>Straightforward definitions, fill-in-the-blanks, common knowledge</td>
+    </tr>
+    <tr>
+      <td>Tuesday</td>
+      <td>Easy</td>
+      <td>Yes</td>
+      <td>Standard 15×15</td>
+      <td>Slightly trickier, still mostly direct</td>
+    </tr>
+    <tr>
+      <td>Wednesday</td>
+      <td>Medium</td>
+      <td>Yes</td>
+      <td>Standard 15×15</td>
+      <td>More wordplay, cultural references broaden</td>
+    </tr>
+    <tr>
+      <td>Thursday</td>
+      <td>Medium-Hard</td>
+      <td>Yes, often with a trick/gimmick</td>
+      <td>May have unusual features (rebus squares, unusual grid shapes)</td>
+      <td>Misdirection, puns, rebus clues; the "trickster" day</td>
+    </tr>
+    <tr>
+      <td>Friday</td>
+      <td>Hard</td>
+      <td>No (themeless)</td>
+      <td>Wide-open grid, fewer black squares, many long entries (10-15 letters)</td>
+      <td>Oblique, clever, multi-layered clues; broad vocabulary required</td>
+    </tr>
+    <tr>
+      <td>Saturday</td>
+      <td>Hardest</td>
+      <td>No (themeless)</td>
+      <td>Wide-open grid, fewest black squares, maximum long entries</td>
+      <td>Most deceptive and indirect clues; expert-level vocabulary and knowledge</td>
+    </tr>
+    <tr>
+      <td>Sunday</td>
+      <td>Medium (≈ Wednesday/Thursday)</td>
+      <td>Yes, always titled</td>
+      <td>21×21 grid (larger, not harder per se)</td>
+      <td>Moderate clues; theme is more elaborate with more theme entries; always has a title</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>For CouchWord:</strong> If you categorize puzzles by difficulty, use this Mon-Sun scale. Solvers colloquially say "that was a Tuesday-level puzzle" to mean easy, or "Saturday-level" to mean brutally hard. The hardest puzzle of the week is Saturday, NOT Sunday. Sunday is large but only medium-difficulty.
+</div>
+
+<h3>Difficulty Levers — How Clues Get Harder</h3>
+<p>The same answer can be clued at any difficulty level. Here's a real example from the NYT specifications using the answer <strong>STRAP</strong>:</p>
+<div class="example">
+  <strong>Monday clue:</strong> "Subway rider's handhold"<br>
+  <strong>Wednesday clue:</strong> "Part of a bike helmet"<br>
+  <strong>Saturday clue:</strong> "What might keep a watch on you?"
+</div>
+<p>Notice: the Monday clue is a direct definition. The Saturday clue is a pun — a watch strap "keeps a watch on you" — and requires lateral thinking. The answer is the same word, but the mental path to get there is completely different.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="themes">
+<h2>9. Theme Architecture</h2>
+
+<p>Themes are the soul of Monday-Thursday and Sunday puzzles. A theme is a set of answers that share something in common — a pattern, a wordplay trick, a concept.</p>
+
+<h3>Theme Entry Placement</h3>
+<ul>
+  <li>Theme entries are usually the <strong>longest answers in the puzzle</strong>.</li>
+  <li>They are placed <strong>symmetrically</strong> in the grid (matching the grid's rotational symmetry). If there's a 15-letter theme entry in row 3, there's another 15-letter theme entry in row 13.</li>
+  <li>A typical themed daily puzzle has 3-5 theme entries.</li>
+  <li>No non-theme entry should be longer than the shortest theme entry.</li>
+  <li>Theme entries are almost always Across entries (horizontal), but Down theme entries are occasionally used.</li>
+</ul>
+
+<h3>Theme Types</h3>
+<ul>
+  <li><strong>Hidden word themes:</strong> A word is hidden across the theme entries (e.g., the word "CAT" hidden inside EDUCATION, SCATTER, PRACTICAL).</li>
+  <li><strong>Pun themes:</strong> Each theme entry is a familiar phrase with one word changed to create a pun, clued with a "?" question mark.</li>
+  <li><strong>Transformation themes:</strong> A consistent transformation is applied to base phrases (adding a letter, removing a letter, changing a letter).</li>
+  <li><strong>Category themes:</strong> All theme entries belong to one category (types of dances, words that can follow "fire," etc.).</li>
+  <li><strong>Revealer themes:</strong> One theme entry (often the last or central one) is a "revealer" — its answer explains what the other theme entries have in common.</li>
+</ul>
+
+<h3>Sunday Theme Titles</h3>
+<p>Every Sunday puzzle has a title printed above the grid. The title hints at the theme without giving it away. It's like a chapter title — evocative, slightly cryptic, enticing. Examples of the flavor: a puzzle where theme entries all contain hidden musical notes might be titled "Sound Effects." The title is a crucial part of the Sunday solving experience.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="clue-conventions">
+<h2>10. Clue Writing Conventions (The Rules of the Game)</h2>
+
+<p>These are the unspoken rules that solvers learn over time. They're like a contract between constructor and solver — silent agreements about how clues work.</p>
+
+<h3>Grammatical Matching</h3>
+<ul>
+  <li><strong>Tense:</strong> If the clue is past tense, the answer is past tense. "Walked heavily" = TRUDGED.</li>
+  <li><strong>Number:</strong> If the clue is plural, the answer is plural. "Felines" = CATS.</li>
+  <li><strong>Part of speech:</strong> If the clue is a noun, the answer is a noun. If the clue is a verb, the answer is a verb.</li>
+  <li><strong>Degree:</strong> Comparative clue = comparative answer. "Most difficult" = TOUGHEST.</li>
+</ul>
+
+<h3>Signal Conventions</h3>
+<table class="spec-table">
+  <thead>
+    <tr><th>Signal in Clue</th><th>What It Means</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Question mark at end</td><td>Wordplay, pun, or misdirection</td><td>"Sole provider?" = SHOE</td></tr>
+    <tr><td>Quotation marks around clue</td><td>Answer is a spoken phrase</td><td>"Get out of here!" = LEAVE NOW</td></tr>
+    <tr><td>"Abbr." or abbreviation in clue</td><td>Answer is an abbreviation</td><td>"M.D. org." = AMA</td></tr>
+    <tr><td>Underscore (___)</td><td>Fill-in-the-blank</td><td>"___ Angeles" = LOS</td></tr>
+    <tr><td>Foreign language indicator</td><td>Answer is in that language</td><td>"Summer: Fr." = ETE</td></tr>
+    <tr><td>City or country from another language</td><td>Answer is in that language</td><td>"A river in Orleans" = FLEUVE</td></tr>
+    <tr><td>"See 22-Across"</td><td>Cross-reference to another clue</td><td>Two clues form one long phrase</td></tr>
+    <tr><td>Square brackets [content]</td><td>Verbalization or sound</td><td>[It's cold!] = BRR</td></tr>
+    <tr><td>"Var." or "Informal"</td><td>Answer is a variant spelling or informal word</td><td>"Goodbye, informally" = BYE</td></tr>
+    <tr><td>First letter capitalized (but not a name)</td><td>Deliberate ambiguity</td><td>"March locale" — is it the month or a parade?</td></tr>
+  </tbody>
+</table>
+
+<h3>What Clues Must Never Do</h3>
+<ul>
+  <li>A clue must <strong>never contain its own answer word</strong>. You can't clue RIVER as "A flowing river."</li>
+  <li>The number of words in the answer is <strong>not given</strong>. A one-word clue can have a multi-word answer.</li>
+  <li>Two obscure words should <strong>never cross each other</strong> in the grid. If a tough word appears, it must be crossed by easily gettable letters.</li>
+  <li>Accented characters in answers are <strong>dropped</strong>. The answer MERE (French for "mother") is entered without the accent.</li>
+</ul>
+</section>
+
+<!-- ============================================================ -->
+<section id="special-mechanics">
+<h2>11. Special Puzzle Mechanics</h2>
+
+<h3>Rebus Squares</h3>
+<p>In a rebus puzzle, one or more squares contain <strong>multiple letters, a word, a number, or a symbol</strong> instead of a single letter. Both the Across and Down answers passing through that square use the same rebus content. Example: the letters "PH" might occupy a single square, appearing in "triumpH" across and "PHone" down. Rebus puzzles are most common on <strong>Thursdays</strong>. In the newspaper, solvers squeeze the content into the cell. Digitally, the cell needs to support multi-character input.</p>
+
+<h3>Circled Squares</h3>
+<p>Some cells have a circle drawn inside them (an inscribed circle within the square). The circled letters, when read in order, spell out a word or phrase related to the theme. In print, this is literally a thin circle drawn within the cell. The solver still writes a letter inside the circle. Circles are purely a visual overlay and do not change the mechanical rules of the puzzle.</p>
+
+<h3>Shaded Squares</h3>
+<p>Some puzzles use gray shading in certain cells instead of (or in addition to) circles. Same purpose — highlighting specific letters that form a meta-answer.</p>
+
+<h3>Unusual Grid Shapes</h3>
+<p>Very rarely, a puzzle's black squares form a recognizable shape (a heart, a star, a letter). This is almost always theme-related. The shape is formed by the negative space of the black squares against the white background.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="word-rules">
+<h2>12. Word & Fill Rules</h2>
+
+<h3>Absolute Rules</h3>
+<ul>
+  <li><strong>Minimum word length: 3 letters.</strong> No 1-letter or 2-letter words ever.</li>
+  <li><strong>No unchecked squares.</strong> Every letter must appear in both an Across answer AND a Down answer. Every single letter in the grid is "crossed."</li>
+  <li><strong>No repeated words.</strong> The same answer cannot appear twice in the same puzzle. This extends to compound words — if CASH COW is an answer, neither CASH nor COW can appear as separate answers.</li>
+  <li><strong>All answers must be real.</strong> Every answer must be a real word, phrase, proper noun, or commonly used expression. Made-up words are forbidden.</li>
+  <li><strong>All-over interlock.</strong> A solver must be able to move from any white cell to any other white cell through a path of adjacent white cells.</li>
+</ul>
+
+<h3>Maximum Word Counts</h3>
+<table class="spec-table">
+  <thead>
+    <tr><th>Grid Size</th><th>Themed Puzzle Max</th><th>Themeless Max</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>15×15</td><td>78 words</td><td>72 words</td></tr>
+    <tr><td>21×21</td><td>140 words</td><td>N/A (Sunday is always themed)</td></tr>
+    <tr><td>23×23</td><td>168 words</td><td>N/A</td></tr>
+  </tbody>
+</table>
+
+<h3>Fill Quality</h3>
+<p>The non-theme answers are called "fill." Good fill uses:</p>
+<ul>
+  <li><strong>Lively, interesting words and phrases:</strong> Modern slang, vivid verbs, colorful proper nouns.</li>
+  <li><strong>Lesser-used alphabet letters:</strong> J, Q, X, Z, K, W make a grid more interesting. A grid full of common letters (E, S, T, A) feels dull.</li>
+  <li><strong>Well-known brand names:</strong> Acceptable in moderation if nationally recognized (OREO, UBER, etc.).</li>
+</ul>
+<p>Bad fill includes:</p>
+<ul>
+  <li><strong>"Crosswordese":</strong> Obscure words that appear in crosswords far more than in real life. Examples: ESNE (Anglo-Saxon serf), ETUI (small ornamental case), OAST (kiln). These are tolerated sparingly but frowned upon.</li>
+  <li><strong>Partial phrases longer than 5 letters:</strong> "ONE TO A" or "A STITCH IN" as standalone answers are bad fill.</li>
+  <li><strong>Obscure foreign words, rare abbreviations, or uninteresting proper nouns.</strong></li>
+</ul>
+
+<h3>Content Restrictions</h3>
+<ul>
+  <li>No profanity.</li>
+  <li>No content involving sad, disturbing, or overly explicit topics.</li>
+  <li>Racial slurs and offensive terms are absolutely prohibited.</li>
+</ul>
+</section>
+
+<!-- ============================================================ -->
+<section id="what-makes-good">
+<h2>13. What Makes a Good Clue (The Art)</h2>
+
+<p>This is where crosswords go from being a word game to being an art form. A great clue is a tiny puzzle within the puzzle — a miniature riddle that makes you groan or grin when you finally crack it.</p>
+
+<h3>Qualities of a Great Clue</h3>
+<ol>
+  <li><strong>Precision:</strong> A clue must be 100% accurate. If you clue MARS as "Fourth planet from the sun," that's precisely correct. If you said "Third planet," that's wrong and unfair.</li>
+  <li><strong>Misdirection:</strong> The best clues point you in the wrong direction first. "Current events?" sounds like it's about the news — but the answer is RAPIDS (currents of water that are events/happenings). The question mark tells you misdirection is at play.</li>
+  <li><strong>Economy:</strong> Great clues are short. Every word earns its place. "Capital of France" is better than "The city that is the capital of the country of France." Brevity creates elegance.</li>
+  <li><strong>Surface reading vs. cryptic reading:</strong> The surface reading (what the clue seems to mean at first glance) should be plausible and coherent. The actual parsing (how the clue leads to the answer) should click with a satisfying "aha!"</li>
+  <li><strong>Freshness:</strong> If every crossword clues ERA as "Period of time," that's boring. Cluing it as "Common denominator?" (ERA is the earned run average in baseball, and "common denominator" sounds like math but isn't) is fresh.</li>
+  <li><strong>Fairness:</strong> A clue should be solvable. Difficulty should come from cleverness, not from obscurity. A clue that requires knowing a tiny Bulgarian village is unfair. A clue that requires lateral thinking is hard but fair.</li>
+  <li><strong>Humor:</strong> Will Shortz values humor. A clue that makes you laugh when you finally see the answer is top-tier. "What might keep a watch on you?" for STRAP is funny because it flips the idiom "keep a watch on."</li>
+</ol>
+
+<h3>Types of Clues by Mechanism</h3>
+<table class="spec-table">
+  <thead>
+    <tr><th>Type</th><th>How It Works</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Straight definition</td><td>Direct synonym or definition</td><td>"Feline" = CAT</td></tr>
+    <tr><td>Fill-in-the-blank</td><td>Complete a known phrase</td><td>"___ of the crop" = CREAM</td></tr>
+    <tr><td>Pun/Wordplay (?)</td><td>Answer requires lateral reading</td><td>"Sole provider?" = SHOE</td></tr>
+    <tr><td>Double definition</td><td>Clue works as two different definitions</td><td>"Saw" = PROVERB (a "saw" is an old saying)</td></tr>
+    <tr><td>Example clue</td><td>"___, for one" or "One of 50"</td><td>"Texas, for one" = STATE</td></tr>
+    <tr><td>Cross-reference</td><td>References another clue number</td><td>"With 22-Across, a breakfast item" = ORANGE / JUICE</td></tr>
+    <tr><td>Spoken phrase ("")</td><td>Answer is what someone might say</td><td>"'No way!'" = AS IF</td></tr>
+    <tr><td>Cultural reference</td><td>References specific works, people, events</td><td>"Hamlet's 'To be or not to be,' e.g." = SOLILOQUY</td></tr>
+    <tr><td>"Kind of" / "Type of"</td><td>Answer precedes a word to form a phrase</td><td>"Kind of plan" = MEAL (meal plan)</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ============================================================ -->
+<section id="aesthetic-appeal">
+<h2>14. Why the NYT Crossword is Aesthetically Pleasing</h2>
+
+<p>The crossword's beauty comes from the same principles that make great graphic design, architecture, and music work. Here's the breakdown:</p>
+
+<h3>1. Constraint Creates Beauty</h3>
+<p>The grid rules (symmetry, no 2-letter words, all-over interlock, maximum word counts) are severe constraints. But constraints force creativity into channels, and the result is elegant. Every NYT grid is proof that structure creates art. It's the same reason a sonnet is beautiful — the 14-line, iambic pentameter constraint forces the poet to find the most elegant expression within tight boundaries.</p>
+
+<h3>2. High-Contrast Binary Pattern</h3>
+<p>Pure black and pure white. No middle ground. This creates maximum visual impact with minimum means. It's the same principle behind a chess board, a Mondrian painting, or a Japanese zen garden with dark stones on white gravel. The eye is drawn to high-contrast patterns instinctively.</p>
+
+<h3>3. Rotational Symmetry = Visual Harmony</h3>
+<p>Symmetry is deeply wired into human perception as beautiful. Faces, flowers, butterflies, architecture — we find symmetry pleasing across every domain. The crossword grid satisfies this instinct every single day. The solver may never consciously think "this grid is rotationally symmetric," but they feel the visual balance.</p>
+
+<h3>4. Completeness Satisfaction</h3>
+<p>An empty crossword grid is a field of potential energy. As the solver fills it in, the white spaces transform from empty voids into meaningful text. Every filled cell is a small victory. The completed grid — every cell filled, the pattern now containing words — is deeply satisfying in the way a completed jigsaw puzzle is. But unlike a jigsaw, you created the content yourself through knowledge and reasoning.</p>
+
+<h3>5. Information Density</h3>
+<p>A 15×15 grid contains 225 cells, maybe 180 of which are white, containing roughly 78 words. The grid compresses enormous amounts of language into a tiny space. This density is visually and intellectually satisfying — like a well-organized bookshelf or a perfectly packed suitcase.</p>
+
+<h3>6. The Clue/Grid Interplay</h3>
+<p>The layout of the puzzle on the page creates a natural visual hierarchy: the grid is the focal point (visual weight, geometric pattern, centrally placed), and the clue columns are the supporting text (smaller, linear, organized). This is classic editorial design — a strong visual anchor with supporting text.</p>
+
+<h3>7. Temporal Beauty</h3>
+<p>The difficulty progression through the week creates a narrative arc. Monday is the warm-up. Saturday is the climax. Sunday is the denouement. This weekly rhythm gives the puzzle a life beyond any single grid.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="interaction-model">
+<h2>15. Interaction Model for Digital Recreation</h2>
+
+<p>When translating the newspaper experience to a screen, here are the critical interaction details from the NYT's own digital versions and from the newspaper experience:</p>
+
+<h3>Selection & Navigation</h3>
+<ul>
+  <li><strong>Active cell:</strong> The cell currently being edited. In the NYT app, this is highlighted in a distinctive color (typically darker blue or yellow).</li>
+  <li><strong>Active word:</strong> All cells in the current word (across or down) are highlighted in a lighter color (light blue). This shows the solver which word they're working on.</li>
+  <li><strong>Direction toggle:</strong> Tapping the same cell toggles between the Across clue and the Down clue that pass through it. This is absolutely essential — every cell belongs to exactly one Across word and one Down word.</li>
+  <li><strong>Auto-advance:</strong> After entering a letter, the cursor automatically moves to the next cell in the current direction (right for Across, down for Down).</li>
+  <li><strong>Tab/navigation:</strong> Tab moves to the next clue. Shift+Tab moves to the previous clue.</li>
+</ul>
+
+<h3>Visual States of a Cell</h3>
+<ul>
+  <li><strong>Empty:</strong> White cell, no letter, possibly has a small number in the top-left.</li>
+  <li><strong>Filled:</strong> White cell with a black uppercase letter centered in it.</li>
+  <li><strong>Active cell:</strong> Highlighted cell (the cursor position) — one distinct color.</li>
+  <li><strong>Active word:</strong> All cells in the current word highlighted — a lighter shade of the active cell color.</li>
+  <li><strong>Black cell:</strong> Pure black, no interaction possible.</li>
+  <li><strong>Pencil mode (optional):</strong> Letters entered in gray instead of black, indicating the solver is uncertain. Mimics pen vs. pencil in the newspaper.</li>
+  <li><strong>Checked/incorrect (optional):</strong> If autocheck is on, incorrect letters can be marked (typically with a small indicator).</li>
+  <li><strong>Circled cell:</strong> A thin circle inscribed within the cell, behind the letter.</li>
+  <li><strong>Rebus cell:</strong> Cell that contains multiple characters, displayed at a smaller font size to fit.</li>
+</ul>
+
+<h3>Clue Display</h3>
+<ul>
+  <li>The currently active clue should be prominently displayed — large enough to read comfortably.</li>
+  <li>The full clue list should be scrollable and organized into ACROSS and DOWN sections.</li>
+  <li>Clicking/selecting a clue in the list should navigate the grid to that clue's starting cell.</li>
+  <li>Clues for completed words can be visually dimmed or struck through to show progress.</li>
+</ul>
+
+<h3>Timer</h3>
+<p>The NYT app includes a running timer in the top corner. The timer pauses when the app is backgrounded. Speed-solving is a significant part of the community — many solvers race against themselves or friends.</p>
+
+<h3>Completion</h3>
+<p>When all cells are correctly filled, the NYT app plays a congratulatory animation/sound. In the newspaper, there is no such feedback — you just know you're done when all cells are filled and everything seems to work. The digital equivalent should have a clear, satisfying completion state.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="apple-tv">
+<h2>16. Apple TV-Specific Considerations for CouchWord</h2>
+
+<div class="callout-warn">
+  <strong>This section is CouchWord-specific design guidance</strong>, not NYT documentation. It's derived from the constraints of tvOS and the Siri Remote.
+</div>
+
+<h3>Screen Distance & Cell Sizing</h3>
+<p>TV viewers sit 6-10 feet from the screen. The grid cells must be large enough that:</p>
+<ul>
+  <li>The answer letters are readable from couch distance.</li>
+  <li>The small clue numbers in the top-left of cells are still legible.</li>
+  <li>The active cell and active word highlights are clearly distinguishable.</li>
+</ul>
+<p>On a 55" 4K TV at 8 feet, each cell of a 15×15 grid displayed at 60% screen width would be approximately 0.7 inches on screen — about double the newspaper size. This is good — it accounts for the distance.</p>
+
+<h3>Navigation with Siri Remote</h3>
+<p>The Siri Remote has:</p>
+<ul>
+  <li>A touch surface / clickpad for directional navigation (swipe or click edges to move up/down/left/right)</li>
+  <li>A select/click button (center press)</li>
+  <li>A menu/back button</li>
+  <li>A play/pause button</li>
+  <li>A microphone button for Siri / voice input</li>
+</ul>
+
+<h3>Voice Input (Key Differentiator)</h3>
+<p>This is CouchWord's unique feature. Since typing on a TV is painful, voice input via the Siri Remote microphone is the primary text entry method. The solver says a letter, the app enters it. Design considerations:</p>
+<ul>
+  <li>Single-letter voice input: "A", "B", "C"... must be fast and accurate.</li>
+  <li>Backspace/delete by voice: "Delete" or "Back."</li>
+  <li>Navigation by voice: "5 Across" or "12 Down" to jump to a clue.</li>
+  <li>Speak the full word: "TIGER" — the app fills in T-I-G-E-R across the active word.</li>
+</ul>
+
+<h3>Screen Layout for TV</h3>
+<p>Recommended layout (landscape, 16:9):</p>
+<ul>
+  <li><strong>Left 60-65%:</strong> The grid, centered vertically, with generous padding.</li>
+  <li><strong>Right 35-40%:</strong> The clue panel — shows the active clue prominently at top, with a scrollable list of all ACROSS and DOWN clues below.</li>
+  <li><strong>Top bar:</strong> Timer, puzzle date, puzzle title (if Sunday), settings icon.</li>
+  <li><strong>Bottom bar:</strong> Minimal — perhaps just a "Pencil mode" toggle and "Check" option.</li>
+</ul>
+
+<h3>Color Palette for TV</h3>
+<p>Stick close to the newspaper aesthetic but adapt for screens:</p>
+<ul>
+  <li><strong>Background:</strong> Not pure white (#FFFFFF) — too harsh on TV. Use a very warm near-white like #F8F6F0 or #FAFAF5.</li>
+  <li><strong>Grid cells:</strong> Pure white (#FFFFFF) for white cells. Pure black (#000000) for black cells.</li>
+  <li><strong>Grid lines:</strong> Light gray (#CCCCCC) for internal lines. Black or very dark gray for the outer border.</li>
+  <li><strong>Active cell highlight:</strong> Warm gold/yellow (#F5D76E) or the NYT's signature blue (#5C9ACF).</li>
+  <li><strong>Active word highlight:</strong> A lighter shade of the active cell color (#D4E7F7 for blue).</li>
+  <li><strong>Text:</strong> Black (#1A1A1A) for letters and clues.</li>
+  <li><strong>Clue numbers:</strong> Dark gray (#555555), small size.</li>
+</ul>
+
+<h3>Font Recommendations for tvOS</h3>
+<ul>
+  <li><strong>Grid letters:</strong> SF Pro Display (Apple's system font), Bold weight, uppercase. Clean, highly legible at distance.</li>
+  <li><strong>Clue text:</strong> SF Pro Text, Regular weight. Designed for readability at text sizes.</li>
+  <li><strong>Cell numbers:</strong> SF Pro Text, Light or Regular weight, small size.</li>
+  <li><strong>Section headers (ACROSS/DOWN):</strong> SF Pro Display, Semibold, uppercase, tracked slightly wider.</li>
+</ul>
+
+<h3>Animations & Polish</h3>
+<ul>
+  <li><strong>Cell focus animation:</strong> Subtle scale-up or glow when the active cell changes. tvOS's native focus engine already does this — lean into it.</li>
+  <li><strong>Letter entry:</strong> Letters should appear with a very brief fade-in or drop-in animation (50-100ms). Fast enough not to slow solving, slow enough to feel tangible.</li>
+  <li><strong>Completion celebration:</strong> When the puzzle is complete, a brief animation — perhaps the grid pulses once, or all cells briefly flash gold. Keep it classy and fast. The NYT app confetti is a reference point.</li>
+  <li><strong>Word completion feedback:</strong> Optional subtle visual feedback when a word is fully filled (not necessarily correct, just filled) — maybe the word's highlight briefly brightens.</li>
+</ul>
+</section>
+
+<!-- ============================================================ -->
+<h2>Appendix A: Quick Reference Card</h2>
+
+<table class="spec-table">
+  <thead>
+    <tr><th>Property</th><th>Value</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Daily grid size</td><td>15 × 15 (225 cells)</td></tr>
+    <tr><td>Sunday grid size</td><td>21 × 21 (441 cells)</td></tr>
+    <tr><td>Symmetry</td><td>180° rotational (standard)</td></tr>
+    <tr><td>Minimum word length</td><td>3 letters</td></tr>
+    <tr><td>Max word count (15×15, themed)</td><td>78</td></tr>
+    <tr><td>Max word count (15×15, themeless)</td><td>72</td></tr>
+    <tr><td>Max word count (21×21)</td><td>140</td></tr>
+    <tr><td>Unchecked squares allowed?</td><td>No — every letter crosses</td></tr>
+    <tr><td>Grid connectivity</td><td>All white cells must connect</td></tr>
+    <tr><td>Grid colors</td><td>Black (#000) and White (#FFF) only</td></tr>
+    <tr><td>Answer letter case</td><td>Uppercase only</td></tr>
+    <tr><td>Grid font family</td><td>Franklin Gothic (print) / SF Pro (Apple)</td></tr>
+    <tr><td>Clue number position</td><td>Top-left corner of cell</td></tr>
+    <tr><td>Clue number size</td><td>~25% of cell height</td></tr>
+    <tr><td>Letter position</td><td>Centered in cell</td></tr>
+    <tr><td>First clue letter</td><td>Always capitalized</td></tr>
+    <tr><td>Word length in clues?</td><td>No (American style omits this)</td></tr>
+    <tr><td>Easiest day</td><td>Monday</td></tr>
+    <tr><td>Hardest day</td><td>Saturday</td></tr>
+    <tr><td>Sunday difficulty</td><td>Medium (≈ Wednesday/Thursday)</td></tr>
+    <tr><td>Sunday always titled?</td><td>Yes</td></tr>
+    <tr><td>Rebus most common on</td><td>Thursday</td></tr>
+    <tr><td>First NYT crossword</td><td>February 15, 1942 (Sunday only)</td></tr>
+    <tr><td>Daily crossword started</td><td>1950</td></tr>
+    <tr><td>Current editor</td><td>Will Shortz (since 1993)</td></tr>
+    <tr><td>Total puzzles published (through 2026)</td><td>~27,900+</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>Appendix B: Numbering Algorithm Pseudocode</h2>
+
+<div class="example">
+<pre style="font-family: monospace; font-size: 0.9rem; line-height: 1.5; white-space: pre-wrap;">
+function numberGrid(grid):
+    // grid is a 2D array where grid[r][c] = BLACK or WHITE
+    // Returns a 2D array of numbers (0 means no number)
+    
+    size = grid.length  // e.g., 15
+    numbers = new 2D array of zeros, same size as grid
+    currentNumber = 1
+    
+    for r from 0 to size-1:
+        for c from 0 to size-1:
+            if grid[r][c] == BLACK:
+                continue
+            
+            startsAcross = false
+            startsDown = false
+            
+            // Check if this cell starts an Across word:
+            // Must be at left edge OR preceded by a black square
+            // AND the cell to the right must be white (word is at least 2 chars,
+            //      but 3-letter minimum is enforced by grid validity)
+            if (c == 0 OR grid[r][c-1] == BLACK):
+                if (c + 1 < size AND grid[r][c+1] == WHITE):
+                    startsAcross = true
+            
+            // Check if this cell starts a Down word:
+            if (r == 0 OR grid[r-1][c] == BLACK):
+                if (r + 1 < size AND grid[r+1][c] == WHITE):
+                    startsDown = true
+            
+            if startsAcross OR startsDown:
+                numbers[r][c] = currentNumber
+                currentNumber += 1
+    
+    return numbers
+</pre>
+</div>
+
+<!-- ============================================================ -->
+<h2>Appendix C: Grid Validation Checklist</h2>
+
+<p>Use this to validate any grid before presenting it to a solver:</p>
+
+<ol>
+  <li>✅ Grid is square with odd dimensions (15×15 or 21×21)</li>
+  <li>✅ Grid has 180° rotational symmetry: for every black cell at (r,c), there is a black cell at (size-1-r, size-1-c)</li>
+  <li>✅ No word slot is shorter than 3 cells</li>
+  <li>✅ Every white cell is part of both an Across word and a Down word (no unchecked squares)</li>
+  <li>✅ All white cells are connected (flood-fill from any white cell reaches all white cells)</li>
+  <li>✅ Word count does not exceed maximum (78 for themed 15×15, 72 for themeless)</li>
+  <li>✅ No duplicate answers in the grid</li>
+  <li>✅ No large clumps of black squares (e.g., no 3×3 solid black blocks)</li>
+  <li>✅ No answer word appears in its own clue</li>
+  <li>✅ All clue numbers are sequential and correctly assigned per the numbering algorithm</li>
+  <li>✅ ACROSS clues listed before DOWN clues</li>
+  <li>✅ Every clue's first letter is capitalized</li>
+  <li>✅ Tense, number, and part of speech match between each clue and its answer</li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>Appendix D: Key Historical Facts</h2>
+
+<ul>
+  <li><strong>First crossword puzzle ever:</strong> December 21, 1913, by Arthur Wynne in the New York World.</li>
+  <li><strong>First NYT crossword:</strong> February 15, 1942, in the Sunday magazine. Motivated by Pearl Harbor — editors felt readers needed something to occupy themselves during wartime blackouts.</li>
+  <li><strong>Daily crossword started:</strong> 1950.</li>
+  <li><strong>Editors:</strong>
+    <ul>
+      <li>Margaret Farrar (1942-1969) — established most of the rules still used today</li>
+      <li>Will Weng (1969-1977)</li>
+      <li>Eugene T. Maleska (1977-1993)</li>
+      <li>Will Shortz (1993-present) — the current and most famous editor</li>
+    </ul>
+  </li>
+  <li><strong>Most famous puzzle:</strong> November 5, 1996 (Election Day) by Jeremiah Farrell. The answer to 39-Across could be either CLINTON or BOBDOLE, with all crossing answers working either way.</li>
+  <li><strong>Submissions:</strong> The NYT receives approximately 150-200 puzzle submissions per week and publishes 7 per week.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>Appendix E: Glossary for CouchWord Development</h2>
+
+<table class="spec-table">
+  <thead>
+    <tr><th>Term</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Grid</td><td>The square array of black and white cells</td></tr>
+    <tr><td>Cell</td><td>A single square in the grid (either black or white)</td></tr>
+    <tr><td>Black square / Block</td><td>A filled-black cell that separates words</td></tr>
+    <tr><td>White square</td><td>A cell where a letter is entered</td></tr>
+    <tr><td>Entry / Answer</td><td>A word or phrase that fills a consecutive run of white cells</td></tr>
+    <tr><td>Across</td><td>Horizontal entries (left to right)</td></tr>
+    <tr><td>Down</td><td>Vertical entries (top to bottom)</td></tr>
+    <tr><td>Clue</td><td>The hint text that leads to an answer</td></tr>
+    <tr><td>Clue number</td><td>The sequential number linking a clue to its starting cell</td></tr>
+    <tr><td>Crossing / Check</td><td>The intersection where an Across entry and a Down entry share a cell/letter</td></tr>
+    <tr><td>Checked square</td><td>A white cell that belongs to both an Across and a Down entry (all cells in NYT puzzles)</td></tr>
+    <tr><td>Fill</td><td>The non-theme answers in a puzzle</td></tr>
+    <tr><td>Theme entry</td><td>A long answer that is part of the puzzle's theme</td></tr>
+    <tr><td>Revealer</td><td>A theme entry that explains the theme pattern</td></tr>
+    <tr><td>Rebus</td><td>A cell containing multiple letters, a word, or a symbol</td></tr>
+    <tr><td>Crosswordese</td><td>Obscure words common in crosswords but rare in everyday language</td></tr>
+    <tr><td>Cheater square</td><td>A black square that doesn't add new words, just makes construction easier</td></tr>
+    <tr><td>Wide-open</td><td>A grid with few black squares and many long, interlocked entries</td></tr>
+    <tr><td>Interlock</td><td>The connection between all white cells through adjacent paths</td></tr>
+    <tr><td>Constructor</td><td>The person who creates a crossword puzzle</td></tr>
+    <tr><td>Pencil mode</td><td>Entering uncertain letters in gray (vs. pen mode in black)</td></tr>
+    <tr><td>Autocheck</td><td>Feature that marks incorrect letters in real-time</td></tr>
+  </tbody>
+</table>
+
+<hr style="margin-top: 60px; border: none; border-top: 2px solid #000;">
+<p style="text-align: center; font-style: italic; color: #888; margin-top: 20px;">
+  CouchWord Build Bible v1.0 — Compiled April 2026<br>
+  All specifications verified against NYT editorial guidelines, Will Shortz's published rules, Wikipedia, XWord Info, and constructor community resources.
+</p>
+
+</body>
+</html>
